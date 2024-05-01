@@ -14,7 +14,7 @@ paginate = 10
 [params]
   favicon = "static/favicon.png"
   about = """
-Softwate developer, *DD and F# enthusiast
+Software developer, *DD and F# enthusiast
 """
 
   [[params.links]]
