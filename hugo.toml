@@ -3,7 +3,7 @@ languageCode = 'en-us'
 title = 'Blog: Romain Berthon'
 theme = 'rocinante'
 
-paginate = 3
+paginate = 10
 
 [markup]
   [markup.highlight]
