@@ -1,3 +1,6 @@
 [submodule "themes/rocinante"]
 	path = themes/rocinante
 	url = https://github.com/mavidser/hugo-rocinante.git
+[submodule "public"]
+	path = public
+	url = https://github.com/RomainTrm/romaintrm.github.io.git
