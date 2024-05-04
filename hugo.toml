@@ -12,7 +12,7 @@ paginate = 10
     unsafe= true
 
 [params]
-  favicon = "static/favicon.png"
+  favicon = "favicon.ico"
   about = """
 Software developer, *DD and F# enthusiast
 """
