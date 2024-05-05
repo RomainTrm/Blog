@@ -1,5 +1,13 @@
-# Update submodules
-git submodule update --init --recursive
+# Update submodules (Troubles with this command)
+# git submodule update --init --recursive
+
+# Alternate solution
+# Update public
+cd public
+git add .
+git reset --hard
+git pull --rebase
+cd ..
 
 # Build site
 hugo
