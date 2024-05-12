@@ -1,6 +1,7 @@
 [submodule "themes/rocinante"]
 	path = themes/rocinante
-	url = https://github.com/mavidser/hugo-rocinante.git
+	url = git@github.com:RomainTrm/hugo-rocinante-theme.git
+	branch = custom
 [submodule "public"]
 	path = public
 	url = git@github.com:RomainTrm/romaintrm.github.io.git
