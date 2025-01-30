@@ -1,5 +1,5 @@
 ---
-title: "THEORIE DES CATEGORIES : VOUS LA CONNAISSEZ DEJA"
+title: "THÉORIE DES CATÉGORIES : VOUS LA CONNAISSEZ DÉJÀ"
 date: 2022-04-20T09:00:00+02:00
 tags: [talk, fr]
 draft: false
