@@ -8,7 +8,7 @@ aliases: ["/posts/2024-11-26/"]
 
 ![Crash test d'une voiture en laboratoire](1.png)
 
-Nouvelle présentation, nouveau co-spreaker ! Cette fois-ci, c'est [Aurélien BOUDOUX](https://x.com/AurelienBoudoux) qui m'accompagne pour vous proposer un retour d'expérience sur nos années de développement avec le pattern CQRS/ES.  
+Nouvelle présentation, nouveau co-spreaker ! Cette fois-ci, c'est [Aurélien BOUDOUX](https://bsky.app/profile/boudoux.fr) qui m'accompagne pour vous proposer un retour d'expérience sur nos années de développement avec le pattern CQRS/ES.  
 
 Fun fact : nous avons eu l'idée de ce talk parce que nos pratiques semblaient converger malgré des expériences très différentes. En construisant ce talk, nous avons découvert qu'en réalité nous avons des pratiques très différentes, et que celles-ci sont en grande partie issues de nos contextes respectifs.
 
