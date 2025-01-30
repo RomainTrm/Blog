@@ -9,6 +9,14 @@ git reset --hard
 git pull --rebase
 cd ..
 
+# Update theme
+cd themes/rocinante
+git add .
+git reset --hard
+git checkout custom
+git pull --rebase
+cd ../..
+
 # Build site
 hugo
 
