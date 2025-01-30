@@ -23,10 +23,6 @@ Software developer, *DD and F# enthusiast
       href = "https://github.com/RomainTrm"
       new_tab = true
     [[params.links.link]]
-      name = "Twitter"
-      href = "https://twitter.com/RomainTrm"
-      new_tab = true
-    [[params.links.link]]
       name = "Bsky"
       href = "https://bsky.app/profile/romaintrm.bsky.social"
       new_tab = true
