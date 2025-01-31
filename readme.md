@@ -20,7 +20,7 @@ git submodule sync --recursive
 Add new post:
 
 ```bash
-hugo new content posts/<post-name>.md
+hugo new content posts/<post-name>/index.md
 ```
 
 Builder server with drats for preview:
