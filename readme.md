@@ -26,7 +26,7 @@ hugo new content posts/<post-name>/index.md
 Builder server with drats for preview:
 
 ```bash
-hugo server -D
+hugo server -D -F
 ```
 
 ## Credits
