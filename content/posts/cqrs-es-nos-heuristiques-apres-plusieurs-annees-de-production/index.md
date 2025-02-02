@@ -22,6 +22,7 @@ Mais cela va changer ! Avec de nombreuses années de pratique, nous avons acquis
 
 ## LES SESSIONS
 
+- Software Crafters Lyon - octobre 2024 (pas de captation)
 - DevFest Toulouse - novembre 2024 ([vidéo](https://youtu.be/aE8cJnJKae8))
 - SnowCamp - janvier 2025 (pas de captation)
 - Touraine Tech - février 2025 (à venir)
