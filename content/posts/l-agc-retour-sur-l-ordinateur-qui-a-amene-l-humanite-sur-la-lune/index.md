@@ -8,7 +8,7 @@ aliases: ["/posts/2024-05-05/"]
 
 ![Photographie de l'AGC et du DSKY](1.png)
 
-Clap de fin pour cette présentation, nous avons donné notre dernière session le vendredi 26 avril à MixIT. J'ai eu grand plaisir à présenter ce sujet si particulier avec mon co-speaker [Olivier PONCET](https://twitter.com/ponceto91). 
+Clap de fin pour cette présentation, nous avons donné notre dernière session le vendredi 26 avril à MixIT. J'ai eu grand plaisir à présenter ce sujet si particulier avec mon co-speaker [Olivier PONCET](https://bsky.app/profile/ponceto91.bsky.social).  
 
 ## ABSTRACT
 

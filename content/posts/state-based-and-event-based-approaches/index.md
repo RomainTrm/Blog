@@ -6,7 +6,7 @@ draft: false
 aliases: ["/posts/2024-11-20/"]
 ---
 
-I've recently gave a talk with my friend Aurélien about the heuristics we've developed after using CQRS/ES for several years.  
+I've recently gave a [talk]("/posts/cqrs-es-nos-heuristiques-apres-plusieurs-annees-de-production") with my friend [Aurélien](https://bsky.app/profile/boudoux.fr) about the heuristics we've developed after using CQRS/ES for several years.  
 
 After our talk, we had a chat with some developers. We concluded that choosing a _state-based_ oriented approach (like [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)) seems to be the default solution, such choice seems to remain unchallenged. On the opposite side, choosing an _event-based_ systems (event sourced or event driven) will very often be heavily challenged.  
 
@@ -29,7 +29,7 @@ This looks like our thoughts can be arranged as some kind of _event-based_ repre
 
 ## THINKING IN STATES
 
-This representation of the human memory seemed rather natural to me until my colleague Mickael gave me a counter-argument : sometimes you now something has changed, you can express the change over time, but you're just unable to explain what caused this change.  
+This representation of the human memory seemed rather natural to me until my colleague Mickael gave me a counter-argument : sometimes you know something has changed, you can express the change over time, but you're just unable to explain what caused this change.  
 
 We could argue that in such cases, we memorize that "well, something changed" but it doesn't sound natural.  
 
@@ -47,7 +47,7 @@ Back to software development! Most of us have worked on _state-based_ applicatio
 
 On the other side, I believe a lot of developers had never worked with event sourced (or event driven) applications. These patterns are considered complex and indeed, as a seasoned CQRS/ES pattern architecture developer, I can attest they are. But it also provides a huge benefit: you append and save events (rather easy, it can only fail if you encounter a conflict because someone else added new events), then you apply these events to your system. If it fails while applying, you can retry, fix the code, etc. No impact on your business because you didn't lose any data.
 
-From my point of view, the missing separation between making/saving decision then applying it is the biggest weak spot for CRUD applications.  
+From my point of view, the missing separation between making/saving decision then applying it is the biggest weakness for CRUD applications.  
 
 Indeed, you must apply all your business rules (making decision and applying it) in a single point in time. But what happens if your code had a bug? Or if you've made decision on stalled information? You may have corrupted or lost some data and users will be mad at you. To prevent this kind of scenario, we're using defensive patterns like pessimistic locks or some questionable versioning implementations. These add a lot of complexity to our software.  
 
