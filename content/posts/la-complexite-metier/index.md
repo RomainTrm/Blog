@@ -48,3 +48,11 @@ Une autre solution pour se protéger contre cette complexité accidentelle est l
 La complexité métier est donc l’ensemble des règles métier et leurs dépendances. Plus il existe de dépendances entre ces règles, plus le métier peut être considéré comme étant complexe.
 
 Merci à [Ouarzy](https://twitter.com/Ouarzy) pour ses retours.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

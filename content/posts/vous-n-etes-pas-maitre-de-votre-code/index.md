@@ -69,3 +69,11 @@ Parmi les pratiques à mettre en place, [Romeu](https://twitter.com/malk_zameth)
 Essayer de convaincre les gens avant de tenter quoi que ce soit est généralement un effort vain. Il ne faut donc pas avoir peur de prendre des initiatives, les résultats sont souvent plus parlant que les débats.
 
 Merci à [Ouarzy](https://twitter.com/Ouarzy) et Léna pour leurs retours, merci à [Romeu](https://twitter.com/malk_zameth) pour cet atelier très instructif.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

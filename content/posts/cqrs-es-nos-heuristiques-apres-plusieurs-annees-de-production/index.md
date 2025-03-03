@@ -30,3 +30,11 @@ Mais cela va changer ! Avec de nombreuses années de pratique, nous avons acquis
 ## LES SLIDES
 
 Vous pouvez retrouver les slides de ce talk au format pdf : [slides](cqrs-es-heuristiques.pdf).  
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

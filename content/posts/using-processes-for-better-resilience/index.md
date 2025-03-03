@@ -93,3 +93,11 @@ In case of failure in these _processes_, the overall impact on the business rema
 Finally, having the capability to observe _jobs_ gives us a good view of our production environment. We can see what type of _processes_ are triggered, how many they are, how they're distributed over time, why some of them are failing, etc. This is a key feature for operating software in a production environment.
 
 > Note to myself: maybe I will read this book (release in winter 2025): [Real-World Event Sourcing](https://pragprog.com/titles/khpes/real-world-event-sourcing/)
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

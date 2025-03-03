@@ -31,3 +31,11 @@ Embarquez avec nous et découvrons ensemble sa conception et les rôles qu’il 
 Si vous souhaitez visualiser nos slides, Olivier les héberge sur son [site personnel](https://www.emaxilde.net/)&nbsp;:
 
 [L’AGC&nbsp;: retour sur l’ordinateur qui a amené l’humanité sur la Lune](https://www.emaxilde.net/talks/l-agc-retour-sur-l-ordinateur-qui-a-amene-l-humanite-sur-la-lune/)
+
+---
+
+## COMMENTAIRES
+
+<!--Add comments here-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

@@ -74,3 +74,11 @@ Quand je développe seul, il m’arrive régulièrement de me demander après co
 Avoir une telle confiance en ses collègues ne se fait pas du jour au lendemain, mais au fil des séances. Parce que vous apprenez comment l’autre réfléchit et procède, et parce que vous constatez qu’il est capable de déceler vous erreurs. Une fois cette confiance installée, vous redécouvrez le vrai sens du mot “équipe”&nbsp;: des gens avec qui vous collaborez et sur qui vous pouvez compter.
 
 Merci à mes reviewers [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https://twitter.com/nadegerouelle).
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

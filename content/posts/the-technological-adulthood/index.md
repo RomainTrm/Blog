@@ -52,3 +52,11 @@ To do so, we must always focus on our business goals. We're not using a technolo
 Every company has some constraints (financial, operational, human) we must deal with. We have to build solutions that fit these constraints. In my post ["Using processes for better resilience"](/posts/using-processes-for-better-resilience), I tried to highlight how these patterns are helping us deal with production incidents. Thanks to these kinds of strategies, a team of two or three developers can develop, maintain and run a complete system for a small company (However, this is not enough, we also need the correct culture and team organization).  
 
 Somehow, I see a trap that must be avoided: don't over anticipate the future because it's too uncertain. Making strong design decisions for the future is then a risk of misalignment between the needs and the solutions available. We should try to delay such decisions as much as we can until we've got enough inputs to make the correct choices. Meanwhile the best thing to do is probably to aim for designs that keep options open for the software to evolve in different ways.
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

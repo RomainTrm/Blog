@@ -99,3 +99,11 @@ La qualité de notre code augmente, le nombre d’anomalies est quasiment nulle.
 Notre code fait foi&nbsp;: en cas d’un doute sur une question métier, le réflexe de tous (même celui du product owner) est de regarder le code. Nos documentations ne servent qu’à formaliser les futurs développements, et dans de rares cas à s’assurer qu’un morceau de code est bien conforme.
 
 Merci à [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https://twitter.com/nadegerouelle) pour leurs retours.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

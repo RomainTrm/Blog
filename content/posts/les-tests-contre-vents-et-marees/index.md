@@ -101,3 +101,11 @@ Enfin, Martin Fowler explique beaucoup mieux que moi tous ces enjeux, notamment 
 A vous de jouer&nbsp;!
 
 Merci à mes reviewers [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https://twitter.com/nadegerouelle).
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

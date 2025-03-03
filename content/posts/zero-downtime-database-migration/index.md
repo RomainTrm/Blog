@@ -170,3 +170,11 @@ If you have full control of your deployment pipeline and you can ensure you are 
 ## MORE ON THIS TOPIC
 
 I recommend for my French readers this [talk](https://youtu.be/pIkA-aPtkNs) that is way more detailed than this blog post.  
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

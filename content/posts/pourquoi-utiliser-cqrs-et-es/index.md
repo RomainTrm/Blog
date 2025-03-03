@@ -78,3 +78,11 @@ Les événements suppriment également un problème inhérent aux modèles de do
 Bien que CQRS et CQRS/ES soient les nouvelles architectures “à la mode”, on constate qu’il ne s’agit pas de *silver bullets*&nbsp;: elles répondent à des problématiques précises. Il est donc important de clairement identifier ses besoins avant de se tourner vers ces architectures. Si vous choisissez de les utiliser, il ne faut pas les craindre&nbsp;: si celles-ci sont plus complexes à appréhender qu’une architecture en couche de type CRUD, les bénéfices compensent le coût initial de mise en place.
 
 Merci à [Nadège](https://twitter.com/nadegerouelle) pour ses retours.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

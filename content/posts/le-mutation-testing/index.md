@@ -75,3 +75,11 @@ De manière grossière, imaginons un projet de 200 classes avec en moyenne 5 mut
 Les tests utilisant la mutation ne peuvent donc pas être joués de manière systématique comme le sont les TUs. Il est selon moi beaucoup plus intéressant de l’appliquer de manière ponctuelle sur des régions ciblées du code.
 
 Merci à [Nadège](https://twitter.com/nadegerouelle) pour sa relecture.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

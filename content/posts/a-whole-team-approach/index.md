@@ -102,3 +102,11 @@ Quelle utilité à maintenir le *daily standup*&nbsp;? Idem pour nos tests crois
 Les exemples de ce genre sont nombreux, et remettent même en questions certaines pratiques de l’agilité. Voilà pourquoi Sebastien Lambla déclarait *“Your Agile is dead”*&nbsp;!
 
 Merci à mes « co-mobeurs » [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https://twitter.com/nadegerouelle) pour leurs reviews.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

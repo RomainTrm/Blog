@@ -65,3 +65,11 @@ And this is probably the point: if you do something a lot, it turns easier and m
 Software has been built with _state-based_ approach for decades now. We're so used to them that they are considered as normality. So normal that we're almost unable to see and recognize their flaws.  
 
 In this blog post, I’m not making an argument against CRUD, I’m just trying to challenge the false belief that CRUD is simple.  
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).
