@@ -50,3 +50,11 @@ Quand j’ajoute un nouveau cas, si je le peux, j’évite de prendre une décis
 ## LES BÉNÉFICES DU DO(N’T) REPEAT YOURSELF
 
 En ne systématisant pas la mutualisation du code, on en augmente sa quantité (plus de classes, de méthodes), mais on réduit sa complexité. Un bout de code est utilisé idéalement dans un seul cas métier. Il est donc beaucoup plus simple à appréhender d’un point de vue cognitif, et donc plus simple à modifier puisqu’il ne faut pas se soucier d’autres cas en même temps. Cela réduit également le nombre d’effets de bords et donc de bugs potentiels.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

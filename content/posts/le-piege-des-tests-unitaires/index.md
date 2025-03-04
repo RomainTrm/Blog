@@ -121,3 +121,11 @@ Edit 2&nbsp;: Deux autres remarques m’ont été faites&nbsp;:
 
 - Certains tests sont déjà naturellement isolés (domaine, hexagone) et ne dépendent pas de détails d’implémentations. Ceux-ci sont aussi viables que la stratégie que je propose dans cet article.
 - Si les tests « petite maille » ne sont pas idéals sur le long terme, ils peuvent être très utiles comme « échaffaudage » pour implémenter progressivement un scénario plus vaste. À condition de les supprimer une fois les conditions d’un test « grosse maille » remplies.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

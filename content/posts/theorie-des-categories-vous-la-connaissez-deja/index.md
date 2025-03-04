@@ -23,3 +23,11 @@ La Theorie des Categories est très intimidante. Beaucoup de gens intelligents u
 ## CODE ET SLIDES
 
 Vous pouvez retrouver le code et les slides de cette université sur ce [repo GitHub](https://github.com/RomainTrm/Talk-CategoryTheoryYouAlreadyKnowIt).
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

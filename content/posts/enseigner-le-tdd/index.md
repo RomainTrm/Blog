@@ -65,3 +65,11 @@ Lors de travail en pair programming avec mon équipe, il nous arrive d’appliqu
 L’apprentissage du TDD est un travail quotidien qui nécessite une implication du développeur et un accompagnement pour débuter.
 
 Merci à mes reviewers [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https://twitter.com/nadegerouelle).
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

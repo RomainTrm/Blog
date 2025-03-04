@@ -125,3 +125,11 @@ Enfin, pour écrire le résultat, on applique la fonction `writeOutput` via la m
 ## OUT OF THE TAR PIT
 
 Si cet article vu a plu et que vous souhaitez approfondir le sujet, je vous encourage à lire le papier [Out of the Tar Pit](https://curtclifton.net/papers/MoseleyMarks06a.pdf) qui traite de la complexité logiciel, et qui propose un découpage similaire du code. J’ai découvert ce papier grâce à un [talk](https://www.youtube.com/watch?v=lFiB-a3aqbE) explicatif de [Romeu Moura](https://twitter.com/malk_zameth).
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

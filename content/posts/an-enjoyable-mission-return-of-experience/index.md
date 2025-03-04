@@ -80,3 +80,11 @@ I really enjoyed this mission, this way of working matches how I imagine my work
 At the beginning of this project, I had the feeling we could move faster and develop more. I’m happy we didn’t because it wouldn’t have been sustainable after a few months.
 
 By my experience, the software industry seems to be addicted to sensation of speed. We have to learn to slow down to reach a sustainable and constant speed of production.
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

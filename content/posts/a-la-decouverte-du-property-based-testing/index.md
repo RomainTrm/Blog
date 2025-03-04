@@ -98,3 +98,11 @@ Mais vous l’aurez compris, le PBT améliore notre compréhension de l’applic
 Enfin, parce que le code est validé par un grand nombre de cas différents, le PBT améliore également la qualité de notre code ainsi que la confiance que nous avons dans celui-ci.
 
 Si après la lecture de cet article le PBT vous intéresse, vous pouvez également regarder ce [talk](https://youtu.be/shngiiBfD80) de [Jessica Kerr](https://twitter.com/jessitron) ou encore [celui](https://youtu.be/5pwv3cuo3Qk) de [Romeu Mourra](https://twitter.com/malk_zameth) qui sont pour moi des références sur ce sujet.
+
+---
+
+## COMMENTAIRES
+
+<!--Ajoutez votre commentaire ici-->
+
+Envie de commenter ? S’il vous plaît, ajoutez votre commentaire en m'[envoyant une pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

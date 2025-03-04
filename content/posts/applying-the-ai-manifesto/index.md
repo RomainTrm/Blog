@@ -45,3 +45,11 @@ If we focus on tech content (blogs, talks), I'm looking for resources with real 
 > *"Writing is thinking, and if they outsource their thinking to a machine, I'm not interested in what they have to say 🤷"*
 
 The same goes for conferences. If you ever applied to a CFP, you know the competition to be part of the selected talks can be really tough. CFP committees seems to face more and more generated abstracts, and they tend to reject them: [Why your AI generated talk abstract was rejected for NDC Oslo - Einar Høst - NDC Oslo 2024](https://youtu.be/XhKcelV7DBo)
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).

@@ -88,3 +88,11 @@ Think how we can design a bank account with all its associated operations. A sin
 To summarize, _events_ are the central building block of a _CQRS/ES_ implementation, they're used for data storage and for inner communication. When designing events, we need an overall view of our system to define _effects_ and _intents_. I think this is the main reason why _CQRS/ES_ is a complex pattern to use. We also have to carefully think how long an _aggregate_ will be used.  
 
 I hope you found these heuristics useful, it took me some time to structure my thoughts in order to formulate them.  
+
+---
+
+## COMMENTS
+
+<!--Add your comment here-->
+
+Wish to comment? Please, add your comment by [sending me a pull request](https://github.com/RomainTrm/Blog?tab=readme-ov-file#how-to-comment).
