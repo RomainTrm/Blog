@@ -27,4 +27,5 @@ git commit -m "Update blog"
 git push
 
 # Don't close window at the end
+echo "Deployment done"
 read

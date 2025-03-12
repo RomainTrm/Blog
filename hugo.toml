@@ -1,6 +1,6 @@
 baseURL = 'https://romaintrm.github.io/'
 languageCode = 'en-us'
-title = 'Blog: Romain Berthon'
+title = 'Romain Berthon'
 theme = 'rocinante'
 
 paginate = 10
