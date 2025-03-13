@@ -477,7 +477,7 @@ Finally, *event-sourcing* doesn't tell us the whole story: unless we treat busin
 
 ## CONCLUSION
 
-In this blog post, we've navigated through several architecture by adding improvements. As they grow in capabilities, they also grow in complexity.  
+In this blog post, we've gone through several architectures by adding improvements. As they grow in capabilities, they also grow in complexity.  
 
 Keep in mind that not all applications need the most advanced *CQRS/Event-Sourcing* pattern. Choose the architecture that is good enough for the problems you're trying to solve. Even more, we don't have to write an entire software using a single architecture. In a given context, some parts are well defined with clear life-cycles and therefore can be *event-sourced*. Other parts may be well suited for a simple *CRUD* approach as they have no life-cycle nor business rules. Mixing these patterns isn't an issue at all.  
 
