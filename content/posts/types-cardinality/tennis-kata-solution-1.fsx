@@ -18,8 +18,10 @@ let computeScore (currentScore: Score) (pointTo: Player) =
     | Points (Forty, Forty), _ -> Advantage pointTo
     | Points (Forty, _), Serving -> Game Serving
     | Points (_, Forty), Opponent -> Game Opponent
-    | Points (pointServingPlayer, pointOpponent), Serving -> Points (addPoint pointServingPlayer, pointOpponent)
-    | Points (pointServingPlayer, pointOpponent), Opponent -> Points (pointServingPlayer, addPoint pointOpponent)
+    | Points (pointServingPlayer, pointOpponent), Serving -> 
+        Points (addPoint pointServingPlayer, pointOpponent)
+    | Points (pointServingPlayer, pointOpponent), Opponent -> 
+        Points (pointServingPlayer, addPoint pointOpponent)
     | Game player, _ -> Game player
 
 // Tests
@@ -32,6 +34,8 @@ computeScore (Points (Fifteen, Fifteen)) Serving |> expect (Points (Thrity, Fift
 computeScore (Points (Thrity, Thrity)) Serving |> expect (Points (Forty, Thrity))
 computeScore (Points (Forty, Love)) Serving |> expect (Game Serving)
 computeScore (Points (Thrity, Forty)) Opponent |> expect (Game Opponent)
+computeScore (Points (Forty, Thrity)) Opponent |> expect (Points (Forty, Forty))
+computeScore (Points (Thrity, Forty)) Serving |> expect (Points (Forty, Forty))
 computeScore (Points (Forty, Forty)) Serving |> expect (Advantage Serving)
 computeScore (Points (Forty, Forty)) Opponent |> expect (Advantage Opponent)
 computeScore (Advantage Serving) Serving |> expect (Game Serving)
