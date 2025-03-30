@@ -1,5 +1,5 @@
 ---
-title: "TYPES CARDINALITY"
+title: "DESIGNING WITH TYPES"
 date: 2025-04-03T09:00:00+02:00
 tags: [post, en]
 draft: true
@@ -13,7 +13,7 @@ Did you know there's a mathematical way to compute the number of possible states
 
 ## TYPE CARDINALITY: THE NUMBER OF POSSIBLE STATES
 
-Every type we're using has a [cardinality](https://en.wikipedia.org/wiki/Cardinality). It is the number of possible states it allows.  
+Every type we're using has a [cardinality](https://en.wikipedia.org/wiki/Cardinality). This is the number of possible states it allows.  
 
 For example, a `bool` has a cardinality of 2 (`true` or `false`), a `byte` has a cardinality of 2<sup>8</sup> (256 values from 0 to 255) and a `string` has virtually an infinity of values possible (in reality there's a hard limit defined by the available memory).  
 
@@ -29,11 +29,11 @@ type MyUnionType =
     | Bar
 ```
 
-With these, we only have one of the possible values at the time. So our value will be either `Foo` that is a `bool` or `Bar` that is a kind of flag`. So our cardinality is then 2 + 1 = 3 possible values.
+With these, we only have one of the possible values at the time. So our value will be either `Foo` that is a `bool` or `Bar` that is a kind of flag. So our cardinality is then 2 + 1 = 3 possible values.
 
 > Note these sum types are not natively supported in C#, even if some trick exists to approach this behavior ([Oskar Dudycz](https://bsky.app/profile/oskardudycz.bsky.social) did a great job in his [blog post](https://event-driven.io/en/union_types_in_csharp/)).  
 >
-> Though one limitation remains: the compiler is unaware of the number of possible types: even if the implementation of new types is restricted, there's theoretically an infinity of possible extensions of the base type. The only solution I've found and used to avoid this issue is to implement the [visitor pattern](https://refactoring.guru/design-patterns/visitor). But this is an extremely verbose solution.  
+> Though one limitation remains: the compiler is unaware of the number of possible types. Even if the implementation of new types is restricted, there's theoretically an infinity of possible extensions of the base type. The only solution I've found and used to avoid this issue is to implement the [visitor pattern](https://refactoring.guru/design-patterns/visitor). But this is an extremely verbose solution.  
 
 We're now able to compute the number of possible states for our model.
 
@@ -182,7 +182,7 @@ type Score = 20
 
 Great! Our cardinality remains correct, we can now use it and it will drive the code implementation.  
 
-First, our `addPoint` function cannot remain like this: it was taking a `Point` and returned a `Point`. Now, if we try to increase `Thrity`, we have to return the type (not the value) `Forty`. So our function must evolve like in order to return a `Score` instead of a `Point`, this means we need points of both players as input. If the serving player marked, the function looks like:  
+First, our `addPoint` function cannot remain like this: it was taking a `Point` and returned a `Point`. Now, if we try to increase `Thrity`, we have to return the type (not the value) `Forty`. So our function must evolve in order to return a `Score` instead of a `Point`, this means we need points of both players as input. If the serving player marked, the function looks like:  
 
 ```fsharp
 let addPointToServingPlayer pointServingPlayer pointOpponent = 
@@ -232,6 +232,10 @@ let computeScore (currentScore: Score) (pointTo: Player) =
 
 The complete code for this implementation is available [here](tennis-kata-solution-2.fsx).
 
+## COMPARE INFINITES
+
+TODO : tip - replace unrevelant data as 1 to facilitate compute
+
 ## CONCLUSION
 
 In this post, we've learned how to compute the number of possible states for our model. Then we saw how it can drive the implementation.  
@@ -239,11 +243,9 @@ In this post, we've learned how to compute the number of possible states for our
 Aiming to tackle illegal states is great, though it can also introduce complexity to the code:  
 
 - We haven't really eliminated illegal states, we've just pushed them out of the domain. This means complex models will also be complex to build from external inputs. We'll have to parse and validate inputs, then map to our domain model.
-- Sometimes, the model isn't at the correct level of abstraction for some treatments. For example, to access a value, we may find it in several places; Each time we need a new value, we have to write a new function that goes across the whole model. If you want to give a try, with our last model try to write a function to retrieve the points of the serving player, then another one for his opponent.  
+- Sometimes, the model isn't at the correct level of abstraction for some treatments. For example, to access a value, we may find it in several places; Each time we need a new value, we have to write a new function that goes across the whole model. If you want to experience this, with our latest model try to write a function to retrieve the points of the serving player and then another for his opponent.  
 
 To conclude, type cardinality helps us gain confidence in our model and identify unhandled use cases. If you have an opportunity to remove illegal states, go for it. But keep in mind that allowing some illegal states in order to simplify the development and model manipulation is OK as long as these cases are properly identified and handled.
-
-TODO : tip - replace unrevelant data as 1 to facilitate compute
 
 ---
 
