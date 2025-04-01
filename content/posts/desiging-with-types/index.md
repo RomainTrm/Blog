@@ -2,16 +2,16 @@
 title: "DESIGNING WITH TYPES"
 date: 2025-04-03T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 When writing software, we're using types to represent the information we're manipulating. Values are express through primitive types like `bool`, `int` or `string`. We're building complex data representation by composing these types. This composition is done by defining our own types, usually with classes or tuples.  
 
-Even if there are several ways to store and represent the same information, these ways are not all equivalent. Some are too permissive and allows states that should be considered as illegal regarding our business rules. Others are well defined and only represent legal states, meaning we don't have to write code to defend ourselves against bad data.  
+Even if there are several ways to store and represent the same information, these ways are not all equivalent. Some are too permissive and allows states that should be considered as illegal regarding our business rules. Others are well defined and only represent legal states, meaning we don't have to write code to defend ourselves against malformed data.  
 
 Did you know there's a mathematical way to compute the number of possible states of your model? We can then compare this number to the number of possible combinations for a business case and determine if our model allows illegal states or not.
 
-## TYPE CARDINALITY: THE NUMBER OF POSSIBLE STATES
+## TYPE'S CARDINALITY: THE NUMBER OF POSSIBLE STATES
 
 Every type we're using has a [cardinality](https://en.wikipedia.org/wiki/Cardinality). This is the number of possible states it allows.  
 
@@ -29,9 +29,9 @@ type MyUnionType =
     | Bar
 ```
 
-With these, we only have one of the possible values at the time. So our value will be either `Foo` that is a `bool` or `Bar` that is a kind of flag. So our cardinality is then 2 + 1 = 3 possible values.
+With these, we only have one of the possible values at the time. So our value will be either `Foo` that is a `bool` or `Bar` that is a kind of constant. So our cardinality is then 2 + 1 = 3 possible values.
 
-> Note these sum types are not natively supported in C#, even if some trick exists to approach this behavior ([Oskar Dudycz](https://bsky.app/profile/oskardudycz.bsky.social) did a great job in his [blog post](https://event-driven.io/en/union_types_in_csharp/)).  
+> Note these sum types are not natively supported in C#, even if some tricks exist to approach this behavior. [Oskar Dudycz](https://bsky.app/profile/oskardudycz.bsky.social) did a great job in his [blog post](https://event-driven.io/en/union_types_in_csharp/) explaining those.  
 >
 > Though one limitation remains: the compiler is unaware of the number of possible types. Even if the implementation of new types is restricted, there's theoretically an infinity of possible extensions of the base type. The only solution I've found and used to avoid this issue is to implement the [visitor pattern](https://refactoring.guru/design-patterns/visitor). But this is an extremely verbose solution.  
 
@@ -43,11 +43,11 @@ We will use the [Tennis Kata](https://sammancoaching.org/kata_descriptions/tenni
 
 ### THE RULES TO IMPLEMENT
 
-There are two players: the "serving player" and his opponent. Each of them mark points: "love" (0 points), 15, 30 and then 40 points.  
+There are two players: the "serving player" and his opponent. Each mark points: "love" (0 points), 15, 30 and then 40 points.  
 
 A score is expressed as a pair of points, like "15-30" or "40-love". By convention, the point of the serving player is always the first.  
 
-To win the game, a player must mark a new point when his score is 40. In the case of a "deuce" (40-40), the player who marks get an "advantage", if he marks again then he wins, otherwise the score goes back to "deuce".
+To win the game, a player must mark a new point when his score is 40. In the case of a "deuce" (40-40), the player who marks gets an "advantage", if he marks again then he wins, otherwise the score goes back to "deuce".
 
 ### THE NUMBER OF POSSIBLE STATES
 
@@ -124,8 +124,10 @@ let computeScore (currentScore: Score) (pointTo: Player) =
     | Points (Forty, Forty), _ -> Advantage pointTo
     | Points (Forty, _), Serving -> Game Serving
     | Points (_, Forty), Opponent -> Game Opponent
-    | Points (pointServingPlayer, pointOpponent), Serving -> Points (addPoint pointServingPlayer, pointOpponent)
-    | Points (pointServingPlayer, pointOpponent), Opponent -> Points (pointServingPlayer, addPoint pointOpponent)
+    | Points (pointServingPlayer, pointOpponent), Serving -> 
+        Points (addPoint pointServingPlayer, pointOpponent)
+    | Points (pointServingPlayer, pointOpponent), Opponent -> 
+        Points (pointServingPlayer, addPoint pointOpponent)
     | Game player, _ -> Game player
 ```
 
@@ -148,7 +150,7 @@ We could keep this model and eliminate this warning by removing the `addPoint` f
 
 ### FINAL IMPLEMENTATION
 
-We should remove `Forty` from our `Point` type and introduce new cases to the `Score` type. We have to make a difference between the "40-40" aka "Deuce" and the other combinations. Our new model is now:  
+Another possibility is to remove `Forty` from our `Point` type and introduce new cases to the `Score` type. We have to make a difference between the "40-40" aka "Deuce" and the other combinations. Our new model is now:  
 
 ```fsharp
 type Player = Serving | Opponent
@@ -234,11 +236,67 @@ The complete code for this implementation is available [here](tennis-kata-soluti
 
 ## COMPARE INFINITES
 
-TODO : tip - replace unrevelant data as 1 to facilitate compute
+Right now, you may think: "That's great, but I can't use it for my software. I'm using strings and large numbers. The cardinality will always be infinite." And you're right!  
+
+Keep in mind that computing cardinality is useful for an algorithm. There is just no point to compute this value for our whole software. Instead, we have to consider only relevant values in our data. The tennis kata is somehow a special case: the whole model is used by our `computeScore` function to make a decision. But most of the time, a model carries a lot of data, and only a fraction of it is used by the algorithm.  
+
+So, to avoid this infinite issue, I use two tricks to reduce the cardinality to a manageable number:  
+
+First, I replace the unused values by our algorithm with a cardinality of 1. Here's an example:
+
+```fsharp
+type MyType = {
+    ValueA: bool
+    ValueB: string
+}
+
+let myFunction (x: MyType) = x.ValueA
+```
+
+Only the `ValueA` is used, `ValueB` has no impact on our function. So we can compute the cardinality of `MyType` for `myFunction` like this:  
+
+```text
+type MyType = {
+    ValueA: bool
+    ValueB: string // not used by myFunction
+}
+
+ValueA = 2
+ValueB = 1
+type MyType = 2 * 1 = 2
+```
+
+Second trick, values can be compared to fulfill some conditions. A typical example is the comparison of IDs, by definition these types have a large cardinality as they usually use types like `int`, `string` or `UUID`. But at the end of the day it is the equality that matter. In such cases, we can reduce the cardinality to two cases: it is either the expected value or not.
+
+```fsharp
+type MyType = {
+    Id: int
+    ValueA: bool
+    ValueB: string
+}
+
+let isTheExpectedValue (expectedId: int) (x: MyType) = 
+    x.Id = expectedId
+```
+
+If we consider `expectedId`, the value to match, as some kind of constant, then we can reduce the cardinality of `Id` to two cases: `Equals | NotEquals`.  
+
+```text
+type MyType = {
+    Id: int // compare to expectedId
+    ValueA: bool // not used
+    ValueB: string // not used
+}
+
+Id = Equals | NotEquals = 2
+ValueA = 1
+ValueB = 1
+type MyType = 2 * 1 * 1 = 2
+```
 
 ## CONCLUSION
 
-In this post, we've learned how to compute the number of possible states for our model. Then we saw how it can drive the implementation.  
+In this post, we've learned how to compute the number of possible states for our model. Then we saw how it can drive the implementation. Finally, I've suggested some tricks to help us compute cardinality for models that are embedding types with a large number of possible values.  
 
 Aiming to tackle illegal states is great, though it can also introduce complexity to the code:  
 
