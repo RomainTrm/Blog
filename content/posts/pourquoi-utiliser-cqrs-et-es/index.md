@@ -1,5 +1,5 @@
 ---
-title: "POURQUOI UTILISER CQRS ET ES ?"
+title: "Pourquoi utiliser CQRS et ES ?"
 date: 2016-12-20T12:52:12+02:00
 tags: [post, fr]
 draft: false
@@ -16,7 +16,7 @@ Alors pourquoi choisir de modifier la façon dont nous représentons nos modèle
 
 Si vous lisez attentivement un livre sur le *[Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design)* (dont découle CQRS et ES), la réponse que vous obtiendrez sera&nbsp;: tout dépend de votre métier et de vos besoins.
 
-## PRENDRE UNE DÉCISION ET DÉCRIRE UN CHANGEMENT
+## Prendre une décision et décrire un changement
 
 Pour comprendre un des avantages de CQRS, il faut se focaliser sur notre mode d’expression oral.
 
@@ -35,7 +35,7 @@ Alors CRUD ou CQRS&nbsp;? Quel est le niveau de complexité de votre métier&nbs
 | CRUD | Adapté | Complexité accidentelle |
 | CQRS | Sur-qualité | Adapté |
 
-## LA MÉMOIRE DES ACTIONS
+## La mémoire des actions
 
 Est-il important de savoir quelles actions ont été menées sur votre système&nbsp;? Cela peut être le cas dans certains métiers comme le e-commerce&nbsp;: ceci permet par exemple de savoir quels articles ont pu être ajoutés au panier puis retirés, et ainsi cibler les suggestions pour un client donné.
 
@@ -59,7 +59,7 @@ Scenario: Add units to an item
 
 Un autre avantage de l’event sourcing est qu’il facilite la communication entre plusieurs contextes. Un *[bounded context](http://martinfowler.com/bliki/BoundedContext.html)* peut émettre un événement dans un *event bus*, tous les *bounded contexts* qui attendent ce type d’événement le récupéreront et l’appliqueront à leurs propres modèles. Pour autant, il n’est pas nécessaire que ces deux contextes utilisent l’ES, une simple couche d’anti-corruption peut permettre d’interfacer un système de type CRUD.
 
-## GAGNER EN PERFORMANCE ET EN ROBUSTESSE
+## Gagner en performance et en robustesse
 
 Votre système a-t-il des attentes élevées en terme de performance&nbsp;? On peut par exemple imaginer un site de billetterie en ligne, à l’annonce d’une date importante, celui-ci risque d’être pris d’assaut par les utilisateurs et nécessitent donc d’être robustes et rapides.
 
@@ -73,7 +73,7 @@ L’*event sourcing* permet également des gains de performance et de robustesse
 
 Les événements suppriment également un problème inhérent aux modèles de données relationnels&nbsp;: vous allez devoir insérer ou mettre à jour plusieurs objets dans des *repositories* différents. Une écriture / mise à jour des données peut échouer en cours d’exécution, pour éviter une donnée partiellement enregistré, il faut alors mettre en place des systèmes de contextes. Ces mécanismes sont lourds à mettre en place et à gérer, ils ajoutent également une forte complexité accidentelle. L’ES vous affranchit des problèmes de cohérence des données en cas d’erreur lors de la persistance&nbsp;: l’écriture de votre événement fonctionne ou non.
 
-## POUR CONCLURE
+## Pour conclure
 
 Bien que CQRS et CQRS/ES soient les nouvelles architectures “à la mode”, on constate qu’il ne s’agit pas de *silver bullets*&nbsp;: elles répondent à des problématiques précises. Il est donc important de clairement identifier ses besoins avant de se tourner vers ces architectures. Si vous choisissez de les utiliser, il ne faut pas les craindre&nbsp;: si celles-ci sont plus complexes à appréhender qu’une architecture en couche de type CRUD, les bénéfices compensent le coût initial de mise en place.
 
@@ -81,7 +81,7 @@ Merci à [Nadège](https://twitter.com/nadegerouelle) pour ses retours.
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

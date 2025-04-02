@@ -1,5 +1,5 @@
 ---
-title: "LES DÉVELOPPEURS ET LE BESOIN MÉTIER"
+title: "Les développeurs et le besoin métier"
 date: 2016-09-20T18:18:51+02:00
 tags: [post, fr]
 draft: false
@@ -10,7 +10,7 @@ Développer est une tâche complexe, maintenir et faire évoluer un projet exist
 
 Une mauvaise qualité de code a de nombreux impacts négatifs&nbsp;: un nombre d’anomalies et de régressions affolantes, des coûts et délais exponentiels à chaque évolution, un manque de performances, voir une solution qui ne répond pas aux besoins. Le tout en sapant progressivement le moral des développeurs qui ont le malheur de travailler dans ces conditions.
 
-## UN PROBLÈME DE CODE
+## Un problème de code
 
 Le mauvais code peut prendre de très nombreuses formes, mais on retrouve souvent certaines caractéristiques&nbsp;:
 
@@ -27,7 +27,7 @@ Un autre problème majeur est le turnover parmi les développeurs qui peut gén�
 
 Dès lors, la moindre modification se fait à taton avec son lot de souffrance&nbsp;: effets de bords, incompréhension du code, régressions, etc…
 
-## DOCUMENTER, SPÉCIFIER, RECOMMENCER
+## Documenter, spécifier, recommencer
 
 Une solution envisagée est de produire d’importantes quantités de documentation et de spécifications. C’est par exemple le parti pris des projets réalisés en cycle en V. L’idée est d’analyser le besoin et conceptualiser la solution à produire avant les développements.
 
@@ -52,7 +52,7 @@ En principe, les développeurs ne réalisent que la conception détaillée, cett
 
 Le développement logiciel est une activité non-déterministe, par conséquent dans la très grande majorité des cas les développeurs rencontreront ces difficultés&nbsp;: aucune spécification ne peut être parfaite, il faut donc savoir improviser. Étant limités à une vision purement technique du projet, ils ne savent y répondre que par des solutions techniques sans aucun sens. Au fil du projet, ceci pollue de plus en plus le code et génère des deltas qui invalident progressivement les documents de référence. Un code illisible, une spécification qui ne correspond pas&nbsp;: vous avez de nouveau perdu les connaissances sur votre projet.
 
-## LE CODE, LA SEULE VÉRITÉ
+## Le code, la seule vérité
 
 S’il existe une vérité, c’est bien celle du code. Peu importe ce qui est écrit dans votre spécification, votre ordinateur appliquera ce que votre code lui dicte&nbsp;: le code fait foi, il est lui même la spécification la plus détaillée et la plus précise de votre programme.
 
@@ -64,7 +64,7 @@ On peut voir le métier de développeur de beaucoup de manières différentes, i
 
 Mais expliquer quelque chose que l’on ne comprend pas soi-même est insensé. Il est donc primordial que les développeurs comprennent ce qu’ils développent, d’un point de vue technique, mais aussi d’un point de vue métier.
 
-## AMÉLIORER LA QUALITÉ
+## Améliorer la qualité
 
 Pour écrire du code de qualité, il faut faire attention aux comportements, ne pas se contenter de quelque chose qui marche&nbsp;:
 
@@ -80,7 +80,7 @@ Pour être expressif, encore faut-il savoir quoi exprimer. La meilleure façon e
 
 Une fois que vous aurez compris le métier de vos interlocuteurs, vous serez capables d’échanger facilement avec eux, de challenger leurs besoins. Vous pourrez retranscrire les connaissances acquises dans votre code, celui-ci deviendra alors plus compréhensible, ses intentions seront beaucoup plus claires. En cas de doute, vous saurez également vers qui vous tourner pour répondre à vos questions.
 
-## QUELQUES MÉTHODES
+## Quelques méthodes
 
 Il existe divers pratiques pour améliorer la compréhension métier des développeurs, et ainsi la qualité du code produit.
 
@@ -90,7 +90,7 @@ Le [BDD](https://fr.wikipedia.org/wiki/Behavior_driven_development) (*Behavior D
 
 Enfin, le [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design). Il a été formalisé pour la première fois par [Eric Evans](https://twitter.com/ericevans0) dans son [blue book](https://www.amazon.fr/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215) qui présente un ensemble de patterns tactiques et techniques. Ces patterns couvrent l’ensemble du cycle de vie d’un projet&nbsp;: des méthodologies pour comprendre et représenter un métier, des choix d’architecture, de design, etc. L’idée est de produire une architecture qui présente de manière pratique plus que purement exhaustive les différents composants et interactions d’un domaine. Les points de complexité d’un logiciel doivent alors êtres des points de complexité métier et non techniques. L’arrivée de nouvelles pratiques comme l’event storming, ou d’architectures logiciel comme CQRS/ES découlent directement du DDD.
 
-## POUR QUELS RÉSULTATS
+## Pour quels résultats
 
 Dans mon équipe actuelle, nous nous efforçons chaque jour d’appliquer ces principes et ces méthodes avec rigueur. Les bénéfices de ce travail se ressentent petit à petit.
 
@@ -102,7 +102,7 @@ Merci à [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https://twitter.com/n
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

@@ -1,5 +1,5 @@
 ---
-title: "CQRS/ES: HOW TO ACHIEVE A GOOD EVENT GRANULARITY?"
+title: "CQRS/ES: How to achieve a good event granularity?"
 date: 2024-12-18T09:00:00+01:00
 tags: [post, en]
 draft: false
@@ -12,7 +12,7 @@ Indeed it's difficult to produce good _events_ that will not harm our design. As
 
 In this blog post, I will share with you these heuristics. But keep in mind this is not some kind of best practices. Best practices are useful for contexts where we can apply a method without any (major) form of adaptation, there's nothing that simple when developing a custom software for business. The following heuristics are rather a way to ask ourselves good questions and drive our thinking.
 
-## EVENTS OWNERSHIP
+## Events ownership
 
 I've mentioned _event sourcing_, but what I'm thinking of is a _CQRS/ES_ implementation. _Event sourcing_ is about persistence, but associated with _CQRS_, _events_ have a double responsibility:
 
@@ -23,7 +23,7 @@ An _event_ is commonly associated with an _aggregate_. This is true, it is the _
 
 > Tip: An _event_ is an implementation detail in a given _context_, don't use them as a contract for cross-context communication, use dedicated messages instead.
 
-## DEFINING EFFECTS
+## Defining effects
 
 In a _CQRS/ES_ implementation, we are emitting _events_ to express decisions we made. By applying these decisions, we're producing _effects_. I can think of three categories of _effects_:  
 
@@ -37,7 +37,7 @@ One of the first things to do is identifying the _effects_ we want to produce.
 
 > Tip: We're storing information in the _aggregate_'s state for future decision-making. Sometimes we can replace a data provided by a _command_ with a data stored in an _event_ of the _aggregate_'s history. Anticipating future _effects_ (and associated information) can highly simplify our software.
 
-## AUTONOMOUS EVENTS
+## Autonomous events
 
 Good _events_ are autonomous _events_. This means they carry all the data they need to apply an _effect_ (ideally). In other words, when applying an _event_ we're not supposed to compute any data, we should only do some mapping and aggregation logic. There is a good reason for this. By storing _events_, we're storing decisions over time, these decisions are associated with _business rules_. If we're missing some data in the _event_, applying a _business rules_ to fill the gap is a potential issue because we're applying the actual version of this _rule_, not the one that was applied then the _event_ was emitted.
 
@@ -47,7 +47,7 @@ I believe autonomous _events_ can be achieved for my first two categories of _ef
 
 > Tip: It's OK to repeat the same information in several _events_.
 
-## BUSINESS INTENTS
+## Business intents
 
 So far, we've talked about _effects_ on the system. An _effect_ is how the state of our system changes, it's a side effect. But observing an _effect_ does not tell us why it occurs, for that we must capture _intents_. Indeed, there are several reasons for our system to send an email...  
 
@@ -61,7 +61,7 @@ There are two ways to encode an _intent_ in an _event_: in the type or in a prop
 
 > Tip: Multiple _commands_ can raise the same _event_ as long as they share the same _intent_.
 
-## SNAPSHOTS AND LIFECYCLES
+## Snapshots and lifecycles
 
 One thing I remember from when I was learning about _CQRS/ES_: _snapshots_ were a recurring topic.  
 
@@ -73,17 +73,17 @@ When designing an _aggregate_, we want to control its lifecycle, how it starts, 
 
 To bound an _event stream_, we have to define an end we will always encounter:  
 
-### BUSINESS RELATED LIMIT
+### Business related limit
 
 Sometimes this emerges very naturally, for example an event `Issued` for an `Invoice`. Sometimes we have to define more arbitrary limits.
 
 One of my customers was running a business with several agencies in France for the purchase and sale of valuables. We had one software to track these valuables as they needed to be moved several times for expertise before being sold again. To avoid long _event stream_ for these objects, the solution was to end the _aggregate_'s lifecycle every time they leave a place (sold or transferred) and initiating a new _aggregate_ when entering a new place (bought or transferred) with the previous valuable identity as a property.  
 
-### TIME RELATED LIMIT
+### Time related limit
 
 Think how we can design a bank account with all its associated operations. A single _aggregate_ isn't suitable because it can last for a very long time, maybe even longer than the lifetime of its owner. In this use case, we can place time-related limits, for example a month duration lifespan. At the beginning of each month, we're initiating a new _aggregate_ with the last known balance of the bank account.
 
-## CONCLUSION
+## Conclusion
 
 To summarize, _events_ are the central building block of a _CQRS/ES_ implementation, they're used for data storage and for inner communication. When designing events, we need an overall view of our system to define _effects_ and _intents_. I think this is the main reason why _CQRS/ES_ is a complex pattern to use. We also have to carefully think how long an _aggregate_ will be used.  
 
@@ -91,7 +91,7 @@ I hope you found these heuristics useful, it took me some time to structure my t
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

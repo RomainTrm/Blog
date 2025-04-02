@@ -1,5 +1,5 @@
 ---
-title: "À LA DÉCOUVERTE DU PROPERTY BASED TESTING"
+title: "À la découverte du Property Based Testing"
 date: 2019-01-08T13:17:17+02:00
 tags: [post, fr]
 draft: false
@@ -12,13 +12,13 @@ Je fais tout ceci en sachant que je choisis des cas de test qui me semblent repr
 
 C’est là qu’il devient intéressant de se pencher sur le property based testing.
 
-## C’EST QUOI LE PROPERTY BASED TESTING (PBT)&nbsp;?
+## C’est quoi le Property Based Testing (PBT)&nbsp;?
 
 L’idée est simple&nbsp;: identifier et tester des invariants. Comprenez quelque chose qui sera toujours vrai, quelles que soient les données que vous fournissez à votre algorithme.
 
 Pour cela, il faut utiliser un framework qui va générer des données aléatoires et vérifier si l’invariant reste vrai. À chaque exécution de votre suite de tests, celui-ci va tester différentes combinaisons (généralement une centaine). Il est important de noter qu’un test de PBT en succès ne signifie pas que l’implémentation est correcte, il veut juste dire que le framework n’a pas su mettre en défaut l’implémentation. Il est tout à fait possible que celui-ci trouve un cas limite après plusieurs heures, jours, semaines, mois…
 
-## OK, ET SI UN TEST ÉCHOUE&nbsp;?
+## Ok, et si un test échoue&nbsp;?
 
 Si le framework arrive finalement à trouver un cas limite, il existe trois possibilités&nbsp;:
 
@@ -30,7 +30,7 @@ Il est important d’avoir cette réflexion dès qu’un cas est identifié. Quo
 
 Un bon framework de PBT est capable de faire du shrinking. Une fois le cas limite identifié, celui-ci va travailler sur les données utilisées pour essayer de les simplifier au maximum tout en reproduisant l’erreur. Ceci nous facilite l’effort d’analyse&nbsp;: imaginez une fonction qui prend une liste en argument, est-ce ma liste de 250 éléments ou juste un élément qui plante mon code&nbsp;? S’il s’agit d’un élément, le shrinking peut l’isoler.
 
-## C’EST QUOI UN INVARIANT&nbsp;? UN EXEMPLE&nbsp;?
+## C’est quoi un invariant&nbsp;? Un exemple&nbsp;?
 
 C’est à la fois tout l’intérêt de cette méthode de test, mais aussi toute sa difficulté. Il faut être capable de raisonner sur le métier de son application pour pouvoir en faire émerger des règles.
 
@@ -89,7 +89,7 @@ L’idée est d’être moins spécifique sur le résultat, l’important est de
 
 Si l’on souhaite tout de même tester un résultat de manière exacte, alors il faudra revenir à un test unitaire avec un résultat hard-codé.
 
-## POUR CONCLURE
+## Pour conclure
 
 On peut trouver certains inconvénients au PBT, comme des temps d’exécution un peu plus longs que des tests unitaires classiques, ou encore une plus grande difficulté à écrire ces tests.
 
@@ -101,7 +101,7 @@ Si après la lecture de cet article le PBT vous intéresse, vous pouvez égaleme
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

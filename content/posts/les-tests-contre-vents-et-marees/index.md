@@ -1,5 +1,5 @@
 ---
-title: "LES TESTS, CONTRE VENTS ET MARÉES"
+title: "Les tests, contre vents et marées"
 date: 2016-05-04T14:07:07+02:00
 tags: [post, fr]
 draft: false
@@ -12,7 +12,7 @@ Connaissez vous la bernache nonnette&nbsp;?
 
 Il s’agit d’une espèce d’oie vivant principalement dans les îles arctiques. La bernache est exclusivement végétarienne, et ce dès sa naissance. Le problème, c’est qu’elle a pour habitude de nicher au sommet d’une falaise pour se protéger elle et ses œufs des prédateurs terrestres. Les oisillons ne sachant pas voler avant l’âge de 40-45 jours, il faut que ceux-ci puissent descendre de la falaise pour se nourrir.
 
-## UN GRAND SAUT
+## Un grand saut
 
 Pour ce faire, les parents se placent en bas la falaise et appellent leurs petits jusqu’à ce que ceux-ci, guidés par leur instinct, se décident à sauter dans le vide. La chute est pour le moins impressionnante, parfois sur plus d’une centaine de mètres avec un éboulis en contre bas. Malheureusement tous n’y survivent pas, certains font une mauvaise réception, d’autres continuent à dévaler la pente avant de s’arrêter. Les rescapés sont quant a eux sonnés pendant quelques temps, ce qui relève déjà de l’exploit compte tenu de l’impact auquel ils viennent de résister.
 
@@ -22,7 +22,7 @@ Replaçons nous maintenant dans un contexte de développement logiciel. Vous êt
 
 Avancer sur un projet sans bonnes pratiques, c’est comme sauter dans le vide quand on ne sait pas voler&nbsp;: vous ne maîtriserez rien, vous vous contenterez de subir (je reviens sur ce point plus bas). Avec de la chance vous en viendrez tout de même à bout, mais dans tous les cas cela se fera dans la douleur.
 
-## UNE PROGRESSION MAÎTRISÉE
+## Une progression maîtrisée
 
 Je suis un développeur passionné, qui éprouve un réel plaisir à produire des applications de qualité. J’ai donc énormément de mal à m’imaginer être obligé de sacrifier mes bonnes pratiques au nom d’une soi-disant productivité.
 
@@ -32,11 +32,11 @@ Pour faire un parallèle avec notre bernache, utiliser les tests unitaires revie
 
 Oui, vous étiez déjà convaincus, mais pourtant vous ne le faites pas. Je vous vois venir…
 
-## MES MANAGERS NE VEULENT PAS DES TESTS
+## Mes managers ne veulent pas des tests
 
 On ne va pas se mentir, les miens n’étaient pas convaincus non plus, ils ont fini par changer d’avis. Mais finalement, pourquoi&nbsp;?
 
-*“Parce qu’écrire les tests ça fait perdre de temps.”*
+*“Parce qu’écrire les tests ça fait perdre de temps.”*  
 
 On a tous déjà entendu quelqu’un tenir un discours de ce genre. Il peut vous sembler absurde, mais il a réellement du sens pour celui qui le prononce. En fait ces personnes n’ont pas toujours conscience des problématiques d’une équipe de développement. Un logiciel se résume pour eux à des fonctionnalités qu’il faut implémenter en évitant au maximum les anomalies. Ils ne voient que la partie émergée de l’iceberg, vouloir travailler avec des tests peut donc ressembler à un “caprice de développeur”.
 
@@ -49,7 +49,7 @@ Contrairement à ces personnes, si vous souhaitez travailler avec des tests, c�
 
 En fait, si vous souhaitez faire accepter les tests à des personnes qui n’en veulent pas, il faut leurs faire comprendre l’influence du code legacy.
 
-## LE CODE LEGACY
+## Le code legacy
 
 Pour faire court, le code legacy est du code qui n’est pas testé, que vous ne comprenez pas et/ou dont vous ne maîtrisez pas les effets de bord. Un de mes collègues le définit aussi comme le code que l’on a peur de modifier.
 
@@ -61,7 +61,7 @@ On peut voir mes pierres comme un legacy, l’équilibre de la structure est des
 
 C’est pourquoi l’argument *“les tests ça coûte du temps”* n’est pas recevable. Oui, pris de manière isolée, un test a un coût. Mais nous les écrivons pour valider des comportements et protéger notre code contre les régressions. Si vous écrivez des tests, vous vous affranchirez donc du code legacy puisque vous maîtriserez ce qui est codé. Cela vous donne également la possibilité de faire du refactoring.
 
-## LE REFACTORING
+## Le refactoring
 
 Encore un gros mot qui fait peur à votre manager. Pourtant le refactoring est essentiel dans la vie d’un projet, surtout si vous souhaitez tendre vers une meilleure architecture.
 
@@ -75,7 +75,7 @@ L’application des tests est donc vertueux pour un projet. Il vous permet de ne
 
 ![Cercle vertueux&nbsp;: plus de tests -> moins de problèmes -> moins de pression -> plus de tests](5.png)
 
-## MON CLIENT NE VEUT PAS PAYER POUR DES TESTS
+## Mon client ne veut pas payer pour des tests
 
 Ce n’est pas bien grave puisque votre client a un besoin. Le logiciel qu’il vous demande doit y répondre, bien y répondre même puisque qu’il a une valeur ajoutée pour votre client. Finalement, la façon dont vous travaillez ne le concerne pas, alors pourquoi se contraindre avec ce qu’il veut&nbsp;? S’il est soucieux de la qualité de son produit, vous pouvez valoriser vos pratiques. Dans le cas contraire, vous pouvez juste “omettre” d’en parler. D’autant plus que nous avons vu que les tests n’augmentent pas les coûts.
 
@@ -90,7 +90,7 @@ N’importe qu’elle personne est capable de comprendre ceci, il suffit juste d
 
 Accepter des exigences de ce genre revient à se tirer une balle dans le pied. Votre travail ne sera pas de la qualité espérée, et votre client ira probablement voir chez la concurrence quand il aura à nouveau besoin d’une prestation informatique. A l’inverse, prôner la qualité vous fera peut-être perdre quelques clients proches de leur argent, mais vous assurera une image de marque grâce à une très grande majorité de vos clients satisfaits et fidélisés.
 
-## POUR CONCLURE
+## Pour conclure
 
 J’espère avoir donné quelques éléments pour expliquer l’intérêt des tests unitaires, aussi bien pour vous que pour votre entreprise et vos clients. Si malgré tout vous n’arrivez pas à convaincre, vous êtes toujours libre de passer outre, les résultats finiront par parler d’eux mêmes.
 
@@ -104,7 +104,7 @@ Merci à mes reviewers [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https:/
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

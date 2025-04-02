@@ -1,12 +1,12 @@
 ---
-title: ABOUT
+title: About
 draft: false
 ---
 
 <style>
-  img { 
+  img {
     border: 2px solid;
-    border-radius: 50% !important; 
+    border-radius: 50% !important;
   }
 </style>
 
@@ -18,7 +18,7 @@ I'm working as a professional software developer since I graduated in 2014. My m
 
 Early in my career, I've been introduced to craft practices and techniques like *TDD*, *BDD*, *DDD* or *Extreme-Programming*. I'm using them on a daily basis. I also share about them on this blog and at community events like conferences and local meetups.  
 
-### ABOUT THIS BLOG
+### About this blog
 
 Over the years, I've accumulated a lot of experience on various topics. I try to write about topics where I think my experience is valuable enough to be shared (with you and the future self). I also regroup talks that I gave at conferences.  
 

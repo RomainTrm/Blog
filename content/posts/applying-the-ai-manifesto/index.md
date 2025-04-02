@@ -1,5 +1,5 @@
 ---
-title: "APPLYING THE '/AI MANIFESTO'"
+title: "Applying the '/ai manifesto'"
 date: 2025-02-05T09:00:00+01:00
 tags: [post, en]
 draft: false
@@ -8,13 +8,13 @@ aliases: ["/posts/ai/", "/ai/"]
 
 Recently, [Antoine Caron](https://bsky.app/profile/slashgear.dev) published a [blog post](https://blog.slashgear.dev/ai/) about his AI usage. Thanks to him, I've discovered the [/ai 'manifesto'](https://www.bydamo.la/p/ai-manifesto) and I want to do the same here. Maybe you've reached this post by typing `/ai` in the URL.  
 
-## MY POSTS
+## My posts
 
 All the posts in this blog are written by myself, I don't use any generative AI to produce content.  
 
 Creating a blog post is an interesting activity, it requires me to challenge and organize my thoughts before trying to write on a topic. Today, I use this blog as a place to put thoughts that I think are worth writing about and sharing.
 
-## TOOLS
+## Tools
 
 For a complete transparency, when I write a blog post I use tools that can be associated with AI:
 
@@ -23,7 +23,7 @@ For a complete transparency, when I write a blog post I use tools that can be as
 
 Both tools provide some rephrasing capabilities, I occasionally accept some suggestions when I'm not happy with my own phrasing and I cannot manage to find something better by myself. However, I'm always making sure that these suggestions remains in line with the point I am developing.  
 
-## MY OPINION ABOUT GENERATIVE AI
+## My opinion about generative AI
 
 This is where I'm about to sound like a grumpy man. You may disagree with me and that's OK, but I'm not looking for contradictors here so please don't waste your time trying to argue with me.  
 
@@ -36,7 +36,7 @@ Even though I think there are good use cases for generative AI, I also believe t
 
 Yes, IT is highly political, and I'm not even arguing about ethics, mass disinformation or environmental concerns here.  
 
-## MY OPINION ABOUT GENERATED CONTENT
+## My opinion about generated content
 
 If we focus on tech content (blogs, talks), I'm looking for resources with real experiences and real thinking processes. I'm not interested in generated content, it even sends me a wrong signal: if the author believes his topic is not worth spending time thinking and writing about it, why should I spend mine reading it?  
 
@@ -48,7 +48,7 @@ The same goes for conferences. If you ever applied to a CFP, you know the compet
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

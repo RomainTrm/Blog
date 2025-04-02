@@ -1,5 +1,5 @@
 ---
-title: "AN ENJOYABLE MISSION: RETURN OF EXPERIENCE"
+title: "An enjoyable mission: return of experience"
 date: 2022-09-01T20:53:08+02:00
 tags: [post, en]
 draft: false
@@ -23,7 +23,7 @@ We were also supported by an SRE team for infrastructure and delivery automation
 
 In less than two months, we had a first MVP in production with some real users, then we kept delivering features on a regular basis (more on this later) while maintaining a high code quality.
 
-## HOW DID WE ORGANIZE?
+## How did we organize?
 
 We worked in an Agile way, we had some rituals like daily meetings, retrospectives and some feature refinements, but we never chose an agile framework to work with. The reason is we wanted a process that match our way of working, not some « by the book » that no one really understands. Nevertheless, as we put a high focus monitoring our work in progress (WIP), Kanban is probably the closest to our way of working.
 
@@ -33,19 +33,19 @@ We never had to do any kind of estimate, every task we did take as long as neede
 
 It doesn’t mean we did not have any planning at all, we were following a three-month roadmap with all the main features expected from this period. The trick was the planned workload was always lower than the team’s capacity (we were confident we could achieve our goals). By doing so, you’re preventing delays from unexpected constraints and complexity. Spare time is available for the team to do some refactoring, addressing code pain points, keeping the code base healthy. This time can also be used investing more in automation.
 
-## DISCOVERING A NEW FEATURE
+## Discovering a new feature
 
 When developing a new feature, it is important to spot complexity, edge cases and unexpected interactions with existing features as soon as possible. To do so, we had short meetings (half an hour) on a regular basis (usually twice a week). During these, we presented new features, challenged UI mockups, and we tried to create an exhaustive listing of every use cases.
 
 Example Mapping is an amazing workshop to work around those corner cases as it provides a good support for reasoning. I will not explain here how the workshop works, I recommend that you read [The BDD books: Discovery](https://www.bddbooks.com/) for more details. Also, a benefit we didn’t expect when introducing example mapping: it allowed us to isolate some problematic business rules among a feature, so we managed to develop it without the rule to avoid this unnecessary complexity.
 
-## TESTS AND REFACTORING
+## Tests and refactoring
 
 All our developments were test-driven, we put a lot of efforts in our test suite to be clean, easy to evolve and not too coupled to the production code. Tests require as much effort as the rest of the code to remain clean and evolutive, don’t hesitate to invest in builders and abstractions. It allowed us to do some heavy refactoring on our model without any major impacts in our test suite.
 
 Refactoring isn’t just cleaning process or a response to remove some pain in the code. Software evolves and new features may not match the existing model. We broke ours several times to prepare for future developments. Fortunately, we worked in a context where everybody understands technical stakes, so we never had to justify any of our refactoring. Occasionally, we developed some temporary features to help our PM solve business issues, but these never lasted more than a few weeks before being superseded by longer-term solutions.
 
-## EXPERIMENTS AND FAILURES
+## Experiments and failures
 
 We tried to define and follow a norm for our developments, but it had to continuously evolve as new features may introduce new requirements. This is a moment when the team discussed and try to choose an adapted solution. More than once we didn’t agree, so instead of losing time in useless discussions, we stopped and tried several solutions in a time-boxed period (no more than a few hours). Then we compared results and defined the way we wanted to implement new behaviors. Quite often, it was a mix of several solutions.
 
@@ -56,7 +56,7 @@ Other times, we were pretty confident with what we developed, and then later (du
 
 Depending on the answers, we chose to stick with the current implementation, or we evolved it.
 
-## CONTINUOUS DEPLOYMENT
+## Continuous deployment
 
 I’m doing a short parenthesis here to introduce you [Accelerate](https://itrevolution.com/product/accelerate/)‘s metrics:
 
@@ -73,7 +73,7 @@ Here’s the list of practices we had to deal with to achieve our goal: API vers
 
 These allowed us to work effectively with a trunk-based approach, this way, we were constantly integrating our developments and reducing merging costs. We also became more confident in our deployments as we had various ways to isolate potential defects (using feature toggles or downgrading to the previous version for worst-case scenarios). Feature toggling has other interesting aspects: as we could activate a toggle for some specific users, we used it to test new features directly in production. Once validated, our PM could communicate freely with users and choose when to make it accessible without depending on the developers.
 
-## TO CONCLUDE
+## To conclude
 
 I really enjoyed this mission, this way of working matches how I imagine my work. It requires skills and rigor, but to me, it removes a lot of pain that I consider avoidable. Anyway, I’m conscious this is highly contextual, and not every company and teams have the means to do so.
 
@@ -83,7 +83,7 @@ By my experience, the software industry seems to be addicted to sensation of spe
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

@@ -1,5 +1,5 @@
 ---
-title: "A WHOLE TEAM APPROACH"
+title: "A whole team approach"
 date: 2016-06-22T13:37:38+02:00
 tags: [post, fr]
 draft: false
@@ -10,7 +10,7 @@ Il y a quelques mois maintenant, j’ai eu l’occasion d’assister, grâce à 
 
 J’étais déjà convaincu par les bénéfices pour un projet d’appliquer le [pair programming](/posts/le-code-c-est-mieux-a-deux/) ainsi que les autres [méthodes](http://www.extremeprogramming.org/rules.html) portées par l’Extreme Programming. Cette présentation m’a montré que l’on peut aller encore plus loin, j’ai donc décidé d’essayer de l’appliquer à mon équipe.
 
-## LE MOB PROGRAMMING C’EST QUOI&nbsp;?
+## Le mob programming c’est quoi&nbsp;?
 
 “Mob” est le terme anglais pour désigner la foule. On peut présenter le mob programming comme une sorte de pair programming++ qui implique l’ensemble de l’équipe pour la réalisation d’une seule tâche.
 
@@ -20,7 +20,7 @@ Le Mob a été initiée par [Woody Zuill](https://twitter.com/woodyzuill). Elle 
 
 Bien que je ne sois pas allé aussi loin, il est tout à fait possible de réaliser des projets entiers en mob programming.
 
-## INTRODUIRE LE MOB PROGRAMMING DANS UNE ÉQUIPE
+## Introduire le mob programming dans une équipe
 
 Pour pouvoir l’appliquer, il m’a tout d’abord fallu convaincre de l’utiliser. Ceux qui ont déjà essayé de proposer le pair programming à des gens avec une vision (trop&nbsp;?) “classique” du développement doivent imaginer ma principale problématique.
 
@@ -32,7 +32,7 @@ Heureusement, tout le monde ne s’est pas montré aussi sceptique (pour ne pas 
 
 C’est lors d’une rétrospective d’équipe que nous avons décidé d’expérimenter le mob programming. Nous constations tous que le pair programming nous apportait de réels bénéfices, j’ai alors “officiellement” lancé l’idée. Comme nous sommes parfaitement autonome d’un point de vue opérationnel, notre pilote s’est vu obligé d’accepter malgré ses réticences du moment. De plus, nous avions une tâche idéale que nous souhaitions cibler pour cette expérimentation.
 
-## NOTRE EXPÉRIMENTATION DU *MOB*
+## Notre expérimentation du *mob*
 
 Pour pratiquer le mob programming, mieux vaut être bien installé. Vous avez tout d’abord besoin d’un espace pouvant accueillir votre équipe, et assez calme pour pouvoir échanger facilement. Pour cela, une salle de réunion est sans doute la bonne solution. Il faut ensuite prévoir un poste de travail avec le support visuel sur lequel travailler&nbsp;: une télévision, un projecteur, … Il est important que tous les membres de l’équipe voient correctement ce qui est en train de se passer. Nous avions également plusieurs souris et claviers afin de facilement se passer la main. Ajoutez éventuellement un ou plusieurs laptop pour des tâches annexes telles que des recherches internet, consulter une documentation ou la rédaction d’un email. Et enfin, prévoyez un support sur lequel vous pourrez facilement représenter vos idées pour faciliter les échanges, un tableau blanc et quelques post-it feront l’affaire&nbsp;!
 
@@ -54,7 +54,7 @@ Est ensuite venu la réalisation. L’équipe a travaillé en TDD et BDD, nous a
 
 C’est une question qui m’est posée de façon récurrente quand je parle du mob programming. Très honnêtement, nous n’avons pas rencontré cette situation. Une solution utilisée par Sebastien Lambla consiste à coder chacun de son côté la solution que l’on souhaite défendre pendant un temps donné, puis de comparer les résultats. De cette manière, vous révélerez plus facilement les avantages et les contraintes de chaque solution. Il vous faudra peut-être faire des concessions et accepter que votre solution n’est pas celle retenue.
 
-## CONSTATS ET RÉSULTATS
+## Constats et résultats
 
 Notre équipe s’efforce de travailler avec des approches DDD et BDD, le mob programming nous a permis d’aller dans ce sens. Une des principales problématiques dans le développement logiciel est la communication entre les différents métiers qu’il implique. Parce qu’ils ne parlent pas tous ensemble, et surtout pas tous en même temps, cela mêne à des incompréhensions et des lenteurs. Avec le Mob, vous enfermez les [three amigos](http://jonkruger.com/blog/2012/01/04/the-three-amigos/) dans une salle pour résoudre un problème. Les échanges autour du besoin se font en direct avec des gens dont l’attention est entièrement portée sur ce besoin, vous êtes sûr de vous comprendre rapidement.
 
@@ -74,7 +74,7 @@ Le *Mob* permet également de comprendre les problématiques de chacun. Mes prob
 
 Nous avons donc été convaincus par l’efficacité du mob programming, les résultats obtenus ont créé une réelle émulation et cette pratique est entrée dans nos habitudes de travail. Si une tâche ou un problème complexe doit être traité, alors nous regroupons l’ensemble de l’équipe pour y répondre. Nos pilotes ont également été convaincus par les résultats obtenus et nous laissent désormais l’appliquer sans aucune réticence.
 
-## LE *MOB*, OUI MAIS…
+## Le *mob*, oui mais…
 
 Je me dois d’apporter certaines limites au mob programming, il faut que certaines conditions soient respectée pour tirer les bénéfices de cette méthode de travail.
 
@@ -93,7 +93,7 @@ Il y a effectivement une taille idéale pour un équipe qui travaille en mob pro
 
 La façon dont l’équipe est installée est un facteur clé&nbsp;! Si vous n’êtes pas au calme, alors vous aurez des difficultés à échanger, vous serez interrompus. Nous avons constaté que, parce que nous étions tous ensemble isolés dans une salle de réunion, nous avons beaucoup moins été dérangé. Enfin, si tout le monde ne voit pas bien ce qu’il se passe à l’écran et ne peut pas intervenir à n’importe quel moment, alors vous risquez de perdre des gens en cours de route.
 
-## SI ON POUSSE À L’EXTRÊME
+## Si on pousse à l’extrême
 
 Mon article décrit les impacts du mob programming lorsqu’il est appliqué ponctuellement. En y réfléchissant, je me rend compte que ces impacts sur le fonctionnement de mon équipe seraient bien plus profond si nous travaillons uniquement de cette manière.
 
@@ -105,7 +105,7 @@ Merci à mes « co-mobeurs » [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

@@ -1,5 +1,5 @@
 ---
-title: "LE CODE, C’EST MIEUX À DEUX"
+title: "Le code, c’est mieux à deux"
 date: 2016-06-01T13:52:46+02:00
 tags: [post, fr]
 draft: false
@@ -14,7 +14,7 @@ Parmi toutes les bonnes pratiques mises en place dans mon équipe actuelle, il y
 
 Je suis réellement convaincu par les avantages et les bénéfices qu’une équipe peut tirer du pair programming. Cependant, je constate que cette méthode n’est pas toujours bien comprise. J’entends régulièrement le même discours&nbsp;: si cette méthode marche “sur le papier”, elle ne semble pas “applicable en entreprise”.
 
-## QU’EST-CE QUE C’EST&nbsp;?
+## Qu’est-ce que c’est&nbsp;?
 
 Le pair programming est l’une des [pratiques](http://www.extremeprogramming.org/rules.html) portées par l’Extreme Programming, son principe est simple&nbsp;: deux développeurs travaillent en binôme sur la même tâche. On observe deux rôles&nbsp;:
 
@@ -23,7 +23,7 @@ Le pair programming est l’une des [pratiques](http://www.extremeprogramming.or
 
 Bien entendu, ces rôles sont régulièrement échangés. La règle d’or lors de ces échanges est&nbsp;: *“déplacez le clavier, pas la chaise”*. C’est pourquoi il est important que l’écran soit placé entre les deux développeurs pour faciliter les interactions et les échanges.
 
-## UNE IMPRESSION DE “GASPILLAGE”
+## Une impression de “gaspillage”
 
 Une crainte récurrente chez toutes les personnes qui n’ont jamais travaillé en pair programming est la perte de productivité&nbsp;: *“Il y en a un qui écrit pendant que l’autre regarde.”*, sous entendu celui qui n’écrit pas est passif.
 
@@ -37,7 +37,7 @@ Ensuite, je trouve que s’appuyer uniquement sur ce 15% révèle une vision du 
 
 Pour moi, il est donc beaucoup plus intéressant de comparer la qualité du code produit avec ces deux méthodes.
 
-## FAIRE LES CHOSES, MAIS LES FAIRE BIEN
+## Faire les choses, mais les faire bien
 
 Il ne faut pas oublier que ce sont bien deux personnes qui travaillent sur la même tâche, même s’il n’écrit pas, le *navigator* n’est absolument pas passif. La réflexion est partagée, les échanges sont dynamiques. Le fait d’échanger permet d’explorer plus facilement tous les aspects d’un problème. Cela a pour effet de dégager une compréhension claire du besoin et une solution appropriée de manière beaucoup plus efficace, tout en éludant plus rapidement les incompréhensions et les fausses routes. De plus, le *navigator* n’ayant pas à se concentrer sur l’écriture du code, il peut plus facilement prendre du recul et apporter un regard critique sur l’implémentation.
 
@@ -53,7 +53,7 @@ Un autre avantage que je trouve au pair programming, c’est qu’il impose une 
 
 Le pair programming permet donc de réaliser des tâches de manière plus rapide qu’un développeur seul, tout en garantissant un nombre d’anomalies plus réduit. On observe des gains à court terme avec moins de corrections à apporter suite aux développements. Le code étant plus propre, il est plus facilement maintenable et évolutif. Les gains se font également sur le long terme grâce à une dette technique réduite.
 
-## CERTAINS COMPORTEMENTS À ÉVITER
+## Certains comportements à éviter
 
 Comme pour n’importe quelle méthode, il faut faire attention à certains détails lors de la mise en pratique du pair programming. Ici, le facteur humain et la bonne communication sont les deux clés pour assurer l’efficience de votre travail.
 
@@ -67,7 +67,7 @@ Nous avons tous une expérience différente, il faut en être conscient et veill
 
 Un autre comportement à éviter, et qu’il m’est déjà arrivé de rencontrer (à ma grande surprise ce jour là), est un esprit de compétition. Concrètement, mon collègue refusait ma solution qu’il jugeait pourtant comme étant bonne parce qu’elle ne venait pas de lui, nous avons perdu beaucoup de temps dans des débats qui étaient inutiles. Gardez à l’esprit que le pair programming vous fait travailler ensemble, pas l’un contre l’autre. Si un développeur se sent obligé de revendiquer le travail réalisé, alors il ne semble clairement pas fait pour travailler en binôme, ni en équipe. Lui imposer le pair programming ne sera absolument pas bénéfique pour lui, son partenaire ainsi que pour le projet.
 
-## GAGNER EN CONFIANCE
+## Gagner en confiance
 
 Quand je développe seul, il m’arrive régulièrement de me demander après coup *“Est-ce que j’ai bien géré ce cas&nbsp;?”*, la grande majorité du temps oui, mais je me sens obligé de vérifier. Avec le temps, je constate que je suis beaucoup plus serein après une séance de pair programming. Mon argument est toujours le même&nbsp;: si quelque chose m’a échappé, il n’a probablement pas échappé à mon partenaire. Si effectivement je réalise que nous avons oublié un cas, j’en serai certain car je n’aurai aucun souvenir d’avoir échangé autour de son implémentation (Quel test écrire&nbsp;? Quel design adopter&nbsp;? …).
 
@@ -77,7 +77,7 @@ Merci à mes reviewers [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https:/
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

@@ -1,5 +1,5 @@
 ---
-title: "STATE-BASED AND EVENT-BASED APPROACHES"
+title: "State-based and event-based approaches"
 date: 2024-11-20T13:02:48+01:00
 tags: [post, en]
 draft: false
@@ -10,7 +10,7 @@ I've recently gave a [talk]("/posts/cqrs-es-nos-heuristiques-apres-plusieurs-ann
 
 After our talk, we had a chat with some developers. We concluded that choosing a _state-based_ oriented approach (like [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)) seems to be the default solution, such choice seems to remain unchallenged. On the opposite side, choosing an _event-based_ systems (event sourced or event driven) will very often be heavily challenged.  
 
-## THINKING IN EVENTS
+## Thinking in events
 
 In a [previous post](/posts/2016-12-20/), I've expressed some kind of thought experiment to highlight how natural events can be:  
 
@@ -27,7 +27,7 @@ Another thing to note is our ability to identify the causality effect: you had a
 
 This looks like our thoughts can be arranged as some kind of _event-based_ representation.
 
-## THINKING IN STATES
+## Thinking in states
 
 This representation of the human memory seemed rather natural to me until my colleague Mickael gave me a counter-argument : sometimes you know something has changed, you can express the change over time, but you're just unable to explain what caused this change.  
 
@@ -41,7 +41,7 @@ I am not a neurologist or cognition scientist, but I'm making an easy assumption
 
 So, our thinking and memory aren't fully _state-based_ neither fully _event-based_. Both concepts should be natural for us.
 
-## SOFTWARE COMPLEXITY
+## Software complexity
 
 Back to software development! Most of us have worked on _state-based_ applications like CRUD, this is probably one of the most common architecture pattern. These concepts are actually quite easy to grasp and understand.  
 
@@ -55,7 +55,7 @@ That's why I'm arguing that _state-based_ isn't that simple when you have to imp
 
 In defense of CRUD pattern, I believe there's one scenario where it shines: you store data as you received it **without** applying any form business rule, exception made for rules that can reject new inputs. If I rephrase this: when receiving an input, you can **C**reate, **U**pdate or **D**elete an entry in the database or reject the input. If you need to **R**ead data to make a decision, CRUD can put you in troubles.  
 
-## HABITS
+## Habits
 
 The thing is, I'm biased. I don't know how much, I just know I am.  
 
@@ -68,7 +68,7 @@ In this blog post, I’m not making an argument against CRUD, I’m just trying 
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

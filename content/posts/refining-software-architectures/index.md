@@ -1,5 +1,5 @@
 ---
-title: "REFINING SOFTWARE ARCHITECTURES"
+title: "Refining software architectures"
 date: 2025-03-12T09:00:24+01:00
 tags: [post, en]
 draft: false
@@ -9,7 +9,7 @@ To develop software, as developers we have to choose between several architectur
 
 In this blog post, I want to iterate through several back-end architectures I've encountered and used during my career. For each of them, I'll be highlighting their limitations and then introducing an improvement. To do so, I'll start from the (in)famous "CRUD app", the assumed simplest architecture, the one that will not give you one of your worst headache (until it does), and I'll finish with some advanced solutions.  
 
-## DEFINING CRUD
+## Defining CRUD
 
 First thing first, what does *CRUD* means? This is the acronym for **C**reate, **R**ead, **U**pdate and **D**elete. These are the four basic operations to manipulate data in a database. Sometimes you'll also find a fifth verb which is **S**earch, but to me it falls within the **R**ead concerns.  
 
@@ -27,7 +27,7 @@ Having an application that just mimic the database schema is so trivial that man
 
 Even if we can think of some valid use cases, those are rare. Let's face it! No one is paying a team of developers to only build a *CRUD* application, this is way too trivial to justify such a financial expense. There is always at least some validations/business rules on top of it.
 
-## MAKING USEFUL SOFTWARE: ADDING LOGIC
+## Making useful software: adding logic
 
 If I try to redefine our "CRUD application" with a broader definition: it's an application with a central data model and some business rules upon it. Now we have some reasons to hire a developer!
 
@@ -70,7 +70,7 @@ Secondly, it reduces the coupling to the data model for the consumer. In the "pu
 
 Finally, we can also choose to introduce a *rich model*: until now we were manipulating an *anemic model*. An *anemic model* is a basic POXO (like *Plain Old Java Object* or *Plain Old C# Object*) that only carries the data. This is often the data model stored in the database. We have to use a *service* to apply business rules (mutations) to this POXO. This separation between data and behavior is not an issue by itself, it's even very common in *functional programming*. The problem is that our business logic conform and works with the storage data model that may not fit well with business constraints. With a *rich model*, we're introducing a new model that is designed to fit with the business, that can possibly enforce some rules with strong typing and may regroup data and behaviors in the same place. Yes, it requires some two-direction mapping logic between these two models but this is a fair tradeoff.
 
-## DRIVING BY BUSINESS: GROWING IN COMPLEXITY
+## Driving by business: growing in complexity
 
 Until now, our architecture remained *data-centric*. What I mean here is that is we draw an arrow to represent the data flow, we'll realize that our data model is in the center of our application.
 
@@ -98,7 +98,7 @@ o--> Workflow
 
 This was OK, but now our users are asking for new cool features that will introduce more complexity to our software, models will grow and we will have to heavily rely on automated tests to ensure there is no regression. This is where I think this *layered architecture* shows its limits.
 
-### TESTABILITY
+### Testability
 
 Let's address testability first. The layers are already testable but with a huge constraint: the higher is the layer we want to test, the more layers to include in our test. This means to test our *Domain layer*, where sits all our business logic (the main thing to test), we have to always include the *Data access layer* because we're depending on it. That is painful for several reasons: we have to set up data in the database to run a business test, this adds useless complexity and noise to the tests. This is even worse if the *Data access layer* is using an ORM that is mapping foreign keys as objects, in such case we may manipulate a complete object tree. Also, tests relying on the database are slower and more prone to side-effects (concurrent tests on the same model).
 
@@ -142,7 +142,7 @@ void domainLayerFunction(id, value) {
 
 And *voilà*! We've implemented a new architecture pattern called [*Functional core, Imperative shell*](https://kennethlange.com/functional-core-imperative-shell/). In our previous example, the *functional core* is our `businessLogic` function, it's surrounded by the *imperative shell* defined by the `domainLayerFunction` method.  
 
-### DOMAIN CENTRIC
+### Domain centric
 
 The *sandwich* trick is great but the architecture still remains *data-centric*. I want to go further!  
 
@@ -217,7 +217,7 @@ Now, we're driving our design by the *Domain*. We can define, code and test our 
 
 This is the core concept behind a whole family of architectures: [*hexagonal architecture*](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) (aka *ports and adapters*), *onion architecture* and *clean architecture*. I will not take the time here to explain the differences between them, mostly because I tend to see them as [bikeshedding](https://en.wiktionary.org/wiki/bikeshedding).
 
-## DATA CONSISTENCY: SHOULD WE REFUSE INPUTS?
+## Data consistency: should we refuse inputs?
 
 I'm doing a small interlude here on our architectures refinement to talk about data consistency. On the first versions we've explored, the *data model* was central and therefore was carrying a huge responsibility on data consistency. This takes the form of several database mechanics like *foreign keys* and constraints like `NOT NULL` or `UNIQUE`. Now, we've got a strong *domain model* responsible for business rules, we may consider more supple rules on the database side. Here's my point: should we refuse a command from the user because our *data model* says the operation is inconsistent? This question may seem weird, but sometimes there are good reasons to accept an input and assume our system is out of sync with reality. Here are two use cases:  
 
@@ -227,7 +227,7 @@ Now let's imagine we're working on a warehouse. Items are brought in, moved, sto
 
 The way to solve these cases are businesses, not technical decisions. So we should be careful not to build systems that enforce this type of consistency without asking domain experts first.
 
-## DISTINCT USE CASES: COMMANDS AND QUERIES
+## Distinct use cases: commands and queries
 
 Our previous architecture is already pretty good, I think it's even becoming a standard in any team this some good crafting skills, but let's refine it more.  
 
@@ -276,7 +276,7 @@ This pattern has been scaled to the architecture level, this is called *CQRS* ([
 
 With *CQRS*, our data model may tend to become more specialized for writing as it becomes the *source of truth*. To fulfill reads requirements, we have several solutions: use *SQL views*, write some code to map the *readmodel* from the write model at runtime, or create and fill dedicated *SQL tables*. With all these solutions, this read/write separation becomes explicit in the code and we can evolve one part with a minimum impact on the other.
 
-## EXECUTING SIDE-EFFECTS: CONSISTENCY AS A TARGET
+## Executing side-effects: consistency as a target
 
 Now we have isolated our business logic and made a clean separation between reads and writes, we should focus on what makes software useful: side-effects.  
 
@@ -321,7 +321,7 @@ A solution is to isolate these IO operations (other than database calls) in dedi
 
 With such solution, a compensation may not be necessary anymore as our system is becoming *eventual consistent*. If something fails, it can be fixed and retried until it works. By the end of the day, our system will be consistent. Also, as processes are now isolated, we've added a level of protection against cascading failures in our software, making it more resilient. I made a more detailed [post](/posts/using-processes-for-better-resilience/) on this specific topic.  
 
-## EXPLICIT DECISION-MAKING
+## Explicit decision-making
 
 We're not done yet, I think we can go even further. As I've already mentioned it in the previous section, we're implicitly making and applying decisions at the same time. This has a consequence, we may have made a valid decision but fail to apply it. In such case our decision has been rolled back and discarded. Now I want to change this behavior, making decisions explicit and not lose them if something else fails!  
 
@@ -415,7 +415,7 @@ My opinion is that making this split between decision-making and the implementat
 
 > Hint: By default I apply all my *effects* synchronously. In case of long operations, I use a dedicated *readmodel* where I write "processing", then I enqueue a job to run the process in an asynchronous way. This way I'm not blocking the user and she has a feedback that the operation she asked is ongoing.
 
-## DO NOT LOSE DATA
+## Do not lose data
 
 Here's the final refinement I want to suggest. All our previous architectures suffer from the same flaw: our database model remained handled in a *CRUD* fashion. This can be an issue in the write model as we're implicitly losing data every time we're updating a value. Yes, Update is an implicit Delete as we lose the replaced value.  
 
@@ -475,7 +475,7 @@ Finally, *event-sourcing* doesn't tell us the whole story: unless we treat busin
 
 *CQRS/Event-Sourcing* is the most advanced architecture pattern I've used in production during my career. I love it because it allows me to write reliable and resilient software, but as I've highlighted it, this is not an easy pattern to use. There are probably some new refinements we could imagine to improve this architecture, but they're out of my current knowledge.  
 
-## CONCLUSION
+## Conclusion
 
 In this blog post, we've gone through several architectures by adding improvements. As they grow in capabilities, they also grow in complexity.  
 
@@ -487,7 +487,7 @@ Finally, even if our architectures have increased in complexity, it doesn't mean
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

@@ -1,5 +1,5 @@
 ---
-title: "UNIFORMISER LE CODE, BONNE IDÉE ?"
+title: "Uniformiser le code, bonne idée ?"
 date: 2021-09-01T21:03:32+02:00
 tags: [post, fr]
 draft: false
@@ -12,11 +12,11 @@ De mon expérience, la motivation derrière cette démarche est toujours la mêm
 
 Si ces motivations me paraissent tout à fait légitimes et raisonnables, je ne suis pas totalement en accord avec la solution envisagée, tout du moins sous ses formes extrêmes. Je vais tenter ici d’apporter ma réflexion sur le sujet.
 
-## DISCLAIMER
+## Disclaimer
 
 Dans ce billet je vais raisonner à une échelle macro&nbsp;: un ensemble d’applications ou une seule application regroupant différents contextes métiers. Au sein d’un périmètre restreint (un contexte métier), il me semble en effet important de préserver un minimum de cohérence dans le code. À noter également que je ne remets pas en cause ici l’intérêt d’uniformiser la partie infrastructure et configuration de vos systèmes. Si par exemple vous travaillez avec Microsoft Azure ou Amazon AWS, vous voudrez sans doute maintenir une façon cohérente de vous interfacer avec ces plateformes.
 
-## UN MÊME SI, MAIS DIFFÉRENTS CONTEXTES
+## Un même si, mais différents contextes
 
 Comme je l’ai déjà évoqué, le vrai bénéfice d’uniformiser le code est de permettre au développeur de rester en terrain connu. Il peut rapidement trouver ses marques comme la structure technique de l’application est déjà connue. Le plus gros de l’effort se focalise sur la compréhension de l’application, de son métier.
 
@@ -32,7 +32,7 @@ De mon expérience, et de façon grossière, une application business s’articu
 
 L’usage de conventions de code uniformisées peut faire sens dans le cas des supporting domains. Une simple architecture de type CRUD peut par exemple se révéler suffisante pour répondre à ces besoins. Cependant cela me semble inadapté aux core domain (par les contraintes métiers fortes) ainsi qu’aux generic domain (contraint par les systèmes tiers). Porter l’uniformisation du code à ces contextes augmente la complexité et fait tendre vers des solutions sous optimales.
 
-## NOS LIMITES COGNITIVES
+## Nos limites cognitives
 
 Nous sommes tous contraints par les limites de nos capacités cognitives, ce qui correspond à l’ensemble des informations que l’on est capable de traiter à un instant donné. Il faut garder en tête que toutes les applications ne représentent pas la même charge cognitive pour un développeur, et que plus il a d’applications à gérer, plus sa charge cognitive est importante. Uniformiser le code permet dans une certaine mesure de réduire cette charge et d’accélérer la transition vers une autre application.
 
@@ -51,7 +51,7 @@ Une autre stratégie (peut-être moins recommandable) est d’accepter que certa
 
 Parfois, le besoin d’uniformiser le code est exprimé par les développeurs eux-mêmes. De mon expérience, cette demande vient toujours de profils transverses à qui on demande d’intervenir sur plusieurs projets en même temps. Cela peut parfois mettre en lumière un problème d’organisation (pourquoi a-t-il besoin de travailler sur tous ces projets&nbsp;?). Mais il reste important d’écouter ce type de retour et d’évaluer si une action d’uniformisation est nécessaire.
 
-## INNOVATIONS ET GESTION DES RISQUES
+## Innovations et gestion des risques
 
 Lorsque l’on conçoit un système, il est rare de trouver immédiatement la bonne solution, le bon design. C’est particulièrement vrai dans le logiciel où le code change, les fonctionnalités évoluent. Il est donc très difficile d’anticiper les besoins futurs, et tenter d’anticiper n’est pas toujours souhaitable, car celà nous mène régulièrement à des optimisations prématurées et de l’over-engineering.
 
@@ -64,19 +64,19 @@ Quand une nouvelle contrainte apparaît, il faut donc comprendre ses impacts sur
 
 Si les standards peuvent évoluer, il est donc plus pertinent de d’abord les tester sur un périmètre limité, et ainsi rapidement obtenir des feedbacks. Si les changements ne sont pas pertinents, alors le temps et l’énergie engagés auront été limités et il est simple de faire machine arrière. Si ceux-ci se montrent pertinents, on peut alors les généraliser de façon opportuniste, progressivement au fils des développements afin de mieux gérer les risques liés à ces évolutions.
 
-## MOTIVATION DES ÉQUIPES
+## Motivation des équipes
 
 Outre le fait de ne pas rester coincé dans une solution inadaptée, les livres [Accelerate](https://itrevolution.com/product/accelerate/) (Allow teams to choose their own tools, p.66) et [Team Topologies](https://teamtopologies.com/book) (Monolithic thinking (Standardization), p.114) soulignent également l’aspect humain; ces phases d’expérimentation et d’exploration tendent à augmenter l’engagement et la motivation des développeurs.
 
 J’y suis pour ma part très sensible, et un entretien avec un potentiel client où celui-ci insiste trop sur l’importance de coder selon ses standards est pour moi un mauvais signal. Ceci parce que le message que j’en retiens est&nbsp;: “Tu devras subir des choix passés, que tu n’as pas pris, et ce sans aucune possibilité de t’en extraire, même s’ils s’avèrent mauvais aujourd’hui. » Bref, pas très motivant. J’ai déjà refusé des missions pour cette raison.
 
-## POUR CONCLURE
+## Pour conclure
 
 Vous l’aurez compris, je ne suis pas un grand défenseur de l’uniformisation du code à l’échelle d’une entreprise. Parce que les avantages que l’on peut en tirer me semblent finalement assez limités (limites cognitives, innovations, motivations), et aussi parce que cette approche a vocation à soigner les symptômes plus que les causes du problème (organisation, complexité du système). Comme je l’ai déjà évoqué, cette pratique peut faire sens pour des métiers « satellites » à faible complexité et sur lesquels les efforts de développements seront limités. Sur ce sujet (comme pour beaucoup d’autres), tout est question d’équilibre, il faut constamment veiller à ne pas s’enfermer dans un extrême.
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

@@ -1,5 +1,5 @@
 ---
-title: "VOUS N’ÊTES PAS MAÎTRE DE VOTRE CODE"
+title: "Vous n’êtes pas maître de votre code"
 date: 2017-05-24T13:30:19+02:00
 tags: [post, fr]
 draft: false
@@ -10,7 +10,7 @@ J’ai récemment pu participer à un atelier animé par [Romeu Mourra](https://
 
 <blockquote class="twitter-tweet"><p lang="in" dir="ltr"><a href="https://twitter.com/hashtag/nCrafts?src=hash&amp;ref_src=twsrc%5Etfw">#nCrafts</a> doing the kebab kata <a href="https://t.co/GpWZM03T0T">pic.twitter.com/GpWZM03T0T</a></p>&mdash; @romeu@mastodon.social (@malk_zameth) <a href="https://twitter.com/malk_zameth/status/865131834673434624?ref_src=twsrc%5Etfw">May 18, 2017</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-## OBJECTIF REMPLI
+## Objectif rempli
 
 L’atelier s’est déroulé de la façon suivante&nbsp;:
 
@@ -24,7 +24,7 @@ L’atelier s’est déroulé de la façon suivante&nbsp;:
 
 Comme prévu, nous avons tous échoué&nbsp;: à l’issue de l’atelier, toutes les équipes ont considéré leur code comme étant du legacy.
 
-DES RESPONSABILITÉS PARTAGÉES
+## Des responsabilités partagées
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Good ways to fail your project with <a href="https://twitter.com/malk_zameth?ref_src=twsrc%5Etfw">@malk_zameth</a> , as expected we failed ! <a href="https://twitter.com/hashtag/NCrafts?src=hash&amp;ref_src=twsrc%5Etfw">#NCrafts</a> <a href="https://t.co/qP12zIqDg2">pic.twitter.com/qP12zIqDg2</a></p>&mdash; Romain Berthon (@RomainTrm) <a href="https://twitter.com/RomainTrm/status/865158052818952192?ref_src=twsrc%5Etfw">May 18, 2017</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -42,7 +42,7 @@ Tout comme le droit de “tricher” pendant les démonstrations, ce manque de v
 
 Enfin, les équipes subissent des pressions sur leurs choix techniques. Le client fait part des retours fait par l’équipe front end (dont l’existence n’avait d’ailleurs jamais été évoquée avant&nbsp;!) et des difficultés qu’elle rencontre lors de l’intégration. L’architecte impose, appuyé par le client qui “le paie très chère”, une architecture basée sur le *design pattern composit*. Il s’avère que cette solution répond bien au problème de conception de ce kata, mais ne reflète pas du tout la façon dont le métier du client peut évoluer, ce qui rend toute évolution encore plus coûteuse.
 
-## PRISONNIERS ET GARDIENS D’UN SYSTÈME
+## Prisonniers et gardiens d’un système
 
 Avec tous ces éléments, les développeurs se sentent isolés puisque considérés comme de simples exécutants de décisions qu’ils ne comprennent pas et pour lesquelles ils n’ont pas été consultés. Il n’existe aucune confiance entre l’équipe de développement et ses interlocuteurs.
 
@@ -56,7 +56,7 @@ Une fois pris dans un tel système, les développeurs ont l’impression d’êt
 
 C’est ainsi que ces mêmes développeurs peuvent se montrer hostiles à l’introduction de nouvelles pratiques comme le TDD ou le pair programming. Parce que cela ne leurs semble pas concevable et qu’ils craignent que le système rejette cela.
 
-## TENTER ET INNOVER
+## Tenter et innover
 
 Bien que fréquents, les comportements évoqués plus haut ne sont pas adoptés pour sciemment nuire au projet. Il est tout de même important de savoir les identifier, les remettre en cause et initier des changements de méthode, de comportement.
 
@@ -72,7 +72,7 @@ Merci à [Ouarzy](https://twitter.com/Ouarzy) et Léna pour leurs retours, merci
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

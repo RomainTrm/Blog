@@ -1,5 +1,5 @@
 ---
-title: "LE PIÈGE DES TESTS UNITAIRES"
+title: "Le piège des tests unitaires"
 date: 2020-06-04T21:28:12+02:00
 tags: [post, fr]
 draft: false
@@ -19,7 +19,7 @@ Avec le temps, je réalise qu’écrire des tests est une discipline difficile e
 
 Dans cet article, je vais essayer de mettre en lumière les raisons de cette dérive. Attention, mon propos ne sera pas focalisé sur la pratique du TDD mais sur les tests unitaires (TU) et la manière dont ils influencent notre capacité à modifier du code.
 
-## ÉCRIS UNE CLASSE, ÉCRIS UNE CLASSE DE TESTS
+## Écris une classe, écris une classe de tests
 
 À chaque classe, chaque méthode son ou ses tests&nbsp;: C’est une définition du TU qui semble très répandue, je la rencontre beaucoup au cours de discussions avec d’autres développeurs, sur twitter, dans des articles de blog, etc. C’est même de cette manière que l’on m’a initié au TDD.
 
@@ -31,7 +31,7 @@ Mon point doit peut-être vous déranger&nbsp;: pourquoi vouloir absolument test
 
 Certains vous répondront qu’il vous faut également des tests d’intégrations. Afin de vérifier que les différents éléments du système interagissent de la bonne manière, et que le logiciel retourne le résultat attendu.
 
-## VOUS AVEZ DÉJÀ PERDU
+## Vous avez déjà perdu
 
 Si vous adoptez cette stratégie, vous allez surement souffrir, ou souffrez déjà, d’une forte adhérence entre votre code et vos tests. En effet, il existe une contrainte forte pour chaque élément de votre système&nbsp;: des tests.
 
@@ -41,7 +41,7 @@ Ajoutez à cela un biais dont nous souffrons tous&nbsp;: celui des coûts irréc
 
 Vous l’avez compris, aligner de manière aussi systématique ses tests avec son implémentation génère un couplage important contre lequel vous luttez à chaque modification que vous souhaitez apporter.
 
-## DU COUP, COMMENT FAIT-ON&nbsp;?
+## Du coup, comment fait-on&nbsp;?
 
 Les TU impliquent obligatoirement un couplage avec le code. Même s’il existe des techniques pour le limiter, la première question qu’il faut se poser est&nbsp;: à quoi veut-on se coupler&nbsp;?
 
@@ -53,7 +53,7 @@ Je vous propose maintenant la définition que j’ai en tête quand je parle de 
 
 Son résultat ne dépend donc pas du résultat d’autres tests ni de l’état de dépendances externes au système (appel à une web API, à une base de données). Notez que je ne définis pas la taille du périmètre testé.
 
-## DES TESTS DE COMPORTEMENT
+## Des tests de comportement
 
 Aujourd’hui, j’adopte autant que possible une stratégie qui me permet de conserver ma capacité à modifier le code.
 
@@ -79,7 +79,7 @@ Je dois tout de même lui reconnaître certaines faiblesses&nbsp;:
 - Des erreurs parfois plus dures à analyser.
 - Il reste un couplage à certaines couches applicatives.
 
-## CRÉER DES ABSTRACTIONS
+## Créer des abstractions
 
 Il est tout de même nécessaire d’aller un peu plus loin pour réduire l’adhérence avec les tests. En effet, si nous avons réduit aux interfaces publiques la surface à laquelle nous sommes couplés, celles-ci deviennent encore plus critiques en cas de modification.
 
@@ -107,7 +107,7 @@ VerifyAssertion(result);
 app.VerifyOnHistory(myAssertion);
 ```
 
-## POUR CONCLURE
+## Pour conclure
 
 Il m’est arrivé plusieurs fois de rencontrer des gens qui ont tenté de mettre en place des tests unitaires ou du TDD sur leur projet, et qui y ont finalement renoncé après quelque temps parce que “ça ne marche pas”. Je pense que le problème que j’ai évoqué au cours de cet article est la principale raison de ces abandons.
 
@@ -124,7 +124,7 @@ Edit 2&nbsp;: Deux autres remarques m’ont été faites&nbsp;:
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

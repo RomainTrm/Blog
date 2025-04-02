@@ -1,5 +1,5 @@
 ---
-title: "DESIGNING WITH TYPES"
+title: "Designing with types"
 date: 2025-04-02T09:00:00+02:00
 tags: [post, en]
 draft: false
@@ -11,7 +11,7 @@ Even if there are several ways to store and represent the same information, thes
 
 Did you know there's a mathematical way to compute the number of possible states of your model? We can then compare this number to the number of possible combinations for a business case and determine if our model allows illegal states or not.
 
-## TYPE'S CARDINALITY: THE NUMBER OF POSSIBLE STATES
+## Type's cardinality: the number of possible states
 
 Every type we're using has a [cardinality](https://en.wikipedia.org/wiki/Cardinality). This is the number of possible states it allows.  
 
@@ -37,11 +37,11 @@ With these, we only have one of the possible values at the time. So our value wi
 
 We're now able to compute the number of possible states for our model.
 
-## USE CASE: THE TENNIS KATA
+## Use case: the tennis kata
 
 We will use the [Tennis Kata](https://sammancoaching.org/kata_descriptions/tennis.html) to highlight the use of the cardinality. We will compute the total number of states of our model and ensure we can't produce an invalid state. Our goal is to compute the new score of a "game".  
 
-### THE RULES TO IMPLEMENT
+### The rules to implement
 
 There are two players: the "serving player" and his opponent. Each mark points: "love" (0 points), 15, 30 and then 40 points.  
 
@@ -49,7 +49,7 @@ A score is expressed as a pair of points, like "15-30" or "40-love". By conventi
 
 To win the game, a player must mark a new point when his score is 40. In the case of a "deuce" (40-40), the player who marks gets an "advantage", if he marks again then he wins, otherwise the score goes back to "deuce".
 
-### THE NUMBER OF POSSIBLE STATES
+### The number of possible states
 
 Now let's compute the number of possible states. We've got two players, each of them can have 4 possible points values ("love", 15, 30, 40). Each player can gain the advantage (2 possible values) and win the game (2 possible values).  
 
@@ -63,7 +63,7 @@ So our cardinality is:
 
 Our model should have a cardinality of 20 possible states.
 
-### NAIVE IMPLEMENTATION
+### Naive implementation
 
 The naive (and tempting?) way to implement the score is a pair of numbers (let says `byte`).  
 
@@ -81,7 +81,7 @@ byte * byte
 
 Few illegal states here...
 
-### CORRECT IMPLEMENTATION
+### Correct implementation
 
 Let try another model.
 
@@ -148,7 +148,7 @@ For example, the value 'Forty' may indicate a case not covered by the pattern(s)
 
 We could keep this model and eliminate this warning by removing the `addPoint` function and getting a more exhaustive pattern in the main `match`. Though, the `Forty` value remains a special case.  
 
-### FINAL IMPLEMENTATION
+### Final implementation
 
 Another possibility is to remove `Forty` from our `Point` type and introduce new cases to the `Score` type. We have to make a difference between the "40-40" aka "Deuce" and the other combinations. Our new model is now:  
 
@@ -234,7 +234,7 @@ let computeScore (currentScore: Score) (pointTo: Player) =
 
 The complete code for this implementation is available [here](tennis-kata-solution-2.fsx).
 
-## COMPARE INFINITES
+## Compare infinites
 
 Right now, you may think: "That's great, but I can't use it for my software. I'm using strings and large numbers. The cardinality will always be infinite." And you're right!  
 
@@ -294,7 +294,7 @@ ValueB = 1
 type MyType = 2 * 1 * 1 = 2
 ```
 
-## CONCLUSION
+## Conclusion
 
 In this post, we've learned how to compute the number of possible states for our model. Then we saw how it can drive the implementation. Finally, I've suggested some tricks to help us compute cardinality for models that are embedding types with a large number of possible values.  
 
@@ -307,7 +307,7 @@ To conclude, type cardinality helps us gain confidence in our model and identify
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

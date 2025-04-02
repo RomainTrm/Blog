@@ -1,5 +1,5 @@
 ---
-title: "UN CODE MÉTIER PUR"
+title: "Un code métier pur"
 date: 2020-02-04T12:46:38+02:00
 tags: [post, fr]
 draft: false
@@ -10,7 +10,7 @@ Il y a quelques jours, au cours d’une discussion, on m’a demandé quelles so
 
 Dans cet article, je pars du principe que vous faite une distinction et séparation forte entre le code métier qui répond à une logique business, et le code infra qui répond aux problématiques techniques.
 
-## QUELS INTÉRÊTS&nbsp;?
+## Quels intérêts&nbsp;?
 
 Un code que l’on peut qualifier de pur a deux caractéristiques&nbsp;:
 
@@ -29,13 +29,13 @@ Par exemple, un scénario pour la réservation d’un parking&nbsp;:
 
 Si l’on peut parfois considérer les problèmes de charge comme inhérents au métier, on a tout de même envie de les traiter comme des problématiques techniques. Gérer l’accès à un état partagé sur lequel on souhaite écrire se révèle vite complexe (usage de lock, de transactions par exemple) et empêche un code scaler. Nous ne voulons donc pas polluer de la logique métier avec ce genre de problématiques&nbsp;: garder le code pur est une façon simple de s’en assurer.
 
-## LA RAISON D’ÊTRE D’UN LOGICIEL
+## La raison d’être d’un logiciel
 
 Cependant, si nous écrivons des logiciels, c’est souvent pour produire ce que nous qualifions jusqu’à maintenant d’effet de bords&nbsp;: écrire en base de données, envoyer un mail, une notification, etc. Nous devons donc être capable de passer d’un code pur à impure et inversement.
 
 Une façon (peut-être simpliste) de voir un logiciel est une succession de transformations de données. Je veux lire une donnée sur mon disque dur (imprédictible), puis la transformer (prédictible) et enfin écrire le résultat sur mon disque (imprédictible).
 
-## COMMENT FAIRE VIVRE LES DEUX&nbsp;?
+## Comment faire vivre les deux&nbsp;?
 
 Nous avons vu jusqu’ici qu’il doit y avoir une distinction claire entre, le code métier que l’on veut pure, et le code infra qui lui est nécessairement impure puisque sa responsabilité est de traiter avec des appels réseaux et système.
 
@@ -122,13 +122,13 @@ La transition du monde de l’`IO` vers du code pur se fait grâce à une foncti
 
 Enfin, pour écrire le résultat, on applique la fonction `writeOutput` via la méthode `bind` (opérateur `>>=`). `bind` nous permet d’appliquer une fonction retournant une `IO` au contenu d’une `IO`.
 
-## OUT OF THE TAR PIT
+## Out of the tar pit
 
 Si cet article vu a plu et que vous souhaitez approfondir le sujet, je vous encourage à lire le papier [Out of the Tar Pit](https://curtclifton.net/papers/MoseleyMarks06a.pdf) qui traite de la complexité logiciel, et qui propose un découpage similaire du code. J’ai découvert ce papier grâce à un [talk](https://www.youtube.com/watch?v=lFiB-a3aqbE) explicatif de [Romeu Moura](https://twitter.com/malk_zameth).
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

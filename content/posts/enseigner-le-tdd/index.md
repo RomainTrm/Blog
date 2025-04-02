@@ -1,5 +1,5 @@
 ---
-title: "ENSEIGNER LE TDD"
+title: "Enseigner le TDD"
 date: 2016-04-27T14:19:48+02:00
 tags: [post, fr]
 draft: false
@@ -12,7 +12,7 @@ Mon équipe est constituée de plusieurs profils&nbsp;: des développeurs, un pr
 
 Au cours de cette mission, j’ai à deux reprises animé des ateliers d’initiation au TDD. La première était destinée à notre recetteur qui souhaitait participer au développement de ses outils de test. La seconde concernait un nouveau développeur ayant déjà reçu une courte formation, mais qu’il n’a jamais pu (su&nbsp;?) appliquer par la suite. Ces deux profils étant très différents, les problématiques rencontrées n’ont donc pas été les mêmes, ce qui a rendu l’exercice extrêmement intéressant.
 
-## CERTAINS PRÉ-REQUIS
+## Certains pré-requis
 
 Après plus d’un an passé à l’appliquer sur tous mes projets, le TDD est devenu une habitude pour moi, l’appliquer me semblait simple. Dans un premier temps, j’ai donc pensé qu’il serait simple de l’inculquer. Que nenni&nbsp;!
 
@@ -20,7 +20,7 @@ Lors de mon premier atelier avec notre recetteur, la principale problématique q
 
 Toujours sur des problématiques de design, nous avons ensuite travaillé sur la façon dont les éléments de notre code interagissent entre eux. Je lui ai donc expliqué l’utilisation de l’injection de dépendance. Cela consiste à expliciter ce que va utiliser le code (une fonction, une classe) en injectant les dépendances nécessaires pour son fonctionnement. De plus, pour réduire le couplage, les dépendances sont abstraites grâce à des interfaces (ou des classes de bases). Cette pratique répond au L, au I et au D de [SOLID](https://fr.wikipedia.org/wiki/SOLID_(informatique)).
 
-```Csharp
+```csharp
 public class CashRegister
 {
     public int ComputePrice(IBasket basket) [...]
@@ -31,7 +31,7 @@ Dans mon exemple, j’explicite que pour calculer un prix, ma classe `CashRegist
 
 Une fois que le développeur maîtrise ces concepts, il lui devient possible d’apprendre à écrire des tests unitaires. Dans le cas contraire, il aura du mal à percevoir le fonctionnement du TDD car il aura beaucoup trop de problématiques annexes à gérer.
 
-## DONNER DU SENS AUX TESTS&nbsp;: UNE APPROCHE MÉTIER
+## Donner du sens aux tests&nbsp;: une approche métier
 
 Pour l’apprentissage du TDD en lui même, les difficultés ont été plus grandes pour notre nouveau développeur. En effet, ayant plus d’expérience, il lui a été plus difficile de sortir d’une de ses habitudes&nbsp;: essayer d’apporter une réponse technique à un besoin métier. Que l’on ne se méprenne pas, je parle ici d’un problème de méthodologie.
 
@@ -41,7 +41,7 @@ Un avantage des tests unitaires est qu’ils documentent le code. Un test spéci
 
 Le même test avec pour nom `WhenComputePriceThenReturnSumOfArticlesPriceOfBasket` exprime mieux la règle métier testée. Personnellement j’utilise le formalisme proposé par [Sandro Mancuso](https://twitter.com/sandromancuso)&nbsp;: le nom de la classe et de la méthode de test se lisent comme une phrase.
 
-```Csharp
+```csharp
 [TestFixture]
 public class CashRegisterShould
 {
@@ -54,13 +54,13 @@ Si votre élève commence à se questionner sur la façon dont il peut implémen
 
 Maintenant que le test est écrit, le développeur peut réfléchir à comment implémenter. Le test décrit les éléments nécessaires ainsi que leurs interactions, c’est donc la façon dont le code doit être écrit. Au cours de l’exercice, il est donc important de faire attention aux termes que vous allez employer quand vous formulerez un nouveau besoin.
 
-## FAIRE PASSER UN CAP
+## Faire passer un cap
 
 Bien entendu, la maîtrise de cette méthodologie ne s’acquière pas en un simple atelier, seule la pratique le permet. Généralement, il arrive un moment où apprendre le TDD peut devenir décourageant pour le développeur. Parce que cela change ses vieilles habitudes. Parce que c’est une façon de réfléchir qui est fatigante, qui n’est pas encore naturelle, ce qui la rend difficile. Il est donc important d’accompagner le développeur jusqu’à ce que celui-ci soit familier avec le TDD. L’essentiel est de le suivre et de rester disponible pour l’aider quand il en ressent le besoin. Pour cela, des revues de son code (et ses tests) ainsi que des séances de pair programming peuvent être des bons moyens pour l’aider à progresser.
 
 Lors de travail en pair programming avec mon équipe, il nous arrive d’appliquer le [ping-pong programming](http://c2.com/cgi/wiki?PairProgrammingPingPongPattern). Nous procédons de la manière suivante&nbsp;: un développeur écrit un test, le second le fait passer puis écrit le test suivant, et ainsi de suite. Cela nous permet de nous challenger et ainsi d’améliorer le niveau de chacun. C’est sans doute la meilleure technique que je peux conseiller pour un travail dans la durée.
 
-## CONCLUSION
+## Conclusion
 
 L’apprentissage du TDD est un travail quotidien qui nécessite une implication du développeur et un accompagnement pour débuter.
 
@@ -68,7 +68,7 @@ Merci à mes reviewers [Ouarzy](https://twitter.com/Ouarzy) et [Nadège](https:/
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 

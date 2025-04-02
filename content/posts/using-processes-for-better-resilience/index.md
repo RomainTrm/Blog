@@ -1,5 +1,5 @@
 ---
-title: "USING PROCESSES FOR BETTER RESILIENCE"
+title: "Using processes for better resilience"
 date: 2025-01-08T09:00:00+01:00
 tags: [post, en]
 draft: false
@@ -10,13 +10,13 @@ In early 2020, I've read the book [Programming Elixir 1.6](https://pragprog.com/
 
 However, I realized I'm using some _actor model_ concepts for a few years now. In my [previous post](/posts/2024-12-18), I've mentioned types of _effects_ produced in a _CQRS/ES_ system, one of them is triggering new _processes_.  
 
-## _ACTOR MODEL_ IN FEW LINES
+## _Actor model_ in few lines
 
 Here's my attempt to explain the _actor model_ in a very simple and coarse way:  
 
 In the _actor model_, the main building blocks are _processes_ (aka _actors_). There are different kinds of _actors_, some will execute business logic, some are storing data, others have to monitor their children to spawn new _actors_ when needed. Each one of them has the capability to interact with other _actors_ by sending messages and handling others' messages. This mechanism provides a very high level of isolation of the execution among all _actors_.  
 
-### LET IT CRASH
+### Let it crash
 
 In a regular code base, we have to put some care to error handling and design mechanisms for recovery. What is worse than an uncaught exception going through the callstack and eventually crashing our application?  
 
@@ -26,7 +26,7 @@ Indeed, thanks to process isolation, when an _actor_ crash it cannot break the o
 
 This is one of the main reasons why systems based on the _actor model_ are often considered to be very stable.
 
-## TRIGGERING NEW PROCESSES
+## Triggering new processes
 
 Back to my _CQRS/ES_ architecture and my _effects_!  
 
@@ -36,7 +36,7 @@ That's why in my company, for most operations other than a database call, we dec
 
 In case of a crash, the _job_ is flagged as failed with the associated error code or exception attached to it. With this information, our team can monitor the production and analyze errors with less pressure (the website still behave normally for our customers, they will just receive their invoice with some delay). Some errors may be transient (like an unavailable third-party API) and jobs are just retried later, or we may need to patch our software before trying again. As every business operations are isolated in dedicated _jobs_, we can replay them without worrying about running other operations several times.  
 
-## THROTTLING PROCESSES
+## Throttling processes
 
 Enqueuing these _jobs_ gives us a lot of flexibility, we have the choice between several strategies for executing them. Some _jobs_ may require a high priority, some can be parallelized, others may require a sequential execution. To do so, we're using dedicated _channels_ depending on the _jobs_' types.
 
@@ -66,7 +66,7 @@ For parallelized execution, we want to dispatch the _jobs_ across several handle
                                                                                     '-------------'
 ```
 
-### CIRCUIT BREAKERS
+### Circuit breakers
 
 Theses _channels_ act as buffers, there is some delay between enqueuing and execution time for a _job_. We can choose to increase this delay on purpose to preserve our system.  
 
@@ -74,7 +74,7 @@ This is the core principle behind a _pattern_ called _circuit breaker_. Sometime
 
 > Even if in this blog post my primary focus is not about cross software integration, all these _patterns_ are well described in the book [Enterprise Integration Patterns](https://martinfowler.com/books/eip.html).  
 
-## THE THREATS OF ASYNCHRONOUS PROCESSING
+## The threats of asynchronous processing
 
 Be aware there are two threats with asynchronous _jobs_ execution.  
 
@@ -84,7 +84,7 @@ Second, when processing _jobs_, especially with parallel calls, we have to make 
 
 From my understanding, this is because of these threats that _Elixir_ and _Erlang_ developers are not using asynchronous _actor_ communication by default.  
 
-## CONCLUSION
+## Conclusion
 
 This _pattern_ brings us a lot of stability to our software, it protects it from cascading failures. Thanks to this _"let it crash"_ philosophy, we're not forced to overcomplicate these sections of the code with a defensive coding style.  
 
@@ -96,7 +96,7 @@ Finally, having the capability to observe _jobs_ gives us a good view of our pro
 
 ---
 
-## COMMENTS
+## Comments
 
 <!--Add your comment here-->
 

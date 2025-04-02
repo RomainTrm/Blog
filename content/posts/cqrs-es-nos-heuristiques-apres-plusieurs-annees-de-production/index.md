@@ -1,5 +1,5 @@
 ---
-title: "CQRS / ES : NOS HEURISTIQUES APRÈS PLUSIEURS ANNÉES DE PRODUCTION"
+title: "CQRS/ES : Nos heuristiques après plusieurs années de production"
 date: 2024-11-26T13:28:55+02:00
 tags: [talk, fr]
 draft: false
@@ -12,7 +12,7 @@ Nouvelle présentation, nouveau co-spreaker ! Cette fois-ci, c'est [Aurélien BO
 
 Fun fact : nous avons eu l'idée de ce talk parce que nos pratiques semblaient converger malgré des expériences très différentes. En construisant ce talk, nous avons découvert qu'en réalité nous avons des pratiques très différentes, et que celles-ci sont en grande partie issues de nos contextes respectifs.
 
-## ABSTRACT
+## Abstract
 
 Avez-vous déjà mis en place une architecture CQRS/ES ? Ou peut-être, avez-vous envisagé de le faire ? Vous avez sans doute trouvé beaucoup de ressources sur les bases de cette architecture. Cependant, il y manque trop souvent un côté pratique vous laissant face à de nombreuses interrogations lors de son implémentation.  
 
@@ -20,20 +20,20 @@ Mais cela va changer ! Avec de nombreuses années de pratique, nous avons acquis
 
 **Attention, notre objectif est de vous présenter des stratégies concrètes pour mettre en application CQRS/ES. Cette présentation s'adresse à des personnes ayant déjà des connaissances de base sur ce pattern.**
 
-## LES SESSIONS
+## Les sessions
 
 - Software Crafters Lyon - octobre 2024 (pas de captation)
 - DevFest Toulouse - novembre 2024 ([vidéo](https://youtu.be/aE8cJnJKae8))
 - SnowCamp - janvier 2025 (pas de captation)
 - Touraine Tech - février 2025 (à venir)
 
-## LES SLIDES
+## Les slides
 
 Vous pouvez retrouver les slides de ce talk au format pdf : [slides](cqrs-es-heuristiques.pdf).  
 
 ---
 
-## COMMENTAIRES
+## Commentaires
 
 <!--Ajoutez votre commentaire ici-->
 
