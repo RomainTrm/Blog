@@ -1,6 +1,6 @@
 ---
 title: "DESIGNING WITH TYPES"
-date: 2025-04-03T09:00:00+02:00
+date: 2025-04-02T09:00:00+02:00
 tags: [post, en]
 draft: false
 ---
