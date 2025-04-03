@@ -23,3 +23,5 @@ Early in my career, I've been introduced to craft practices and techniques like 
 Over the years, I've accumulated a lot of experience on various topics. I try to write about topics where I think my experience is valuable enough to be shared (with you and the future self). I also regroup talks that I gave at conferences.  
 
 I've decided to write all my new posts in English. However, I had another blog where I was used to publishing in French. As I have retrieved my old articles here, you will find content in French and English in this blog.
+
+As a final note, I want to highlight that all the content in this blog is produced without generative AI, more about this in this dedicated [post](/ai).
