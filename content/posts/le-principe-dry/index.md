@@ -1,9 +1,9 @@
 ---
-title: "Do(n’t) repeat yourself"
+title: "Le principe DRY : Do(n’t) Repeat Yourself"
 date: 2021-05-26T21:18:59+02:00
 tags: [post, fr]
 draft: false
-aliases: ["/posts/2021-05-26/"]
+aliases: ["/posts/2021-05-26/", "/posts/don-t-repeat-yourself/"]
 ---
 
 ## Un biais cognitif et un usage erroné
@@ -11,7 +11,7 @@ aliases: ["/posts/2021-05-26/"]
 Les développeurs aiment bien les acronymes pour énoncer des “bonnes pratiques” (KISS, DRY, SOLID, etc…). Souvent, l’idée véhiculée par ceux-ci est très simple à appréhender.  
 Cependant, nous souffrons d’un biais cognitif énorme&nbsp;: plus une information est simple à intégrer, moins elle est remise en question / challengée. Et celle-ci est encore mieux intégrée si elle ne va pas en contradiction avec vos croyances.
 
-DRY en est l’exemple parfait&nbsp;:
+Don’t Repeat Yourself (DRY) en est l’exemple parfait&nbsp;:
 
 - L’idée sous-jacente est simple à comprendre&nbsp;: si on doit appliquer un changement, on veut l’appliquer à un seul endroit.
 - DRY est assez connu et fréquemment énoncé pour être consciemment ou non étiqueté comme étant une bonne pratique (et elle l’est).
@@ -21,7 +21,7 @@ Pourtant, il est fréquent d’observer ceci&nbsp;: en travaillant sur une base 
 
 Le premier enjeu du DRY est une meilleure gestion de la complexité, pourtant en l’appliquant de manière aussi basique/dogmatique, on observe une augmentation de la complexité.
 
-## Don’t repeat yourself, définition
+## Don’t Repeat Yourself, définition
 
 Si on regarde plus en détail le concept originel&nbsp;: The DRY principle is stated as « Every piece of knowledge must have a single, unambiguous, authoritative representation within a system »  (source [Wikipedia](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)).
 

@@ -1,9 +1,9 @@
 ---
-title: "A whole team approach"
+title: "Mob programming : une approche d'équipe"
 date: 2016-06-22T13:37:38+02:00
 tags: [post, fr]
 draft: false
-aliases: ["/posts/2016-06-22/"]
+aliases: ["/posts/2016-06-22/", "/posts/a-whole-team-approach/"]
 ---
 
 Il y a quelques mois maintenant, j’ai eu l’occasion d’assister, grâce à un user group local, à une présentation de [Sebastien Lambla](https://twitter.com/serialseb). Celle-ci était intitulée [Your Agile is Dead](https://serialseb.com/speaker/your-agile-is-dead/). J’avoue que je ne savais pas trop de quoi allait pouvoir traiter une présentation avec un tel nom, il s’agissait en réalité d’un retour expérience sur un projet réalisé en mob programming.
