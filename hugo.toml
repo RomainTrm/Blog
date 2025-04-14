@@ -1,4 +1,4 @@
-baseURL = 'https://romaintrm.github.io/'
+baseURL = 'https://berthon.dev/'
 languageCode = 'en-us'
 title = 'Romain Berthon'
 theme = 'rocinante'
