@@ -88,7 +88,56 @@ In this first version of our feature, the *imperative shell* loads the `PrinterS
 
 ## Events in a black box
 
+Let's proceed to our first move to introduce *events*. The idea here is to modify our *aggregate* (inside the *functional core*) to use *events* in the way that keeps the *imperative shell* unaware of the changes. So our commands have to keep consuming and returning `PrinterState`.  
 
+One possible solution for our *events*:
+
+```fsharp
+type Events =
+    | PagesPrinted of int
+    | LowInkRaised
+    | Reloaded
+```
+
+Now we have to introduce a new function that apply an `Events` to a `PrinterState`:
+
+```fsharp
+let evolve (state: PrinterState) = function
+    | PagesPrinted nbOfPagesToPrint -> 
+        let numberOfPagesToPrint = state.NumberOfPagesToPrint - nbOfPagesToPrint
+        { state with NumberOfPagesToPrint = numberOfPagesToPrint }
+    | LowInkRaised -> { state with NeedToBeReloaded = true }
+    | Reloaded -> { NumberOfPagesToPrint = 100; NeedToBeReloaded = false }
+```
+
+And finally, we update our `decide` function. Depending of the command and the current state of our printer, we may decide to return zero, one or two *events*. It forces us to manipulate an `Events list`. Then we immediatly apply them to our current `state` by folding:
+
+```fsharp
+let decide (state: PrinterState) = function
+    | Print nbOfPagesToPrint ->
+        [
+            let nbOfPagesPrinted = min state.NumberOfPagesToPrint nbOfPagesToPrint
+            if nbOfPagesPrinted <> 0
+            then PagesPrinted nbOfPagesPrinted
+            
+            let nbOfPagesLeft = state.NumberOfPagesToPrint - nbOfPagesPrinted
+            if not state.NeedToBeReloaded && nbOfPagesLeft <= 10
+            then LowInkRaised
+        ]
+        |> List.fold evolve state
+    | Reload -> 
+        [
+            if state.NumberOfPagesToPrint <> 100
+            then Reloaded
+        ]
+        |> List.fold evolve state
+```
+
+I'm fully aware that this code implementation already contains some early optimisations: conditions on `PagesPrinted` and `Reloaded` events are not mandatory as emitting them or not doesn't change behavior for an external observer. I chose to it anyway to make future changes easiers.
+
+The rest of the code (the *imperative shell*) remains the same, you can check it [here](2-events-in-a-black-box.fsx).
+
+## Get events from the functional core
 
 - load state, state as output, save sate
 - load state, events in black box (state as output), save sate
