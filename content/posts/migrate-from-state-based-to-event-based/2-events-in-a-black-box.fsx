@@ -45,15 +45,18 @@ type InfraDependencies = {
     save: PrinterState -> unit
 }
 
-let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
+let execute (deps: InfraDependencies) (command: Commands) =
     let state = deps.load ()
-    let newState = Print nbOfPagesToPrint |> decide state
+    let newState = command |> decide state
     deps.save newState
 
+let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
+    Print nbOfPagesToPrint 
+    |> execute deps
+
 let reload (deps: InfraDependencies) =
-    let state = deps.load ()
-    let newState = Reload |> decide state
-    deps.save newState
+    Reload 
+    |> execute deps
 
 // Tests
 let testDependency (initialState: PrinterState) = 

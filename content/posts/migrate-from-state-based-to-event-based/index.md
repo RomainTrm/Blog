@@ -69,15 +69,18 @@ type InfraDependencies = {
     save: PrinterState -> unit
 }
 
-let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
+let execute (deps: InfraDependencies) (command: Commands) =
     let state = deps.load ()
-    let newState = Print nbOfPagesToPrint |> decide state
+    let newState = command |> decide state
     deps.save newState
 
+let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
+    Print nbOfPagesToPrint 
+    |> execute deps
+
 let reload (deps: InfraDependencies) =
-    let state = deps.load ()
-    let newState = Reload |> decide state
-    deps.save newState
+    Reload 
+    |> execute deps
 ```
 
 Complete code example available [here](1-state-based.fsx).
@@ -137,7 +140,46 @@ I'm fully aware that this code implementation already contains some early optimi
 
 The rest of the code (the *imperative shell*) remains the same, you can check it [here](2-events-in-a-black-box.fsx).
 
-## Get events from the functional core
+## Retrieve events from the *functional core*
+
+Second refactor now: we will retrieve events from our *functional core* and rebuild state into the *imperative shell* before saving it. This way, we change the interface between these two layers but it doesn't affect our dependencies yet.  
+
+I am used to keep the `evolve` function hidden as an internal implementation detail of an *aggregate*, called through the `evolve` function. But as I'm following Jérémie's technique here, we will keep these two functions separated as it will help us for the upcoming refactorings.
+
+The code change here is quite simple: we will move the folding from the *functional core* to the *imperative shell*.
+
+First we remove the folding from the `decide` function and return an `Events list` instead of a `PrinterState`:
+
+```fsharp
+let decide (state: PrinterState) = function
+    | Print nbOfPagesToPrint ->
+        [
+            let nbOfPagesPrinted = min state.NumberOfPagesRemaining nbOfPagesToPrint
+            if nbOfPagesPrinted <> 0
+            then PagesPrinted nbOfPagesPrinted
+            
+            let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesPrinted
+            if not state.NeedToBeReloaded && nbOfPagesLeft <= 10
+            then LowPaperReserveRaised
+        ]
+    | Reload -> 
+        [
+            if state.NumberOfPagesRemaining <> 100
+            then Reloaded
+        ]
+```
+
+Then we apply `evolve` to the state into the `execute` function:
+
+```fsharp
+let execute (deps: InfraDependencies) (command: Commands) =
+    let state = deps.load ()
+    let events = command |> decide state
+    let newState = events |> List.fold evolve state 
+    deps.save newState
+```
+
+We don't have to apply any change to our `InfraDependencies` type, meaning the applicative/infrastructure layer remains unaware of this change. Complete code example [here](3-retrieve-events-from-funcitonal-core.fsx).
 
 - load state, state as output, save sate
 - load state, events in black box (state as output), save sate

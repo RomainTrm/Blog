@@ -8,20 +8,38 @@ type Commands =
     | Print of int
     | Reload
 
+type Events =
+    | PagesPrinted of int
+    | LowPaperReserveRaised
+    | Reloaded
+
+let evolve (state: PrinterState) = function
+    | PagesPrinted nbOfPagesToPrint -> 
+        let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesToPrint
+        { state with NumberOfPagesRemaining = nbOfPagesLeft }
+    | LowPaperReserveRaised -> { state with NeedToBeReloaded = true }
+    | Reloaded -> { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }
+
 let decide (state: PrinterState) = function
+    // Returns Events list instead of PrinterState
     | Print nbOfPagesToPrint ->
-        let nbOfPagesLeft = max 0 (state.NumberOfPagesRemaining - nbOfPagesToPrint)
-        { 
-            NumberOfPagesRemaining = nbOfPagesLeft
-            NeedToBeReloaded = nbOfPagesLeft <= 10
-        }
+        [
+            let nbOfPagesPrinted = min state.NumberOfPagesRemaining nbOfPagesToPrint
+            if nbOfPagesPrinted <> 0
+            then PagesPrinted nbOfPagesPrinted
+            
+            let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesPrinted
+            if not state.NeedToBeReloaded && nbOfPagesLeft <= 10
+            then LowPaperReserveRaised
+        ]
     | Reload -> 
-        { 
-            NumberOfPagesRemaining = 100
-            NeedToBeReloaded = false
-        }
+        [
+            if state.NumberOfPagesRemaining <> 100
+            then Reloaded
+        ]
 
 // Imperative shell
+// InfraDependencies doesn't change
 type InfraDependencies = {
     load: unit -> PrinterState
     save: PrinterState -> unit
@@ -29,7 +47,10 @@ type InfraDependencies = {
 
 let execute (deps: InfraDependencies) (command: Commands) =
     let state = deps.load ()
-    let newState = command |> decide state
+    // Retrive events
+    let events = command |> decide state
+    // Apply events to the previous state
+    let newState = events |> List.fold evolve state 
     deps.save newState
 
 let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
