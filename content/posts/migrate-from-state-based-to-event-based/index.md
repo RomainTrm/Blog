@@ -15,7 +15,7 @@ What I was looking for is how Jérémie introduces *event-sourcing* to newcomers
 
 ## Initial architecture: manipulating states
 
-Let's start with a simple feature implemented with the [*Functional core, Imperative shell*](https://kennethlange.com/functional-core-imperative-shell/) pattern and in a *state based* fashion.  
+Let's start with a simple feature implemented with the [*Functional core, Imperative shell*](https://kennethlange.com/functional-core-imperative-shell/) pattern and in a *state-based* fashion.  
 
 ```goat
     .---------------------------------------. 
@@ -33,13 +33,13 @@ Let's start with a simple feature implemented with the [*Functional core, Impera
 o--> Workflow  
 ```
 
-Let's build a code that emulate a printer. Users can do two actions: print pages and reload ink. If the printer runs out of ink, then it can't print pages anymore. When the remaining ink in the printer allows a maximum of ten pages to be print, then a flag asking for a reload is raised.
+Let's build a code that emulate a printer. Users can do two actions: print pages and reload it with paper. If the printer runs out of pper, then it can't print pages anymore. When the remaining paper in the printer allows a maximum of ten pages to be print, then a flag asking for a reload is raised.
 
 Here's the first implementation of the *functional core* part of the feature:  
 
 ```fsharp
 type PrinterState = {
-    NumberOfPagesToPrint: int
+    NumberOfPagesRemaining: int
     NeedToBeReloaded: bool
 }
 
@@ -49,14 +49,14 @@ type Commands =
 
 let decide (state: PrinterState) = function
     | Print nbOfPagesToPrint ->
-        let nbOfPagesLeft = max 0 (state.NumberOfPagesToPrint - nbOfPagesToPrint)
+        let nbOfPagesLeft = max 0 (state.NumberOfPagesRemaining - nbOfPagesToPrint)
         { 
-            NumberOfPagesToPrint = nbOfPagesLeft
+            NumberOfPagesRemaining = nbOfPagesLeft
             NeedToBeReloaded = nbOfPagesLeft <= 10
         }
     | Reload -> 
         { 
-            NumberOfPagesToPrint = 100
+            NumberOfPagesRemaining = 100
             NeedToBeReloaded = false
         }
 ```
@@ -95,7 +95,7 @@ One possible solution for our *events*:
 ```fsharp
 type Events =
     | PagesPrinted of int
-    | LowInkRaised
+    | LowPaperReserveRaised
     | Reloaded
 ```
 
@@ -104,10 +104,10 @@ Now we have to introduce a new function that apply an `Events` to a `PrinterStat
 ```fsharp
 let evolve (state: PrinterState) = function
     | PagesPrinted nbOfPagesToPrint -> 
-        let numberOfPagesToPrint = state.NumberOfPagesToPrint - nbOfPagesToPrint
-        { state with NumberOfPagesToPrint = numberOfPagesToPrint }
-    | LowInkRaised -> { state with NeedToBeReloaded = true }
-    | Reloaded -> { NumberOfPagesToPrint = 100; NeedToBeReloaded = false }
+        let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesToPrint
+        { state with NumberOfPagesRemaining = nbOfPagesLeft }
+    | LowPaperReserveRaised -> { state with NeedToBeReloaded = true }
+    | Reloaded -> { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }
 ```
 
 And finally, we update our `decide` function. Depending of the command and the current state of our printer, we may decide to return zero, one or two *events*. It forces us to manipulate an `Events list`. Then we immediatly apply them to our current `state` by folding:
@@ -116,24 +116,24 @@ And finally, we update our `decide` function. Depending of the command and the c
 let decide (state: PrinterState) = function
     | Print nbOfPagesToPrint ->
         [
-            let nbOfPagesPrinted = min state.NumberOfPagesToPrint nbOfPagesToPrint
+            let nbOfPagesPrinted = min state.NumberOfPagesRemaining nbOfPagesToPrint
             if nbOfPagesPrinted <> 0
             then PagesPrinted nbOfPagesPrinted
             
-            let nbOfPagesLeft = state.NumberOfPagesToPrint - nbOfPagesPrinted
+            let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesPrinted
             if not state.NeedToBeReloaded && nbOfPagesLeft <= 10
-            then LowInkRaised
+            then LowPaperReserveRaised
         ]
         |> List.fold evolve state
     | Reload -> 
         [
-            if state.NumberOfPagesToPrint <> 100
+            if state.NumberOfPagesRemaining <> 100
             then Reloaded
         ]
         |> List.fold evolve state
 ```
 
-I'm fully aware that this code implementation already contains some early optimisations: conditions on `PagesPrinted` and `Reloaded` events are not mandatory as emitting them or not doesn't change behavior for an external observer. I chose to it anyway to make future changes easiers.
+I'm fully aware that this code implementation already contains some early optimisations: conditions on `PagesPrinted` and `Reloaded` events are not mandatory as emitting them or not doesn't change behavior for an external observer. I chose to do it anyway to make future changes easier.
 
 The rest of the code (the *imperative shell*) remains the same, you can check it [here](2-events-in-a-black-box.fsx).
 
@@ -151,6 +151,7 @@ The rest of the code (the *imperative shell*) remains the same, you can check it
   - each step is a valid solution to go to production with
   - choose what you're confortable with
   - Jeremie's workshop is more detailed and I recommand you to attend it if you have the opportunity
+- TODO: add link with edit to "refining software architecture"
 
 ---
 

@@ -1,6 +1,6 @@
 // Functional core
 type PrinterState = {
-    NumberOfPagesToPrint: int
+    NumberOfPagesRemaining: int
     NeedToBeReloaded: bool
 }
 
@@ -10,31 +10,31 @@ type Commands =
 
 type Events =
     | PagesPrinted of int
-    | LowInkRaised
+    | LowPaperReserveRaised
     | Reloaded
 
 let evolve (state: PrinterState) = function
     | PagesPrinted nbOfPagesToPrint -> 
-        let numberOfPagesToPrint = state.NumberOfPagesToPrint - nbOfPagesToPrint
-        { state with NumberOfPagesToPrint = numberOfPagesToPrint }
-    | LowInkRaised -> { state with NeedToBeReloaded = true }
-    | Reloaded -> { NumberOfPagesToPrint = 100; NeedToBeReloaded = false }
+        let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesToPrint
+        { state with NumberOfPagesRemaining = nbOfPagesLeft }
+    | LowPaperReserveRaised -> { state with NeedToBeReloaded = true }
+    | Reloaded -> { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }
 
 let decide (state: PrinterState) = function
     | Print nbOfPagesToPrint ->
         [
-            let nbOfPagesPrinted = min state.NumberOfPagesToPrint nbOfPagesToPrint
+            let nbOfPagesPrinted = min state.NumberOfPagesRemaining nbOfPagesToPrint
             if nbOfPagesPrinted <> 0
             then PagesPrinted nbOfPagesPrinted
             
-            let nbOfPagesLeft = state.NumberOfPagesToPrint - nbOfPagesPrinted
+            let nbOfPagesLeft = state.NumberOfPagesRemaining - nbOfPagesPrinted
             if not state.NeedToBeReloaded && nbOfPagesLeft <= 10
-            then LowInkRaised
+            then LowPaperReserveRaised
         ]
         |> List.fold evolve state
     | Reload -> 
         [
-            if state.NumberOfPagesToPrint <> 100
+            if state.NumberOfPagesRemaining <> 100
             then Reloaded
         ]
         |> List.fold evolve state
@@ -79,17 +79,17 @@ let printReturns (nbOfPagesToPrint: int) (expected: PrinterState) (initialState:
     print dependencies nbOfPagesToPrint
     expect expected dependencies
 
-let loadedPrinter = { NumberOfPagesToPrint = 100; NeedToBeReloaded = false }
+let loadedPrinter = { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }
 
-{ NumberOfPagesToPrint = 0; NeedToBeReloaded = true } |> reloadReturns loadedPrinter
-{ NumberOfPagesToPrint = 10; NeedToBeReloaded = true } |> reloadReturns loadedPrinter
-{ NumberOfPagesToPrint = 100; NeedToBeReloaded = false } |> reloadReturns loadedPrinter
+{ NumberOfPagesRemaining = 0; NeedToBeReloaded = true } |> reloadReturns loadedPrinter
+{ NumberOfPagesRemaining = 10; NeedToBeReloaded = true } |> reloadReturns loadedPrinter
+{ NumberOfPagesRemaining = 100; NeedToBeReloaded = false } |> reloadReturns loadedPrinter
 
-loadedPrinter |> printReturns 5 { NumberOfPagesToPrint = 95; NeedToBeReloaded = false }
-loadedPrinter |> printReturns 50 { NumberOfPagesToPrint = 50; NeedToBeReloaded = false }
-loadedPrinter |> printReturns 89 { NumberOfPagesToPrint = 11; NeedToBeReloaded = false }
-loadedPrinter |> printReturns 90 { NumberOfPagesToPrint = 10; NeedToBeReloaded = true }
-loadedPrinter |> printReturns 100 { NumberOfPagesToPrint = 0; NeedToBeReloaded = true }
-loadedPrinter |> printReturns 150 { NumberOfPagesToPrint = 0; NeedToBeReloaded = true }
-{ NumberOfPagesToPrint = 50; NeedToBeReloaded = false } |> printReturns 5 { NumberOfPagesToPrint = 45; NeedToBeReloaded = false } 
-{ NumberOfPagesToPrint = 10; NeedToBeReloaded = true } |> printReturns 5 { NumberOfPagesToPrint = 5; NeedToBeReloaded = true } 
+loadedPrinter |> printReturns 5 { NumberOfPagesRemaining = 95; NeedToBeReloaded = false }
+loadedPrinter |> printReturns 50 { NumberOfPagesRemaining = 50; NeedToBeReloaded = false }
+loadedPrinter |> printReturns 89 { NumberOfPagesRemaining = 11; NeedToBeReloaded = false }
+loadedPrinter |> printReturns 90 { NumberOfPagesRemaining = 10; NeedToBeReloaded = true }
+loadedPrinter |> printReturns 100 { NumberOfPagesRemaining = 0; NeedToBeReloaded = true }
+loadedPrinter |> printReturns 150 { NumberOfPagesRemaining = 0; NeedToBeReloaded = true }
+{ NumberOfPagesRemaining = 50; NeedToBeReloaded = false } |> printReturns 5 { NumberOfPagesRemaining = 45; NeedToBeReloaded = false } 
+{ NumberOfPagesRemaining = 10; NeedToBeReloaded = true } |> printReturns 5 { NumberOfPagesRemaining = 5; NeedToBeReloaded = true } 
