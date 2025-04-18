@@ -83,7 +83,7 @@ let reload (deps: InfraDependencies) =
     |> execute deps
 ```
 
-Complete code example available [here](0-state-based.fsx).
+The complete code example is available [here](0-state-based.fsx).
 
 In this first version of our feature, the *imperative shell* loads the `PrinterState`, applies a `Command` to it then saves the final state it gets as a result form the *functional core*. On every steps we're manipulating a state, no *event* involved so far.  
 
@@ -182,13 +182,13 @@ let execute (deps: InfraDependencies) (command: Commands) =
     deps.save newState
 ```
 
-We don't have to apply any change to our `InfraDependencies` type, meaning the applicative/infrastructure layer remains unaware of this change. Complete code example available [here](2-retrieve-events-from-funcitonal-core.fsx).
+We don't have to apply any change to our `InfraDependencies` type, meaning the applicative/infrastructure layer remains unaware of this change. The complete code example is available [here](2-retrieve-events-from-funcitonal-core.fsx).
 
 ## Step 3: Saving events
 
-From now on, we will not have to modify our *functional core* anymore, all requirements for an *event-sourced* implementation are already in place there. All the upcomming changes will impact the *imperative shell* and the application/infrastructure layer.
+For this step, we will not have to modify our *functional core*. There is only one missing requirement there for an *event-sourced* implementation that we will introduce in step 4. All the other upcomming changes will impact the *imperative shell* and the application/infrastructure layer.
 
-So we change our dependencies to save an `Events list` with our `PrinteState`:  
+To save our events, first we must change our dependencies to save an `Events list` with our `PrinterState`:  
 
 ```fsharp
 type InfraDependencies = {
@@ -209,13 +209,56 @@ let execute (deps: InfraDependencies) (command: Commands) =
     deps.save (newState, events)
 ```
 
-Complete code example available [here](3-saving-events.fsx).
+The complete code example is available [here](3-saving-events.fsx).
 
 This refactoring looks simple, but keep in mind that we also have to handle events serialization in the infrastructure layer that doesn't appear in my code example. This can be a non-trivial topic and we have to come out with a proper strategy.  
 
-Note that now, as our *events* are exposed outside of the domain layer, we can know if something happened or not in our system: if no *event* is returned, then we have a proof that nothing happened.
+Note that now, as our *events* are exposed outside of the domain layer, we can know if something happened or not in our system: if no *event* is returned, then we have a proof that no decision has been made.
 
-## Step 4: Loading events
+Also, keeping *states* alongside our newly saved *events* is a very convenient solution: it helps maintaining the current model without building new projections (aka *readmodels*). Business people may be used to go check things in the database, even if *events* bring new informations, *states* remains more practical to query for them.
+
+## Step 4: Loading events, our first *event-sourced* implementation
+
+Now we can implement an *event-sourced* feature with our next refactoring. To do so we have to load from the infrastructure layer an *Events list* instead of a `PrinterState`. Let's modify the dependencies:  
+
+```fsharp
+type InfraDependencies = {
+    // Load events
+    load: unit -> Events list
+    save: PrinterState * Events list -> unit 
+}
+```
+
+And then we try to rebuild the `PrinterState` in our *imperative shell*:  
+
+```fsharp
+let execute (deps: InfraDependencies) (command: Commands) =
+    // Load printer's history
+    let history = deps.load ()
+    // Build printer's state
+    let state = history |> List.fold evolve ??????
+    let events = command |> decide state
+    let newState = events |> List.fold evolve state 
+    deps.save (newState, events)
+```
+
+We are runing into an issue here: until now we had a *state* on which to apply our *events*, but now we have only *events*, we are missing an `initialState`. I usually define it in the *functional core*:
+
+```fsharp
+// A new printer is empty and needs to be loaded
+let initialState : PrinterState = {
+    NumberOfPagesRemaining = 0
+    NeedToBeReloaded = true
+}
+```
+
+And then we use it to build our *state*:
+
+```fsharp
+let state = history |> List.fold evolve initialState
+```
+
+The complete code example is available [here](4-loading-events.fsx).
 
 - load state, state as output, save sate
 - load state, events in black box (state as output), save sate

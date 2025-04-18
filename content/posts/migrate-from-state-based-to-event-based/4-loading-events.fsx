@@ -1,7 +1,14 @@
-// Functional core: doesn't change
+// Functional core
 type PrinterState = {
     NumberOfPagesRemaining: int
     NeedToBeReloaded: bool
+}
+
+// Introduce the inital state
+// A new printer is empty and needs to be loaded
+let initialState : PrinterState = {
+    NumberOfPagesRemaining = 0
+    NeedToBeReloaded = true
 }
 
 type Commands =
@@ -39,16 +46,18 @@ let decide (state: PrinterState) = function
 
 // Imperative shell
 type InfraDependencies = {
-    load: unit -> PrinterState
-    // Gets the new state and new events
+    // Load events
+    load: unit -> Events list
     save: PrinterState * Events list -> unit 
 }
 
 let execute (deps: InfraDependencies) (command: Commands) =
-    let state = deps.load ()
+    // Load printer's history
+    let history = deps.load ()
+    // Build printer's state
+    let state = history |> List.fold evolve initialState
     let events = command |> decide state
     let newState = events |> List.fold evolve state 
-    // Pass events
     deps.save (newState, events)
 
 let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
@@ -65,11 +74,11 @@ type SpyInfraDependencies = {
     deps: InfraDependencies
 }
 
-let testDependency (initialState: PrinterState) = 
-    let mutable store = initialState, []
+let testDependency (initialHistory: Events list) = 
+    let mutable store = initialState, initialHistory
     {
         deps = {
-            load = fun () -> fst store
+            load = fun () -> snd store
             save = fun (newState, newEvents) ->
                 store <- newState, newEvents
         }
@@ -81,29 +90,31 @@ let expect (expected: PrinterState * Events list) (deps: SpyInfraDependencies) =
     if expected <> result
     then failwith $"Expected: %A{expected}; Received: %A{result}"
 
-let reloadReturns (expected: PrinterState * Events list) (initialState: PrinterState) =
-    let dependencies = testDependency initialState
+let reloadReturns (expected: PrinterState * Events list) (initialHistory: Events list) =
+    let dependencies = testDependency initialHistory
     reload dependencies.deps
     expect expected dependencies
 
-let printReturns (nbOfPagesToPrint: int) (expected: PrinterState * Events list) (initialState: PrinterState) =
-    let dependencies = testDependency initialState
+let printReturns (nbOfPagesToPrint: int) (expected: PrinterState * Events list) (initialHistory: Events list) =
+    let dependencies = testDependency initialHistory
     print dependencies.deps nbOfPagesToPrint
     expect expected dependencies
 
+let loadedPrinterHistory = [Reloaded]
+let emptyPrinterHistory = []
 let loadedPrinter = { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }
 let emptyPrinter = { NumberOfPagesRemaining = 0; NeedToBeReloaded = true }
 
-emptyPrinter |> reloadReturns (loadedPrinter, [Reloaded])
-{ NumberOfPagesRemaining = 10; NeedToBeReloaded = true } |> reloadReturns (loadedPrinter, [Reloaded])
-{ NumberOfPagesRemaining = 100; NeedToBeReloaded = false } |> reloadReturns (loadedPrinter, [])
+emptyPrinterHistory |> reloadReturns (loadedPrinter, [Reloaded])
+[Reloaded; PagesPrinted 90; LowPaperReserveRaised] |> reloadReturns (loadedPrinter, [Reloaded])
+loadedPrinterHistory |> reloadReturns (loadedPrinter, [])
 
-loadedPrinter |> printReturns 5 ({ NumberOfPagesRemaining = 95; NeedToBeReloaded = false }, [PagesPrinted 5])
-loadedPrinter |> printReturns 50 ({ NumberOfPagesRemaining = 50; NeedToBeReloaded = false }, [PagesPrinted 50])
-loadedPrinter |> printReturns 89 ({ NumberOfPagesRemaining = 11; NeedToBeReloaded = false }, [PagesPrinted 89])
-loadedPrinter |> printReturns 90 ({ NumberOfPagesRemaining = 10; NeedToBeReloaded = true }, [PagesPrinted 90; LowPaperReserveRaised])
-loadedPrinter |> printReturns 100 (emptyPrinter, [PagesPrinted 100; LowPaperReserveRaised])
-loadedPrinter |> printReturns 150 (emptyPrinter, [PagesPrinted 100; LowPaperReserveRaised])
-{ NumberOfPagesRemaining = 50; NeedToBeReloaded = false } |> printReturns 5 ({ NumberOfPagesRemaining = 45; NeedToBeReloaded = false }, [PagesPrinted 5])
-{ NumberOfPagesRemaining = 10; NeedToBeReloaded = true } |> printReturns 5 ({ NumberOfPagesRemaining = 5; NeedToBeReloaded = true }, [PagesPrinted 5])
-emptyPrinter |> printReturns 5 (emptyPrinter, [])
+loadedPrinterHistory |> printReturns 5 ({ NumberOfPagesRemaining = 95; NeedToBeReloaded = false }, [PagesPrinted 5])
+loadedPrinterHistory |> printReturns 50 ({ NumberOfPagesRemaining = 50; NeedToBeReloaded = false }, [PagesPrinted 50])
+loadedPrinterHistory |> printReturns 89 ({ NumberOfPagesRemaining = 11; NeedToBeReloaded = false }, [PagesPrinted 89])
+loadedPrinterHistory |> printReturns 90 ({ NumberOfPagesRemaining = 10; NeedToBeReloaded = true }, [PagesPrinted 90; LowPaperReserveRaised])
+loadedPrinterHistory |> printReturns 100 (emptyPrinter, [PagesPrinted 100; LowPaperReserveRaised])
+loadedPrinterHistory |> printReturns 150 (emptyPrinter, [PagesPrinted 100; LowPaperReserveRaised])
+[Reloaded; PagesPrinted 50] |> printReturns 5 ({ NumberOfPagesRemaining = 45; NeedToBeReloaded = false }, [PagesPrinted 5])
+[Reloaded; PagesPrinted 90; LowPaperReserveRaised] |> printReturns 5 ({ NumberOfPagesRemaining = 5; NeedToBeReloaded = true }, [PagesPrinted 5])
+emptyPrinterHistory |> printReturns 5 (emptyPrinter, [])
