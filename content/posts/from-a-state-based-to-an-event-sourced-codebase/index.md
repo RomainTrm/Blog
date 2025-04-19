@@ -7,9 +7,9 @@ draft: true
 
 A few weeks ago, I've published a [post](/posts/refining-software-architectures) where I described improvements for various architectures, following a logical path from a CRUD architecture to a CQRS/ES implementation.  
 
-Since then, I have participated to [Lyon Craft](https://lyon-craft.fr/) 2025, a local conference focusing on software craftsmanship mindset and practices. For this edition, we had the pleasure to invite [Jérémie Chassaing](https://thinkbeforecoding.com/) for an *event-sourcing* workshop. I had the opportunity to discuss with him and attend his workshop.  
+Since then, I participated in [Lyon Craft](https://lyon-craft.fr/) 2025, a local conference focusing on the software craftsmanship mindset and practices. For this edition, we had the pleasure to invite [Jérémie Chassaing](https://thinkbeforecoding.com/) for an *event-sourcing* workshop. I had the opportunity to discuss with him and attend his workshop.  
 
-During this, he described his `Decider` pattern: I will not detail the pattern here but I encourage you to read Jérémie's [dedicated post](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) on this topic. I already knew about it and about *event-sourcing* in general so I didn't learn anything new about this pattern, but it wasn't why I decided to attend this workshop anyway.  
+During this, he described his `Decider` pattern: I will not detail the pattern here but I encourage you to read Jérémie's [dedicated post](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) on this topic. I already knew about it and about *event-sourcing* in general so I didn't learn anything new, but it wasn't why I decided to attend this workshop anyway.  
 
 What I was looking for is how Jérémie introduces *event-sourcing* to newcomers and how he refactors a *state-based* codebase to an *event-sourcing* implementation, and I loved what I found! Jérémie's approach reminds me [mine](/posts/refining-software-architectures) except he uses tiny steps I didn't think of. In this post I want to explain these in order to avoid another Big Bang refactoring.
 
@@ -33,7 +33,7 @@ Let's start with a simple feature implemented with the [*Functional core, Impera
 o--> Workflow  
 ```
 
-Let's build a code that emulates a printer. Users can do two actions: print pages and reload it with paper. If the printer runs out of paper, then it can't print pages anymore. When the remaining paper in the printer allows a maximum of ten pages to be printed, then a flag is raised, asking for a refill.
+For this blog post, we will use a codebase that emulates a printer. Users can do two actions: print pages and reload it with paper. If the printer runs out of paper, then it can't print pages anymore. When the remaining paper in the printer allows a maximum of ten pages to be printed, then a flag is raised, asking for a refill.
 
 Here's the first implementation of the *functional core* part of the feature:  
 
@@ -85,7 +85,7 @@ let reload (deps: InfraDependencies) =
 
 The complete code example is available [here](0-state-based.fsx).
 
-In this first version of our feature, the *imperative shell* loads the `PrinterState`, applies a `Command` to it then saves the final state it gets as a result from the *functional core*. On every step we're manipulating a state, no *event* involved so far.  
+In this first version of our feature, the *imperative shell* loads the `PrinterState`, applies a `Command` to it, then saves the final *state* it gets as a result from the *functional core*. On every step we're manipulating a *state*, no *event* involved so far.  
 
 I believe it's worth mentioning that with such a model, we don't know how many pages have been printed for a given `Print` command, and if anything has been printed at all.
 
@@ -113,7 +113,7 @@ let evolve (state: PrinterState) = function
     | Reloaded -> { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }
 ```
 
-And finally, we update our `decide` function. Depending of the command and the current state of our printer, we may decide to return zero, one or two *events*. It forces us to manipulate an `Events list`. Then we immediatly apply them to our current `state` by folding:
+And finally, we update our `decide` function. Depending of the command and the current *state* of our printer, we may decide to return zero, one or two *events*. This forces us to manipulate an `Events list`. Then we immediatly apply them to our current `state` by folding:
 
 ```fsharp
 let decide (state: PrinterState) = function
@@ -142,9 +142,9 @@ The rest of the code (the *imperative shell*) remains the same, you can check it
 
 ## Step 2: Retrieve events from the *functional core*
 
-Second refactor now: we will retrieve events from our *functional core* and rebuild state into the *imperative shell* before saving it. This way, we change the interface between these two layers but it doesn't affect our dependencies yet.  
+Second refactor now: we will retrieve events from our *functional core* and rebuild *state* into the *imperative shell* before saving it. This way, we change the interface between these two layers but it doesn't affect our dependencies yet.  
 
-I am used to keeping the `evolve` function hidden as an internal implementation detail of an *aggregate*, called through the `evolve` function. But as I'm following Jérémie's technique here, we will keep these two functions separated as it will help us for the upcoming refactoring.
+I am used to keeping the `evolve` function hidden as an internal implementation detail of an *aggregate*, called through the `decide` function. But as I'm following Jérémie's technique here, we will keep these two functions separated as it will help us for the upcoming refactoring.
 
 The code change here is quite simple: we will move the folding from the *functional core* to the *imperative shell*.
 
@@ -170,7 +170,7 @@ let decide (state: PrinterState) = function
         ]
 ```
 
-Then we apply these *events* with the `evolve` function to the state into the `execute` function:
+Then we apply these *events* with the `evolve` function to the *state* into the `execute` function:
 
 ```fsharp
 let execute (deps: InfraDependencies) (command: Commands) =
@@ -219,7 +219,7 @@ Also, keeping *states* alongside our newly saved *events* is a very convenient s
 
 ## Step 4: Loading events, our first *event-sourced* implementation
 
-Now we can implement an *event-sourced* feature with our next refactoring. To do so we have to load from the infrastructure layer an *Events list* instead of a `PrinterState`. Let's modify the dependencies:  
+Now we can implement an *event-sourced* feature with our next refactoring. To do so we have to load from the infrastructure layer an `Events list` instead of a `PrinterState`. Let's modify the dependencies:  
 
 ```fsharp
 type InfraDependencies = {
@@ -242,7 +242,7 @@ let execute (deps: InfraDependencies) (command: Commands) =
     deps.save (newState, events)
 ```
 
-We are runing into an issue here: until now we had a *state* on which to apply our *events*, but now we have only *events*, we are missing an `initialState`. I usually define it in the *functional core*:
+We are runing into an issue here: until now we had a *state* on which to apply our *events*, but now we have only *events*. We are missing an `initialState` for our printer when nothing has happened yet. I usually define it in the *functional core*:
 
 ```fsharp
 // A new printer is empty and needs to be loaded
@@ -252,7 +252,7 @@ let initialState : PrinterState = {
 }
 ```
 
-And then we use it to build our *state* by replacing the `??????` with `initialState`:
+And now we can use it to build our *state* by replacing the `??????` with `initialState`:
 
 ```fsharp
 let state = history |> List.fold evolve initialState
@@ -260,7 +260,7 @@ let state = history |> List.fold evolve initialState
 
 The complete code example is available [here](4-loading-events.fsx).
 
-As for step 3, my code example doesn't show the whole story here as I didn't implement the infrastructure layer. For this step you'll have to deserialize *events* once loaded from the database.
+As for step 3, my code example doesn't show the whole story here: I didn't implement the infrastructure layer where we will have to deserialize *events* once loaded from the database.
 
 ## Step 5: removing *state* from the infrastructure layer
 
@@ -293,7 +293,7 @@ The final implementation is available [here](5-removing-state.fsx).
 
 In this post, we've explored how to gradually move from a *state-based* code base to an *event-sourced* one. Each of these steps is a valid solution that you can choose to go to production with. Just pick the one that matches your needs and you're comfortable with.  
 
-As I've mentioned it in the introduction, Jérémie goes further in his workshop as he also introduces his `Decider` pattern. If you have an opportunity to participate in this workshop, give it a try because you will learn more from it than with this post. 
+As I've already mentioned it in the introduction, Jérémie goes further in his workshop as he also introduces his `Decider` pattern. If you have an opportunity to participate in this workshop, give it a try because you will learn more from it than with this post. 
 
 ---
 
