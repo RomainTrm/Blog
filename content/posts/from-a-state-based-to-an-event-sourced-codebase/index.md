@@ -1,5 +1,5 @@
 ---
-title: "Migrate from State-Based to Event-Based"
+title: "From a state-based to an event-sourced codebase"
 date: 2025-04-30T09:00:00+02:00
 tags: [post, en]
 draft: true
