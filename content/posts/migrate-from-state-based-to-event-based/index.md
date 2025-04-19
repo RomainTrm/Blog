@@ -264,7 +264,7 @@ As for step 3, my code example doesn't show the whole story here as I didn't imp
 
 ## Step 5: removing *state* from the infrastructure layer
 
-For this final refactoring, we will remove the `PrinterState` from the infrastructure layer, meaning we will only load and save `Events list`. This is straighforward as we will only remove code.  
+For this final refactoring, we will remove the `PrinterState` from the infrastructure layer, meaning we will only load and save `Events list`. This is straighforward as we will only remove code. Note that it is possible to achieve this step before the step 4.  
 
 First, let's change our dependencies:  
 
@@ -291,11 +291,10 @@ The final implementation is available [here](5-removing-state.fsx).
 
 ## Conclusion
 
-- conclusion
-  - progressive
-  - each step is a valid solution to go to production with
-  - choose what you're confortable with
-  - Jeremie's workshop is more detailed and I recommand you to attend it if you have the opportunity
+In this post, we've explored how to gradualy move from a *state-based* code base to an *event-sourced* one. Each of these steps are valid solutions that you can choose to go to production with. Just pick the one that matches your needs and you're confortable with.  
+
+As I've mentionned it in the introduction, Jérémie goes further in his workshop as he also introduce his `Decider` pattern. If you have an oportunity to participate in this workshop, give it a try because you will learn more than with this post. 
+
 - TODO: add link with edit to "refining software architecture"
 
 ---
