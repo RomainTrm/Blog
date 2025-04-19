@@ -1,17 +1,17 @@
 ---
 title: "From a state-based to an event-sourced codebase"
-date: 2025-04-30T09:00:00+02:00
+date: 2025-04-23T09:00:00+02:00
 tags: [post, en]
 draft: true
 ---
 
-Few weeks ago, I've published a [post](/posts/refining-software-architectures) where I described improvements for various architectures, following a logical path from a CRUD architecture to a CQRS/ES implementation.  
+A few weeks ago, I've published a [post](/posts/refining-software-architectures) where I described improvements for various architectures, following a logical path from a CRUD architecture to a CQRS/ES implementation.  
 
 Since then, I have participated to [Lyon Craft](https://lyon-craft.fr/) 2025, a local conference focusing on software craftsmanship mindset and practices. For this edition, we had the pleasure to invite [Jérémie Chassaing](https://thinkbeforecoding.com/) for an *event-sourcing* workshop. I had the opportunity to discuss with him and attend his workshop.  
 
-During it, he described his `Decider` pattern: I will not detail the pattern here but I encourage you to read Jérémie's [dedicated post](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) on this topic. I already knew about it and about *event-sourcing* in general so I didn't learn anything new about this pattern, but it wasn't why I decided to attend this workshop anyway.  
+During this, he described his `Decider` pattern: I will not detail the pattern here but I encourage you to read Jérémie's [dedicated post](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) on this topic. I already knew about it and about *event-sourcing* in general so I didn't learn anything new about this pattern, but it wasn't why I decided to attend this workshop anyway.  
 
-What I was looking for is how Jérémie introduces *event-sourcing* to newcomers and how he refactors a *state-based* codebase to an *event-sourcing* implementation, and I loved what I found! Jérémie's approach reminds me [mine](/posts/refining-software-architectures), except he uses tiny steps I didn't think of. In this post I want to explain them in order to avoid another big-bang refactoring.
+What I was looking for is how Jérémie introduces *event-sourcing* to newcomers and how he refactors a *state-based* codebase to an *event-sourcing* implementation, and I loved what I found! Jérémie's approach reminds me [mine](/posts/refining-software-architectures) except he uses tiny steps I didn't think of. In this post I want to explain these in order to avoid another Big Bang refactoring.
 
 ## Initial architecture: manipulating states
 
@@ -33,7 +33,7 @@ Let's start with a simple feature implemented with the [*Functional core, Impera
 o--> Workflow  
 ```
 
-Let's build a code that emulate a printer. Users can do two actions: print pages and reload it with paper. If the printer runs out of pper, then it can't print pages anymore. When the remaining paper in the printer allows a maximum of ten pages to be print, then a flag asking for a reload is raised.
+Let's build a code that emulates a printer. Users can do two actions: print pages and reload it with paper. If the printer runs out of paper, then it can't print pages anymore. When the remaining paper in the printer allows a maximum of ten pages to be printed, then a flag is raised, asking for a refill.
 
 Here's the first implementation of the *functional core* part of the feature:  
 
@@ -85,9 +85,9 @@ let reload (deps: InfraDependencies) =
 
 The complete code example is available [here](0-state-based.fsx).
 
-In this first version of our feature, the *imperative shell* loads the `PrinterState`, applies a `Command` to it then saves the final state it gets as a result form the *functional core*. On every steps we're manipulating a state, no *event* involved so far.  
+In this first version of our feature, the *imperative shell* loads the `PrinterState`, applies a `Command` to it then saves the final state it gets as a result from the *functional core*. On every step we're manipulating a state, no *event* involved so far.  
 
-I believe it's worth mentionning that with such a model, we don't know how many pages have been printed for a given `Print` command, and if anything has been printed at all.
+I believe it's worth mentioning that with such a model, we don't know how many pages have been printed for a given `Print` command, and if anything has been printed at all.
 
 ## Step 1: Events in a black box
 
@@ -136,7 +136,7 @@ let decide (state: PrinterState) = function
         |> List.fold evolve state
 ```
 
-I'm fully aware that this code implementation already contains some early optimisations: conditions on `PagesPrinted` and `Reloaded` events are not mandatory as emitting them or not doesn't change behavior for an external observer. I chose to do it anyway to make future changes easier.
+I'm fully aware that this code implementation already contains some early optimizations: conditions on `PagesPrinted` and `Reloaded` events are not mandatory as raising them or not doesn't change behavior for an external observer. I chose to do it anyway to make future changes easier.
 
 The rest of the code (the *imperative shell*) remains the same, you can check it [here](1-events-in-a-black-box.fsx).
 
@@ -144,7 +144,7 @@ The rest of the code (the *imperative shell*) remains the same, you can check it
 
 Second refactor now: we will retrieve events from our *functional core* and rebuild state into the *imperative shell* before saving it. This way, we change the interface between these two layers but it doesn't affect our dependencies yet.  
 
-I am used to keep the `evolve` function hidden as an internal implementation detail of an *aggregate*, called through the `evolve` function. But as I'm following Jérémie's technique here, we will keep these two functions separated as it will help us for the upcoming refactorings.
+I am used to keeping the `evolve` function hidden as an internal implementation detail of an *aggregate*, called through the `evolve` function. But as I'm following Jérémie's technique here, we will keep these two functions separated as it will help us for the upcoming refactoring.
 
 The code change here is quite simple: we will move the folding from the *functional core* to the *imperative shell*.
 
@@ -170,7 +170,7 @@ let decide (state: PrinterState) = function
         ]
 ```
 
-Then we apply theses *events* with the `evolve` function to the state into the `execute` function:
+Then we apply these *events* with the `evolve` function to the state into the `execute` function:
 
 ```fsharp
 let execute (deps: InfraDependencies) (command: Commands) =
@@ -186,7 +186,7 @@ We don't have to apply any change to our `InfraDependencies` type, meaning the a
 
 ## Step 3: Saving events
 
-For this step, we will not have to modify our *functional core*. There is only one missing requirement there for an *event-sourced* implementation that we will introduce in step 4. All the other upcomming changes will impact the *imperative shell* and the application/infrastructure layer.
+For this step, we will not have to modify our *functional core*. There is only one missing requirement there for an *event-sourced* implementation that we will introduce in step 4. All the other upcoming changes will impact the *imperative shell* and the application/infrastructure layer.
 
 To save our events, first we must change our dependencies to save an `Events list` with our `PrinterState`:  
 
@@ -211,11 +211,11 @@ let execute (deps: InfraDependencies) (command: Commands) =
 
 The complete code example is available [here](3-saving-events.fsx).
 
-This refactoring looks simple, but keep in mind that for storing our *events*, we also have to handle serialization in the infrastructure layer that doesn't appear in my code example. This can be a non-trivial topic and we have to come out with a proper strategy.  
+This refactoring looks simple, but keep in mind that for storing our *events*, we also have to handle serialization in the infrastructure layer that doesn't appear in my code example. This can be a non-trivial topic and we have to come up with a proper strategy.  
 
 Note that now, as our *events* are exposed outside of the domain layer, we can know if something happened or not in our system: if no *event* is returned, then we have a proof that no decision has been made.
 
-Also, keeping *states* alongside our newly saved *events* is a very convenient solution: it helps maintaining the current model without building new projections (aka *readmodels*). Business people may be used to go check things in the database, even if *events* bring new informations, *states* remains more practical to query for them.
+Also, keeping *states* alongside our newly saved *events* is a very convenient solution: it helps maintain the current model without building new projections (aka *readmodels*). Business people may be used to go check things in the database, even if *events* bring new information, *states* remains more practical to query for them.
 
 ## Step 4: Loading events, our first *event-sourced* implementation
 
@@ -260,11 +260,11 @@ let state = history |> List.fold evolve initialState
 
 The complete code example is available [here](4-loading-events.fsx).
 
-As for step 3, my code example doesn't show the whole story here as I didn't implement the infrasctructure layer. For this step you'll have to deserialize *events* once loaded from the database.
+As for step 3, my code example doesn't show the whole story here as I didn't implement the infrastructure layer. For this step you'll have to deserialize *events* once loaded from the database.
 
 ## Step 5: removing *state* from the infrastructure layer
 
-For this final refactoring, we will remove the `PrinterState` from the infrastructure layer, meaning we will only load and save `Events list`. This is straighforward as we will only remove code. Note that it is possible to achieve this step before the step 4.  
+For this final refactoring, we will remove the `PrinterState` from the infrastructure layer, meaning we will only load and save `Events list`. This is straightforward as we will only remove code. Note that it is possible to achieve this step before the step 4.  
 
 First, let's change our dependencies:  
 
@@ -291,9 +291,9 @@ The final implementation is available [here](5-removing-state.fsx).
 
 ## Conclusion
 
-In this post, we've explored how to gradualy move from a *state-based* code base to an *event-sourced* one. Each of these steps are valid solutions that you can choose to go to production with. Just pick the one that matches your needs and you're confortable with.  
+In this post, we've explored how to gradually move from a *state-based* code base to an *event-sourced* one. Each of these steps is a valid solution that you can choose to go to production with. Just pick the one that matches your needs and you're comfortable with.  
 
-As I've mentionned it in the introduction, Jérémie goes further in his workshop as he also introduce his `Decider` pattern. If you have an oportunity to participate in this workshop, give it a try because you will learn more than with this post. 
+As I've mentioned it in the introduction, Jérémie goes further in his workshop as he also introduces his `Decider` pattern. If you have an opportunity to participate in this workshop, give it a try because you will learn more from it than with this post. 
 
 ---
 
