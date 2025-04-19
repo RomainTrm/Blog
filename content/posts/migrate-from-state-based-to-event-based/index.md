@@ -211,7 +211,7 @@ let execute (deps: InfraDependencies) (command: Commands) =
 
 The complete code example is available [here](3-saving-events.fsx).
 
-This refactoring looks simple, but keep in mind that we also have to handle events serialization in the infrastructure layer that doesn't appear in my code example. This can be a non-trivial topic and we have to come out with a proper strategy.  
+This refactoring looks simple, but keep in mind that for storing our *events*, we also have to handle serialization in the infrastructure layer that doesn't appear in my code example. This can be a non-trivial topic and we have to come out with a proper strategy.  
 
 Note that now, as our *events* are exposed outside of the domain layer, we can know if something happened or not in our system: if no *event* is returned, then we have a proof that no decision has been made.
 
@@ -252,13 +252,42 @@ let initialState : PrinterState = {
 }
 ```
 
-And then we use it to build our *state*:
+And then we use it to build our *state* by replacing the `??????` with `initialState`:
 
 ```fsharp
 let state = history |> List.fold evolve initialState
 ```
 
 The complete code example is available [here](4-loading-events.fsx).
+
+As for step 3, my code example doesn't show the whole story here as I didn't implement the infrasctructure layer. For this step you'll have to deserialize *events* once loaded from the database.
+
+## Step 5: removing *state* from the infrastructure layer
+
+For this final refactoring, we will remove the `PrinterState` from the infrastructure layer, meaning we will only load and save `Events list`. This is straighforward as we will only remove code.  
+
+First, let's change our dependencies:  
+
+```fsharp
+type InfraDependencies = {
+    load: unit -> Events list
+    // Only saves events
+    save: Events list -> unit 
+}
+```
+
+And finally we update our *imperative shell*:
+
+```fsharp
+let execute (deps: InfraDependencies) (command: Commands) =
+    let history = deps.load ()
+    let state = history |> List.fold evolve initialState
+    let events = command |> decide state
+    // Doesn't build new state, only pass new events
+    deps.save events
+```
+
+The final implementation is available [here](5-removing-state.fsx).
 
 - load state, state as output, save sate
 - load state, events in black box (state as output), save sate
