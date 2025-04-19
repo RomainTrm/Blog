@@ -295,8 +295,6 @@ In this post, we've explored how to gradualy move from a *state-based* code base
 
 As I've mentionned it in the introduction, Jérémie goes further in his workshop as he also introduce his `Decider` pattern. If you have an oportunity to participate in this workshop, give it a try because you will learn more than with this post. 
 
-- TODO: add link with edit to "refining software architecture"
-
 ---
 
 ## Comments
