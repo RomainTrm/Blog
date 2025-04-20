@@ -39,17 +39,17 @@ let decide (state: PrinterState) = function
 
 // Imperative shell
 type InfraDependencies = {
-    load: unit -> PrinterState
+    Load: unit -> PrinterState
     // Gets the new state and new events
-    save: PrinterState * Events list -> unit 
+    Save: PrinterState * Events list -> unit 
 }
 
 let execute (deps: InfraDependencies) (command: Commands) =
-    let state = deps.load ()
+    let state = deps.Load ()
     let events = command |> decide state
     let newState = events |> List.fold evolve state 
     // Pass events
-    deps.save (newState, events)
+    deps.Save (newState, events)
 
 let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
     Print nbOfPagesToPrint 
@@ -61,34 +61,34 @@ let reload (deps: InfraDependencies) =
 
 // Tests
 type SpyInfraDependencies = {
-    loadSavedData: unit -> PrinterState * Events list 
-    deps: InfraDependencies
+    LoadSavedData: unit -> PrinterState * Events list 
+    Deps: InfraDependencies
 }
 
 let testDependency (initialState: PrinterState) = 
     let mutable store = initialState, []
     {
-        deps = {
-            load = fun () -> fst store
-            save = fun (newState, newEvents) ->
+        Deps = {
+            Load = fun () -> fst store
+            Save = fun (newState, newEvents) ->
                 store <- newState, newEvents
         }
-        loadSavedData = fun () -> store
+        LoadSavedData = fun () -> store
     }
 
 let expect (expected: PrinterState * Events list) (deps: SpyInfraDependencies) =
-    let result = deps.loadSavedData ()
+    let result = deps.LoadSavedData ()
     if expected <> result
     then failwith $"Expected: %A{expected}; Received: %A{result}"
 
 let reloadReturns (expected: PrinterState * Events list) (initialState: PrinterState) =
     let dependencies = testDependency initialState
-    reload dependencies.deps
+    reload dependencies.Deps
     expect expected dependencies
 
 let printReturns (nbOfPagesToPrint: int) (expected: PrinterState * Events list) (initialState: PrinterState) =
     let dependencies = testDependency initialState
-    print dependencies.deps nbOfPagesToPrint
+    print dependencies.Deps nbOfPagesToPrint
     expect expected dependencies
 
 let loadedPrinter = { NumberOfPagesRemaining = 100; NeedToBeReloaded = false }

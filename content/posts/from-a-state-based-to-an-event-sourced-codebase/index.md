@@ -65,14 +65,14 @@ let decide (state: PrinterState) = function
 
 ```fsharp
 type InfraDependencies = {
-    load: unit -> PrinterState
-    save: PrinterState -> unit
+    Load: unit -> PrinterState
+    Save: PrinterState -> unit
 }
 
 let execute (deps: InfraDependencies) (command: Commands) =
-    let state = deps.load ()
+    let state = deps.Load ()
     let newState = command |> decide state
-    deps.save newState
+    deps.Save newState
 
 let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
     Print nbOfPagesToPrint 
@@ -174,12 +174,12 @@ Then we apply these *events* with the `evolve` function to the *state* into the 
 
 ```fsharp
 let execute (deps: InfraDependencies) (command: Commands) =
-    let state = deps.load ()
+    let state = deps.Load ()
     // Retrive events
     let events = command |> decide state
     // Apply events to the previous state
     let newState = events |> List.fold evolve state 
-    deps.save newState
+    deps.Save newState
 ```
 
 We don't have to apply any change to our `InfraDependencies` type, meaning the applicative/infrastructure layer remains unaware of this change. The complete code example is available [here](2-retrieve-events-from-funcitonal-core.fsx).
@@ -192,9 +192,9 @@ To save our events, first we must change our dependencies to save an `Events lis
 
 ```fsharp
 type InfraDependencies = {
-    load: unit -> PrinterState
+    Load: unit -> PrinterState
     // Gets the new state and new events
-    save: PrinterState * Events list -> unit 
+    Save: PrinterState * Events list -> unit 
 }
 ```
 
@@ -202,11 +202,11 @@ Then we update the code to match this new signature:
 
 ```fsharp
 let execute (deps: InfraDependencies) (command: Commands) =
-    let state = deps.load ()
+    let state = deps.Load ()
     let events = command |> decide state
     let newState = events |> List.fold evolve state 
     // Pass events
-    deps.save (newState, events)
+    deps.Save (newState, events)
 ```
 
 The complete code example is available [here](3-saving-events.fsx).
@@ -224,8 +224,8 @@ Now we can implement an *event-sourced* feature with our next refactoring. To do
 ```fsharp
 type InfraDependencies = {
     // Load events
-    load: unit -> Events list
-    save: PrinterState * Events list -> unit 
+    Load: unit -> Events list
+    Save: PrinterState * Events list -> unit 
 }
 ```
 
@@ -234,12 +234,12 @@ And then we try to rebuild the `PrinterState` in our *imperative shell*:
 ```fsharp
 let execute (deps: InfraDependencies) (command: Commands) =
     // Load printer's history
-    let history = deps.load ()
+    let history = deps.Load ()
     // Build printer's state
     let state = history |> List.fold evolve ??????
     let events = command |> decide state
     let newState = events |> List.fold evolve state 
-    deps.save (newState, events)
+    deps.Save (newState, events)
 ```
 
 We are runing into an issue here: until now we had a *state* on which to apply our *events*, but now we have only *events*. We are missing an `initialState` for our printer when nothing has happened yet. I usually define it in the *functional core*:
@@ -270,9 +270,9 @@ First, let's change our dependencies:
 
 ```fsharp
 type InfraDependencies = {
-    load: unit -> Events list
+    Load: unit -> Events list
     // Only saves events
-    save: Events list -> unit 
+    Save: Events list -> unit 
 }
 ```
 
@@ -280,14 +280,61 @@ And finally we update our *imperative shell*:
 
 ```fsharp
 let execute (deps: InfraDependencies) (command: Commands) =
-    let history = deps.load ()
+    let history = deps.Load ()
     let state = history |> List.fold evolve initialState
     let events = command |> decide state
     // Doesn't build new state, only pass new events
-    deps.save events
+    deps.Save events
 ```
 
 The final implementation is available [here](5-removing-state.fsx).
+
+## Remarks
+
+Keep in mind though that my code example is a simplified version of what a real implementation looks like, especially in the *imperative shell* where I've decided to remove some noise for the seek of the demonstration. Indeed, systems manipulating a single stream of *events* are rare, we usually have to provide an ID for loading and saving. Also, we often provide the version of the stream we used to make our decision, this allows us to detect potential concurrent executions of *command*.
+
+```goat
+Initial event stream     Add event: No conflict    Add event: Conflict 
+ 
+  .-----------.            .-----------.             .-----------.        
+  |  Event 1  |            |  Event 1  |             |  Event 1  |        
+  '-----------'            '-----------'             '-----------'        
+  |  Event 2  |            |  Event 2  |             |  Event 2  |
+  '-----------'            '-----------'             '-----------'        
+  |  Event …  |            |  Event …  |             |  Event …  |        
+  '-----------'            '-----------'             '-----------'        
+  |  Event N  |            |  Event N  |             |  Event N  |        
+  '-----------'            '------+----'------.      '-----------'    .-----------.
+                              <---| Event N+1 |      | Event N+1 |<-x-| Event N+1 |
+                                  '-----------'      '-----------'    '-----------'
+
+<--- Valid insertion
+<-x- Conflicting insertion
+```
+
+With these constraints in mind, a more realistic implementation could look like this:
+
+```fsharp
+type InfraDependencies = {
+    Load: PrinterId -> Events list
+    Save: SaveParams -> unit 
+}
+and SaveParams = {
+    PrinterId: PrinterId
+    Version: int
+    Events: Events list
+ }
+
+let execute (deps: InfraDependencies) (printerId: PrinterId) (command: Commands) =
+    let history = deps.Load printerId
+    let state = history |> List.fold evolve initialState
+    let events = command |> decide state
+    deps.Save {
+        PrinterId = printerId
+        Version = List.length history
+        Events = events
+    }
+```
 
 ## Conclusion
 

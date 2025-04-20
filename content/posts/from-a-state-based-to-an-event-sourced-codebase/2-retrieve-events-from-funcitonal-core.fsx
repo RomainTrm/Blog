@@ -41,17 +41,17 @@ let decide (state: PrinterState) = function
 // Imperative shell
 // InfraDependencies doesn't change
 type InfraDependencies = {
-    load: unit -> PrinterState
-    save: PrinterState -> unit
+    Load: unit -> PrinterState
+    Save: PrinterState -> unit
 }
 
 let execute (deps: InfraDependencies) (command: Commands) =
-    let state = deps.load ()
+    let state = deps.Load ()
     // Retrive events
     let events = command |> decide state
     // Apply events to the previous state
     let newState = events |> List.fold evolve state 
-    deps.save newState
+    deps.Save newState
 
 let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
     Print nbOfPagesToPrint 
@@ -65,13 +65,13 @@ let reload (deps: InfraDependencies) =
 let testDependency (initialState: PrinterState) = 
     let mutable state = initialState
     {
-        load = fun () -> state
-        save = fun newState ->
+        Load = fun () -> state
+        Save = fun newState ->
             state <- newState
     }
 
 let expect (expected: PrinterState) (deps: InfraDependencies) =
-    let result = deps.load ()
+    let result = deps.Load ()
     if expected <> result
     then failwith $"Expected: %A{expected}; Received: %A{result}"
 

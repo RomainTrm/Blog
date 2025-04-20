@@ -47,18 +47,18 @@ let decide (state: PrinterState) = function
 // Imperative shell
 type InfraDependencies = {
     // Load events
-    load: unit -> Events list
-    save: PrinterState * Events list -> unit 
+    Load: unit -> Events list
+    Save: PrinterState * Events list -> unit 
 }
 
 let execute (deps: InfraDependencies) (command: Commands) =
     // Load printer's history
-    let history = deps.load ()
+    let history = deps.Load ()
     // Build printer's state
     let state = history |> List.fold evolve initialState
     let events = command |> decide state
     let newState = events |> List.fold evolve state 
-    deps.save (newState, events)
+    deps.Save (newState, events)
 
 let print (deps: InfraDependencies) (nbOfPagesToPrint: int) =
     Print nbOfPagesToPrint 
@@ -70,34 +70,34 @@ let reload (deps: InfraDependencies) =
 
 // Tests
 type SpyInfraDependencies = {
-    loadSavedData: unit -> PrinterState * Events list 
-    deps: InfraDependencies
+    LoadSavedData: unit -> PrinterState * Events list 
+    Deps: InfraDependencies
 }
 
 let testDependency (initialHistory: Events list) = 
     let mutable store = initialState, initialHistory
     {
-        deps = {
-            load = fun () -> snd store
-            save = fun (newState, newEvents) ->
+        Deps = {
+            Load = fun () -> snd store
+            Save = fun (newState, newEvents) ->
                 store <- newState, newEvents
         }
-        loadSavedData = fun () -> store
+        LoadSavedData = fun () -> store
     }
 
 let expect (expected: PrinterState * Events list) (deps: SpyInfraDependencies) =
-    let result = deps.loadSavedData ()
+    let result = deps.LoadSavedData ()
     if expected <> result
     then failwith $"Expected: %A{expected}; Received: %A{result}"
 
 let reloadReturns (expected: PrinterState * Events list) (initialHistory: Events list) =
     let dependencies = testDependency initialHistory
-    reload dependencies.deps
+    reload dependencies.Deps
     expect expected dependencies
 
 let printReturns (nbOfPagesToPrint: int) (expected: PrinterState * Events list) (initialHistory: Events list) =
     let dependencies = testDependency initialHistory
-    print dependencies.deps nbOfPagesToPrint
+    print dependencies.Deps nbOfPagesToPrint
     expect expected dependencies
 
 let loadedPrinterHistory = [Reloaded]
