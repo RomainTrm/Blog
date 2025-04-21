@@ -485,6 +485,9 @@ I'm also aware we've not explored all architectures that exist out-there. For ex
 
 Finally, even if our architectures have increased in complexity, it doesn't mean that the cost of the software is growing with it. Sure, it requires more skilled developers and the initial cost of a new feature may be higher, but we have to consider how the code complexity is contained over time, how costly it is to run and maintain the software in production, etc. Increased initial development cost can result in lower maintenance, production and evolution costs. That's why only looking at the development costs to drive a technical choice doesn't make sense to me. This is also the reason why I don’t think these advanced architectures are necessarily more expensive.  
 
+> ### Edit: 2025/04/23  
+> In this post, I've described how to gradually move from a state-based persistence model to an *event-sourced* solution, but I did it with a macroscopic view of our architectures. Since then, I've published another [post](/posts/from-a-state-based-to-an-event-sourced-codebase) where I detail how to do such migrations of a codebase in tiny steps.
+
 ---
 
 ## Comments
