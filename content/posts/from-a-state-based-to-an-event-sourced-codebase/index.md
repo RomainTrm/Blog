@@ -2,7 +2,7 @@
 title: "From a state-based to an event-sourced codebase"
 date: 2025-04-23T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 A few weeks ago, I've published a [post](/posts/refining-software-architectures) where I described improvements for various architectures, following a logical path from a CRUD architecture to a CQRS/ES implementation.  
