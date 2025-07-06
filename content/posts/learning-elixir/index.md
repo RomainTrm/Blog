@@ -7,7 +7,7 @@ draft: true
 
 In a previous [post](../using-processes-for-better-resilience/), I've mentioned I've read the book [Programming Elixir 1.6](https://pragprog.com/titles/elixir16/programming-elixir-1-6/).  
 
-Recently, because I was planning to read [Real-World Event Sourcing](https://pragprog.com/titles/khpes/real-world-event-sourcing/), I chose to conduct a second reading because my limited knowledge and skills with Elixir were eroded over time. I took time to take many notes which are available on a dedicated [repository](https://github.com/RomainTrm/Book-ElixirExercices).  
+As I was planning to read [Real-World Event Sourcing](https://pragprog.com/titles/khpes/real-world-event-sourcing/), I chose to conduct a second reading because my limited knowledge and skills with Elixir were eroded over time. I took time to take many notes which are available on a dedicated [repository](https://github.com/RomainTrm/Book-ElixirExercices).  
 
 In this post, I want to present to you the Elixir language, the Erlang VM and give you a taste of why you should learn it even if you will not use it in production.
 
@@ -91,7 +91,7 @@ Elixir is a dynamically typed language. This is a voluntary choice made by José
 
 At runtime, though, we have many types and structures available to represent our data: primitives, lists, maps (dictionaries), structs, etc. This has the consequence of forcing developers to be very explicit about the data structures they are handling, which leads to verbose code in my opinion (unless we declare specific [structure definitions](https://hexdocs.pm/elixir/main/structs.html)).  
 
-We also have some tooling to check the validity of our code: A compiler that is able to spot missing or invalid function signatures and a static analysis tools like [dialyzer](https://www.erlang.org/doc/apps/dialyzer/dialyzer.html). These analyzers use annotations added to the code by developers to check consistency across functions declarations and invocations (note these annotations are optional):  
+We also have some tooling to check the validity of our code: A compiler that is able to spot missing or invalid function signatures and some static analysis tools like [dialyzer](https://www.erlang.org/doc/apps/dialyzer/dialyzer.html). These analyzers use annotations added to the code by developers to check consistency across functions declarations and invocations (note these annotations are optional):  
 
 ```elixir
 defmodule Simple do
@@ -147,7 +147,67 @@ With such property, it enables metaprogramming like macros, allowing developers 
 
 Elixir runs on the Erlang VM and benefits from these capabilities.  
 
-## TODO OTP
+### Actor model
+
+First of all, this environment is fully designed to be used with the [actor model](https://en.wikipedia.org/wiki/Actor_model). With this pattern, we use processes as the basic building bloc. A process run some code logic, store an internal state, send messages to other processes to communicate, can spawn new processes, etc.  
+
+As an example, the following code implement an in-memory stack. Once initiated, it waits for messages to add or return values. Internal state is stored by using recursion on the `loop` function.
+
+```elixir
+defmodule Stack do
+  def init() do
+    loop([])
+  end
+
+  def loop(values) do
+    receive do
+      {:pop} ->
+        case values do
+          [] ->
+            IO.puts("Stack is empty")
+            loop(values)
+          [head|tail] ->
+            IO.puts("Pop: #{head}")
+            loop(tail)
+        end
+      {:push, value} ->
+        loop([value|values])
+    end
+  end
+end
+```
+
+We spawn a `Stack` instance in a dedicated process (here `#PID<0.110.0>`) then we send messages:
+
+```elixir
+iex> stack = spawn(fn -> Stack.init() end)
+#PID<0.110.0>
+iex> send(stack, {:pop})
+Stack is empty
+{:pop}
+iex> send(stack, {:push, 1})
+{:stack, 1}
+iex> send(stack, {:push, 2})
+{:stack, 2}
+iex> send(stack, {:push, 3})
+{:stack, 3}
+iex> send(stack, {:pop})
+Pop: 3
+{:pop}
+iex> send(stack, {:pop})
+Pop: 2
+{:pop}
+```
+
+Even though we can manipulate these processes with few functions from Elixir, this example is a "low-level" implementation. Processes are rarely managed this way.
+
+Most of the use cases seems to be handled with modules [`Task`](https://hexdocs.pm/elixir/1.12/Task.html) and [`Agent`](https://hexdocs.pm/elixir/1.12/Agent.html) or with high-level libraries like [`GenServer`](https://hexdocs.pm/elixir/1.12/GenServer.html) or [`GenStage`](https://hexdocs.pm/gen_stage/GenStage.html). For the following code examples, I will use `GenServer`.
+
+#### Server
+
+#### Supervisor
+
+#### No concurrency (process isolation)
 
 ### Nodes
 
@@ -184,7 +244,7 @@ iex(node_one@machine-name)> Node.spawn :"node_two@machine-name", func
 :"node_two@machine-name"
 #PID<13771.116.0>
 # => Runs on node two, first field of the return PID isn't zero, meaning we are not running the code on the local node
-# => Note: As func has been defined on node one, it uses IO of node one to print information
+# => Note: As `func` has been defined on node one, it uses IO of node one to print information
 ```
 
 ### Hot-upgrades
@@ -207,23 +267,7 @@ end
 I will not go too deep in this topic, I think this is a nice feature but maybe not as useful as it may sound now that we're used to run our applications with several instances and to perform rolling updates.  
 Furthermore, it seems these upgrades were supported by `mix` with the help of some packages, but it doesn't seem to work anymore with the latest versions of OTP without some manual configuration from the developers.  
 
-Despite my best efforts, I didn't manage to achieve one of these updates successfully with [`distillery`](https://hexdocs.pm/distillery/home.html) or [`castle`](https://hex.pm/packages/castle). I am pretty sure these tools work and the issue comes from my environment and/or my skills.
-
-- langage:  
-  - ruby syntax
-  - REPL
-  - FP
-  - types (dynamic typing & static analysis)
-  - atoms
-  - homoconoicity
-- BEAM: 
-  - actor model 
-  - OTP:
-    - Server
-    - Supervisor
-    - no concurrency (process isolation)
-  - nodes
-  - hot-upgrade
+Despite my best efforts, I didn't manage to achieve one of these updates successfully with [`distillery`](https://hexdocs.pm/distillery/home.html) or [`castle`](https://hex.pm/packages/castle). But I am pretty sure these tools work and the issue comes from my environment and/or my skills.
 
 ---
 
