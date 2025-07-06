@@ -48,7 +48,7 @@ For maps, the function expects a key-value tuple.
     [a: -1, b: -2]
 ```
 
-Elixir also benefits from [mix](https://hexdocs.pm/mix/1.12/Mix.html), a complete build tool (like `npm` or `dotnet`) that provides project creation, compiling, testing, dependencies management and many more capabilities.
+Elixir also benefits from [`mix`](https://hexdocs.pm/mix/1.12/Mix.html), a complete build tool (like `npm` or `dotnet`) that provides project creation, compiling, testing, dependencies management and many more capabilities.
 
 ### A functional langage
 
@@ -145,7 +145,69 @@ With such property, it enables metaprogramming like macros, allowing developers 
 
 ## The Erlang VM
 
+Elixir runs on the Erlang VM and benefits from these capabilities.  
 
+## TODO OTP
+
+### Nodes
+
+The Erlang VM allows to connect several nodes in a fairly easy way, providing a high level of abstraction in the code. Each node is a running Erlang VM instance, these can be running and connected from the same hardware or over a network.  
+This is a great feature as this allows high scalability and balancing load across several instances.
+
+As an example, in the following code we connect two nodes together, then from one node we launch some code execution on the second node:  
+
+```elixir
+# Window 1
+...> iex --sname one
+iex(one@machine-name)>
+
+# Window 2
+...> iex --sname two
+iex(two@machine-name)> Node.connect :"one@machine-name"
+true
+
+# Window 1
+iex(node_one@machine-name)> func = fn -> IO.inspect Node.self end
+#Function<43.81571850/0 in :erl_eval.expr/6>
+# => Prints information about the Node that runs the function
+
+iex(node_one@machine-name)> spawn(func)
+:"node_one@machine-name"
+# => Runs on node one
+
+iex(node_one@machine-name)> Node.spawn :"node_one@machine-name", func
+:"node_one@machine-name"
+#PID<0.116.0>
+# => Runs on node one
+
+iex(node_one@machine-name)> Node.spawn :"node_two@machine-name", func
+:"node_two@machine-name"
+#PID<13771.116.0>
+# => Runs on node two, first field of the return PID isn't zero, meaning we are not running the code on the local node
+# => Note: As func has been defined on node one, it uses IO of node one to print information
+```
+
+### Hot-upgrades
+
+I have already mentioned it, the Erlang VM provides the hot-upgrade capability. This means developers can update code behaviors and data structure stored in the memory without stopping the application.  
+
+To do so, there are some nice and simple APIs:  
+
+```elixir
+defmodule MyModule do
+  # ...
+
+  # Code for updating state's data structure of the process
+  def code_change(_old_vsn, value, _extra) do
+    {:ok, [value]}
+  end
+end
+```
+
+I will not go too deep in this topic, I think this is a nice feature but maybe not as useful as it may sound now that we're used to run our applications with several instances and to perform rolling updates.  
+Furthermore, it seems these upgrades were supported by `mix` with the help of some packages, but it doesn't seem to work anymore with the latest versions of OTP without some manual configuration from the developers.  
+
+Despite my best efforts, I didn't manage to achieve one of these updates successfully with [`distillery`](https://hexdocs.pm/distillery/home.html) or [`castle`](https://hex.pm/packages/castle). I am pretty sure these tools work and the issue comes from my environment and/or my skills.
 
 - langage:  
   - ruby syntax
@@ -154,14 +216,14 @@ With such property, it enables metaprogramming like macros, allowing developers 
   - types (dynamic typing & static analysis)
   - atoms
   - homoconoicity
-- BEAM:  
+- BEAM: 
+  - actor model 
+  - OTP:
+    - Server
+    - Supervisor
+    - no concurrency (process isolation)
   - nodes
-  - actor model
   - hot-upgrade
-- OTP:
-  - Server
-  - Supervisor
-  - no concurrency (process isolation)
 
 ---
 
