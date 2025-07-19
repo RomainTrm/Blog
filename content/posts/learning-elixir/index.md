@@ -205,14 +205,96 @@ Most of the use cases seems to be handled with modules [`Task`](https://hexdocs.
 
 #### Server
 
+With [`GenServer`](https://hexdocs.pm/elixir/GenServer.html), the main building bloc is a server. This is a process dedicated to a specific work. The following example is the same `Stack` as before:
+
+```elixir
+defmodule Stack do
+  use GenServer
+
+  ### Public API
+  def start_link do
+    initial_stack = []
+    GenServer.start_link(__MODULE__, initial_stack, name: __MODULE__)
+  end
+
+  def push(item) do
+    GenServer.cast(__MODULE__, {:push, item})
+  end
+
+  def pop do
+    response = GenServer.call(__MODULE__, :pop)
+    IO.puts(response)
+  end
+
+  ### Process logic
+  def init(initial_stack) do
+    {:ok, initial_stack}
+  end
+
+  def handle_cast({:push, item}, stack_content) do
+    {:noreply, [item|stack_content]}
+  end
+
+  def handle_call(:pop, _from, []) do
+    {:reply, "Stack is empty", []}
+  end
+
+  def handle_call(:pop, _from, [head|tail]) do
+    {:reply, "Pop: #{head}", tail}
+  end
+end
+```
+
+Behavior remains the same. However we don't have to specify the `PID` as it is managed by the public api (the `name` parameter of the `start_link` function). With this specific implementation, we can only instantiate one `Stack` process.
+
+```elixir
+iex> Stack.start_link
+{:ok, #PID<0.110.0>}
+iex> Stack.start_link
+{:error, {:already_started, #PID<0.110.0>}}
+iex> Stack.pop
+Stack is empty
+:ok
+iex> Stack.push(1)
+:ok
+iex> Stack.push(2)
+:ok
+iex> Stack.push(3)
+:ok
+iex> Stack.pop
+Pop: 3
+:ok
+iex> Stack.pop
+Pop: 2
+:ok
+```
+
+Though, this example needs some explanations:  
+
+The code is split in two sections `Public API` and `Process logic`. `Public API` exposes all the available behaviors to the outside world and send messages to the `Stack` process using `GenServer`. `Process logic` implement `GenServer`'s handlers with business logic and state management.
+
+First we spawn a new process with the public api `GenServer.start_link`, it calls the `init` function that only returns to `GenServer` the initial state of our process.  
+
+Then we have the `push` function that pushes a new item into our `Stack` by using the `GenServer.cast` function. This sends a message to our process without expecting a response, `handle_cast` is an asynchronous operation.  
+
+Finally, we have the `pop` function that runs synchronously with the `GenServer.call` function. This also sends a message to the process but waits for a response. Note we're using pattern matching for our `handle_call(:pop, _from, ...` as our behavior depends on the state of the process.
+
+#### No concurrency
+
+You may wonder what happens if our `Stack` is called by multiple processes at the same time?  
+I think it's worth mentioning that concurrency is handled by design with this messaging system. Every process has their own mailbox, processing one message at the time.
+
 #### Supervisor
 
-#### No concurrency (process isolation)
+Sometimes, though, processes face (un)recoverable errors and crashes. When this happens, we have to decide how to handle this situation:  
+Should we restart the process or not? When restarting, should we only restart the crashed process or should we also include some linked processes?  
+
+This responsibility belongs to a specific kind of process called supervisors (see [`Supervisor`](https://hexdocs.pm/elixir/Supervisor.html)). Thanks to them, we are able to build resilient/self-healing systems.
 
 ### Nodes
 
-The Erlang VM allows to connect several nodes in a fairly easy way, providing a high level of abstraction in the code. Each node is a running Erlang VM instance, these can be running and connected from the same hardware or over a network.  
-This is a great feature as this allows high scalability and balancing load across several instances.
+The Erlang VM allows connecting several nodes in a fairly easy way, providing a high level of abstraction in the code. Each node is a running Erlang VM instance, these can be running and connected from the same hardware or over a network.  
+This is a great feature as this allows high scalability and load balancing across several instances.
 
 As an example, in the following code we connect two nodes together, then from one node we launch some code execution on the second node:  
 
