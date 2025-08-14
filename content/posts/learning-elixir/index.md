@@ -1,6 +1,6 @@
 ---
 title: "Learning Elixir"
-date: 2025-06-17T13:17:56+02:00
+date: 2025-06-20T09:00:00+02:00
 tags: [post, en]
 draft: true
 ---
