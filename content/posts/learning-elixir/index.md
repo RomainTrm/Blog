@@ -68,9 +68,9 @@ iex> [1, b, 3] = [1, 2, 3] # We declare a value "b" wich value is equal to the s
 [1, 2, 3]
 iex> b
 2
-iex> [c, c] = [1, 1] # We expect a list of two elements that are equals
+iex> [c, c] = [1, 1] # We expect a list of two elements that are equal
 [1, 1]
-iex> [c, c] = [1, 2]
+iex> [c, c] = [1, 2] # Value "c" cannot be equal to 1 and 2 at the same time
 ** (MatchError) no match of right hand side value: [1, 2]
 ```
 
@@ -109,7 +109,7 @@ More details on the typespecs [documentation](https://hexdocs.pm/elixir/typespec
 
 I would like to focus on a specific kind of data that exist on the Erlang VM: Atoms.  
 
-Atoms are constants that only carries their name as information, for example `:apple` or `:ok`.  
+Atoms are constants that only carries their name as information, for example `:ok`, `:apple` or `:"my atom"`.  
 This might sound kinda useless but they appear to be extremely powerful. For instance, they are constantly used with pattern matching:  
 
 ```elixir
@@ -141,7 +141,7 @@ iex> Code.eval_quoted {:+, [], [1, 2]}
 {3, []}
 ```
 
-With such property, it enables metaprogramming like macros, allowing developers to (re)define code, functions and behaviors at runtime.  
+Such property enables metaprogramming like macros, allowing developers to (re)define code, functions and behaviors at runtime.  
 
 ## The Erlang VM
 
@@ -151,7 +151,7 @@ Elixir runs on the Erlang VM and benefits from these capabilities.
 
 First of all, this environment is fully designed to be used with the [actor model](https://en.wikipedia.org/wiki/Actor_model). With this pattern, we use processes as the basic building bloc. A process run some code logic, store an internal state, send messages to other processes to communicate, can spawn new processes, etc.  
 
-As an example, the following code implement an in-memory stack. Once initiated, it waits for messages to add or return values. Internal state is stored by using recursion on the `loop` function.
+As an example, the following code implements an in-memory stack. Once initiated, it waits for messages to add or return values. Internal state is stored by using recursion on the `loop` function.
 
 ```elixir
 defmodule Stack do
@@ -161,7 +161,7 @@ defmodule Stack do
 
   def loop(values) do
     receive do
-      {:pop} ->
+      :pop ->
         case values do
           [] ->
             IO.puts("Stack is empty")
@@ -182,21 +182,21 @@ We spawn a `Stack` instance in a dedicated process (here `#PID<0.110.0>`) then w
 ```elixir
 iex> stack = spawn(fn -> Stack.init() end)
 #PID<0.110.0>
-iex> send(stack, {:pop})
+iex> send(stack, :pop)
 Stack is empty
-{:pop}
+:pop
 iex> send(stack, {:push, 1})
 {:stack, 1}
 iex> send(stack, {:push, 2})
 {:stack, 2}
 iex> send(stack, {:push, 3})
 {:stack, 3}
-iex> send(stack, {:pop})
+iex> send(stack, :pop)
 Pop: 3
-{:pop}
-iex> send(stack, {:pop})
+:pop
+iex> send(stack, :pop)
 Pop: 2
-{:pop}
+:pop
 ```
 
 Even though we can manipulate these processes with few functions from Elixir, this example is a "low-level" implementation. Processes are rarely managed this way.
@@ -245,7 +245,7 @@ defmodule Stack do
 end
 ```
 
-Behavior remains the same. However we don't have to specify the `PID` as it is managed by the public api (the `name` parameter of the `start_link` function). With this specific implementation, we can only instantiate one `Stack` process.
+Behavior remains the same. However we don't have to specify the `PID` as it is managed by the public api (the `:name` parameter of the `start_link` function). With this specific implementation, we can only instantiate one `Stack` process.
 
 ```elixir
 iex> Stack.start_link
@@ -286,10 +286,9 @@ I think it's worth mentioning that concurrency is handled by design with this me
 
 #### Supervisor
 
-Sometimes, though, processes face (un)recoverable errors and crashes. When this happens, we have to decide how to handle this situation:  
-Should we restart the process or not? When restarting, should we only restart the crashed process or should we also include some linked processes?  
+Sometimes, though, processes face (un)recoverable errors and crashes. When this happens, we have to decide how to handle this situation: Should we restart the process or not? When restarting, should we only restart the crashed process or should we also include some linked processes? Once restarted, should we resume the last known state or have a new state?  
 
-This responsibility belongs to a specific kind of process called supervisors (see [`Supervisor`](https://hexdocs.pm/elixir/Supervisor.html)). Thanks to them, we are able to build resilient/self-healing systems.
+These responsibilities belong to a specific kind of process called supervisors (see [`Supervisor`](https://hexdocs.pm/elixir/Supervisor.html)). Thanks to them, we are able to build resilient/self-healing systems.
 
 ### Nodes
 
@@ -325,8 +324,9 @@ iex(node_one@machine-name)> Node.spawn :"node_one@machine-name", func
 iex(node_one@machine-name)> Node.spawn :"node_two@machine-name", func
 :"node_two@machine-name"
 #PID<13771.116.0>
-# => Runs on node two, first field of the return PID isn't zero, meaning we are not running the code on the local node
-# => Note: As `func` has been defined on node one, it uses IO of node one to print information
+# => Runs on node two
+# Note 1: first field of the return PID isn't zero, meaning we are not running the code on the local node
+# Note 2: As `func` has been defined on node one, it uses IO of node one to print information
 ```
 
 ### Hot-upgrades
