@@ -2,7 +2,7 @@
 title: "Learning Elixir"
 date: 2025-06-20T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 In a previous [post](../using-processes-for-better-resilience/), I've mentioned I've read the book [Programming Elixir 1.6](https://pragprog.com/titles/elixir16/programming-elixir-1-6/).  
