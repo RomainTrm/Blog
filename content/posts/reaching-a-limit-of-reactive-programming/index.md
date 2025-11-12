@@ -1,5 +1,5 @@
 ---
-title: "Reaching the limits of Reactive Programming"
+title: "Reaching a limit of Reactive Programming"
 date: 2025-11-12T09:00:00+01:00
 tags: [post, en]
 draft: true
