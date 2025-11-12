@@ -2,7 +2,7 @@
 title: "Reaching a limit of Reactive Programming"
 date: 2025-11-12T09:00:00+01:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 In my career, I had (and still have) many opportunities to develop UIs on desktop and web applications using various technologies. With these experiences I've been using two main patterns: *MVVM* ([Model-View-ViewModel](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)) and a *Reactive* approach.  
