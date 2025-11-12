@@ -13,9 +13,9 @@ In this post, I want to talk about the *Reactive* approach and especially about 
 
 I am not talking about a specific framework here. By *Reactive* I think of a specific way to code and organize behaviors for a UI.  
 
-Imagine a user interface with several fields. Each of them manages one value, and other fields can subscribe to be notified when the value has changed. When notified, we can make decisions, change our value, and by doing so, notify our subscribers. Here's an example:  
+Imagine a user interface with several fields. Each of them manages one value, other fields can subscribe to be notified when the value has changed. When notified, we can make decisions, change our value, and by doing so, notify our subscribers. Here's an example:  
 
-We have three fields `A`, `B` and `C`. `B` listen to `A` updates and `C` listen to `B`.  
+We have three fields `A`, `B` and `C`. `B` listen to `A`'s updates and `C` listen to `B`.  
 
 ```goat
  .-.  listen to  .-.  listen to  .-.                              
@@ -37,15 +37,15 @@ I can see various benefits to this strategy:
 
 Though, twice in my career, I have encountered features for which, using *Reactive* turned out to be a real pain. Both were computing prices with associated taxes.
 
-In the first setback, the form was used by the company's sellers to negotiate with customers. The seller could use a price with or without taxes as a base of negotiations, choose to round the final price, etc. For example, they could agree on a price of 19,2&nbsp;€ excluding taxes, add 20&nbsp;% of taxes and then choose to round the total amount of 23,04&nbsp;€ to 23&nbsp;€. The real feature was more complex with some additional fields but you get the idea.  
+In the first setback, the form was used by the company's sellers to negotiate with customers. The seller could use a price with or without taxes as a base of negotiations, choose to round the final price, etc. For example, they could agree on a price of 19,2&nbsp;€ excluding taxes, add taxes with a rate of 20%, then choose to round the total amount from 23,04&nbsp;€ to 23&nbsp;€. The real feature was more complex with some additional fields but you get the idea.  
 
-The second setback was in reality two features for which we chose to reuse some components. It was a form used by users to declare incomes. Initially, users had to enter the amount without taxes and the associated tax percentage, the form then computes the final amount automatically. Later, we've added a second use case: sometimes we already knew the final amount as it was imported from some bank operations. Users had to fill the associated taxes for the form to compute correct amount without taxes. Here again, this is the general idea, the form was more complex than that.
+The second setback was in reality two features for which we chose to reuse some components. It was a form used by users to declare incomes. Initially, they had to enter the amount without taxes and the associated tax percentage, the form then computes the final amount automatically. Later, we've added a second use case: sometimes we already knew the final amount as it was imported from some bank operations. Users had to fill the associated taxes for the form to compute correct amount without taxes. Here again, this is the general idea, the form was more complex than that.
 
 These may seem like a good use case for a *Reactive* approach. Indeed, users change a value in a way that impacts other values displayed on the screen, so they must be recalculated.  
 
 ## When *Reactive* turns to an impediment
 
-You may have already spotted something in common with these cases: the computation flow is multidirectional.  
+You may have already spotted something in common with these cases: the computation flow is multidirectional. We could choose to change any of the amounts, the others would be updated to match.  
 
 ```goat
  .-.  listen to  .-.  listen to  .-.                              
@@ -61,11 +61,11 @@ This could work smoothly on one condition: all transformations must be *isomorph
 >
 > If you're not familiar with this concept, this term comes from the [*Category Theory*](https://en.wikipedia.org/wiki/Category_theory).  
 >
-> A *morphism* is a transformation: `f: a -> b`.  
-> We have the *identity morphism*: `id: a -> a`, this returns the value it gets as input.  
+> A *morphism* is a transformation: `f: x -> y`.  
+> We have the *identity*: `id: x -> x`, this is a neutral operation that returns the value it receives as input.  
 > We can compose *morphisms*: `f.id = f` (left identity) and `id.f = f` (right identity)  
 >
-> An *isomorphism* is a special case where, for a transformation `f: a -> b`, we have another opposite transformation `g: b -> a` that satisfies `f.g = id` and `g.f = id`.  
+> An *isomorphism* is a special case where, for a transformation `f: x -> y`, we have another opposite transformation `g: y -> x` that satisfies `f.g = id` and `g.f = id`.  
 > These are transformations without loss of information (no abstraction).
 
 In such case, if we choose to update the value `B`, then `A` and `C` are notified and updated. This notify back `B`, but as the computed value is equal to the actual value, nothing happens and the update is complete.  
@@ -83,7 +83,7 @@ You may suggest here to do all the calculation first, then do the rounding of th
 
 I can think of another approach to deal with this kind of feature requiring a multidirectional calculation flow. However, I must say that I did not have the opportunity to test it on these specific cases because my time was of better use on other subjects, so **I may be wrong** here.
 
-I believe these cases would be way easier to handle if we replaced the *Reactive* approach with a *MVU* architecture (Model-View-Update, also known as the [Elm architecture](https://guide.elm-lang.org/architecture/)). Yes, instead of fully embracing the *Reactive* approach with some elegant workaround (that I wanted to find), I totally give it up.  
+I believe these cases would be way easier to handle if we replaced the *Reactive* approach with a *MVU* architecture (Model-View-Update, also known as the [Elm architecture](https://guide.elm-lang.org/architecture/)). Yes, instead of fully embracing the *Reactive* approach with some elegant workaround (that I wanted, but I couldn't find), I totally give it up.  
 
 In a very simple way, the *MVU* architecture is a loop between three elements:  
 
@@ -102,16 +102,16 @@ In a very simple way, the *MVU* architecture is a loop between three elements:
 
 To solve my initial problem, we have to look at the *Update* part.  
 
-This is a function `(model, command) => model` that returns a new `model` by applying a `command` to the current state. I can see several benefits of this function:  
+This is a function `(model, command) => model` that returns a new `model` by applying a `command` to the current state. I can see several benefits to this function:  
 
 - We can express clear intents with dedicated `commands`.
-- By knowing the intent, we can do the whole computation all at once without any cascading effect.
-- With a dedicated piece of code per `command`, we handle only one use case at the time, that makes the code simpler (even if it can mean more code).
+- We can do the whole computation all at once with a known intent and without any cascading effect.
+- With a dedicated piece of code per `command`, we handle only one use case at the time. That makes the code simpler (even if it can mean more code).
 - Bonus: we can declare some user-defined values as impossible due to rounding.
 
 ## Conclusion
 
-*Reactive* is a good way to organize the code, but as every solution, it comes with some tradeoffs. In this post, we saw that the computation flow must be either unidirectional or must not suffer from loss of data over transformations. If we don't respect at least one of these conditions, then *Reactive* is probably not the best choice for our feature. In such cases, turning to a strategy where every intent is handled by a dedicated piece of code seems to be a better tradeoff.
+*Reactive* is a good way to organize the code, but as every solution, it comes with some tradeoffs and limitations. In this post, we saw that the computation flow must be either unidirectional or must not suffer from loss of data over transformations. If we don't respect at least one of these conditions, then *Reactive* is probably not the best choice for our feature. In such cases, turning to a strategy where every intent is handled by a dedicated piece of code seems to be a better tradeoff.
 
 ---
 
