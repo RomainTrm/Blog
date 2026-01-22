@@ -1,6 +1,6 @@
 ---
-title: "About Events"
-date: 2025-12-24T09:00:00+01:00
+title: "Events as a means of communication"
+date: 2026-01-22T09:00:00+01:00
 tags: [post, en]
 draft: true
 ---
