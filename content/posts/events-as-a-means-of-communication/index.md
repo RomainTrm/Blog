@@ -108,8 +108,14 @@ This way, the provider of a service can evolve without breaking consumer applica
 
 This can be implemented with a combination of patterns:  
 
-- [*Published Langage*](https://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/published-language/): *Notifiers* build and publish dedicated *events* that act as API contract, only used for external communication.
+- [*Published Langage*](https://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/published-language/): We define dedicated *events* that act as API contracts and that are only used for external communication.  
+It is the *notifiers*' responsibility to build and publish them. This way, we've decoupled our internal model from the public one, and we can now easily see when our clients will be impacted by a change.  
+
+> To avoid confusion, this is probably a good idea to use another name than *events* for these contracts. Personally, I like to refer to them as *messages*.
+
 - [*Anticorruption Layer*](https://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/anticorruption-layer/): *Injectors* receive outside-world notifications, perform necessary validation and mapping before injecting anything into our system.  
+This can be achieved by using *aggregates*: a *message* is converted by the *injector* into a *command* and then processed. The *aggregate* processing this *command* should always return an *event* (as long as the operation isn't idempotent) to store received values. Depending on the validations rules, it can emit additional *events* to trigger processing inside our system through choreography.  
+In a way, we've imported external *events*, but we kept control of the structure and they remain isolated in some dedicated *events streams*.
 
 ---
 
