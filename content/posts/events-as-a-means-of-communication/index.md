@@ -5,38 +5,6 @@ tags: [post, en]
 draft: true
 ---
 
-<!--
-- finished reading
-  - fun reading 
-  - spotted something quickly
-- in the book:
-  - events are everywhere, central building block (state, persistance, choregraphy with other building blocks)
-  - no clear distinction between my events and outside-world events (cf injectors & notifiers)
-  - to me, this is an issue, events as proposed in the book is an anti-pattern
-- events for my app and for communicating with others are not the same
-  - internal: persistance & choregraphy (event sourcing)
-  - external: communication (aka API contracts)
-- about using external events/sharing my events: 
-  - I do migrate my events -> this break contracts
-  - I use versioning : new versions means update in every client or they will no receive new values
-    - also means we need to support new events (in our domain logic) every time a provider change some events
-  - Changes in my events may be for internal logic only (outside world doesn't need to known)
-  - We need to decorelate internal and external needs
-- DDD contexts & strategic patterns:
-  - context matters:
-    - event's semantic is linked to a context
-  - all contexts are not linked the same way
-    - conformist -> one context drives the other, high level of colaboration
-    - shared kernel -> shared by two contexts, very high level of colaboration
-    - open host service with published language -> dedicated contracts, providers may not know about consumers
-- how I handle these cases:  
-  - events doesn't leak outside of a context (even with modular monolith)
-  - send to we outside world: notifiers produces dedicated messages or call external apis instead of sending our events 
-  - receive from the outside world: injectors act as ACL and produce internal events
-    - you may want to produces your own events without the aggregate
-    - we use aggregates to validate inputs before injecting them in the system 
--->
-
 I've recently finished reading [Real-World Event Sourcing](https://pragprog.com/titles/khpes/real-world-event-sourcing/). It was a fun reading, but I found the book unclear on a very specific point and I want to express my thoughts on it in this blog post. I may have misinterpreted the author's explanations but this doesn't invalidate the following reflection.
 
 ## How to define an *event stream*?
@@ -116,6 +84,8 @@ It is the *notifiers*' responsibility to build and publish them. This way, we've
 - [*Anticorruption Layer*](https://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/anticorruption-layer/): *Injectors* receive outside-world notifications, perform necessary validation and mapping before injecting anything into our system.  
 This can be achieved by using *aggregates*: a *message* is converted by the *injector* into a *command* and then processed. The *aggregate* processing this *command* should always return an *event* (as long as the operation isn't idempotent) to store received values. Depending on the validations rules, it can emit additional *events* to trigger processing inside our system through choreography.  
 In a way, we've imported external *events*, but we kept control of the structure and they remain isolated in some dedicated *events streams*.
+
+## Conclusion
 
 ---
 
