@@ -30,12 +30,12 @@ I can identify three ways to use *events* in an application:
 - Choreography: inside our application, we react to *events* to trigger new operations, build data projections, etc.
 - External communication: we notify the external world that an important business event occurred.  
 
-Data persistence and choreography are internal usages of our *events*, they are core concepts of *CQRS/ES* architecture. We have full control on how they're produced and consumed.  
+Data persistence and choreography are internal uses of our *events*, they are core concepts of *CQRS/ES* architecture. We have full control on how they're produced and consumed.  
 However, we do not have such control for external communication: these applications are maintained by their own teams, following their own release frequency. This means that the *events* producer can break listeners at any moment with a new version.  
 
 Broadcasting *events* as a way to communicate with other applications is not a new idea, there is a lot of literature about it like [Enterprise Integration Patterns](https://martinfowler.com/books/eip.html).  
 
-What I want to highlight here, in an *event-sourcing* context, is using the same *events* for internal and external usages is, in my opinion, an anti-pattern.
+What I want to highlight here, in an *event-sourcing* context, is using the same *events* for internal and external uses is, in my opinion, an anti-pattern in many situations.
 
 ## Events as a means of communication
 
@@ -72,7 +72,7 @@ When trying to reduce friction between applications, we usually define some API 
 - have a public communication when some changes are introduced, like publishing a changelog
 - give time to consumers to migrate by ensuring retrocompatibility
 
-This way, the provider of a service can evolve without breaking consumer applications, even when it doesn't know some consumers exists! *Events* as means of cross-context communication are some kind of API contracts, so they should respect these rules.
+This way, the provider of a service can evolve without breaking consumer applications, even when it doesn't know some consumers exists! *Events* as means of cross-context communication are a kind of API contracts, so they should respect these rules.
 
 This can be implemented with a combination of patterns:  
 
@@ -85,7 +85,17 @@ It is the *notifiers*' responsibility to build and publish them. This way, we've
 This can be achieved by using *aggregates*: a *message* is converted by the *injector* into a *command* and then processed. The *aggregate* processing this *command* should always return an *event* (as long as the operation isn't idempotent) to store received values. Depending on the validations rules, it can emit additional *events* to trigger processing inside our system through choreography.  
 In a way, we've imported external *events*, but we kept control of the structure and they remain isolated in some dedicated *events streams*.
 
+However, I must confess, this solution can necessitate a lot of extra work and introduce some complexity, but it can be really beneficial in the long run.
+
 ## Conclusion
+
+*Events* are a natural communication means, but we should distinguish between interal and external uses.  
+
+For internal uses, *events* are primarily persistence contracts, so we have full control of their structure and how they evolve.  
+For external uses, *events* act like any API contracts, so they should have their own versioning strategy and we should communicate about it.  
+
+As I tried to highlight it, sharing internal *events* (as a producer or a consumer) with other applications have some strong impacts on application execution, teams organization and communication, deployment constraints. This solution may be a good tradeoff in your context.  
+The other solution is to build and publish dedicated *messages* for public communication and to "translate" and validate *messages* before consuming them.
 
 ---
 
