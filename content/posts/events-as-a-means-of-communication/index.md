@@ -14,13 +14,13 @@ As the book is about *Event Sourcing* and *CQRS* (*Command Query Responsibility 
 Two building blocks are also introduced:  
 
 - *Injectors* that receives external events and can choose to inject them into the *event stream*.  
-- *Notifiers* that react to internal events and choose to broadcast them or trigger effects (call to external systems).
+- *Notifiers* that react to internal events and choose to broadcast them or trigger effects (calls to external systems).
 
-This got me confused: How to define an event stream? Who emits the events that compose the stream? Do we have events from the outside world inside it?  
+This got me confused: How to define an *event stream*? Who emits the events that compose the *stream*? Do we have *events* from the outside world inside the *event stream*?  
 
-The author never answers explicitly to these questions, but it seems OK for him to inject external events in the stream and broadcast our own events to the outside world.  
+The author never answers explicitly to these questions, but it seems OK for him to inject external *events* in the *stream* and broadcast our own *events* to the outside world.  
 
-> Note: The book introduces [*Cloud-Events*](https://cloudevents.io/) but this is just a convention for cross-application communication, it says nothing about the event's payload.  
+> Note: The book introduces [*Cloud-Events*](https://cloudevents.io/) but this is just a convention for cross-application communication, it says nothing about the *event*'s payload.  
 
 ## Three use cases
 
@@ -31,6 +31,7 @@ I can identify three ways to use *events* in an application:
 - External communication: we notify the external world that an important business event occurred.  
 
 Data persistence and choreography are internal uses of our *events*, they are core concepts of *CQRS/ES* architecture. We have full control on how they're produced and consumed.  
+
 However, we do not have such control for external communication: these applications are maintained by their own teams, following their own release frequency. This means that the *events* producer can break listeners at any moment with a new version.  
 
 Broadcasting *events* as a way to communicate with other applications is not a new idea, there is a lot of literature about it like [Enterprise Integration Patterns](https://martinfowler.com/books/eip.html).  
@@ -60,9 +61,9 @@ What we've got here is the same coupling problem as a shared database: if you've
 
 What we've just described is defined with *Domain-Driven Design* as the [*Conformist* pattern](http://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/conformist/). This pattern implies a high level of dependence from the *conformist* to the *provider*'s model. In organizational terms, the *provider* and the *conformist* must be maintained by the same team or by two teams with a high level of collaboration, otherwise this pattern isn't sustainable.
 
-Another interesting point: *events* are relevant in a given context. When we choose to go for the *conformist* pattern, we accept using the *provider*'s context and semantic. As an example, an `InvoiceIssued` *event* have different meanings depending on the context: it can be an invoice we issue to one of our users, or an invoice a user issue to one of its own customers. Both cases can exist in the application at the same time so we must know which context emitted it.  
-
 > If this high level of dependence isn't an issue for you but the strong ownership of the model by the *provider* is, you should consider [*Partnership*](https://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/partnership/) and [*Shared Kernel*](https://ddd-practitioners.com/home/glossary/bounded-context/bounded-context-relationship/shared-kernel/) patterns as alternative solutions.
+
+Another interesting point: *events* are relevant in a given context. When we choose to go for the *conformist* pattern, we accept using the *provider*'s context and semantic. As an example, an `InvoiceIssued` *event* have different meanings depending on the context: it can be an invoice we issue to one of our users, or an invoice a user issue to one of its own customers. Both cases can exist in the application at the same time so we must know which context emitted it.
 
 ### Defining dedicated contracts
 
@@ -95,7 +96,7 @@ For internal uses, *events* are primarily persistence contracts, so we have full
 For external uses, *events* act like any API contracts, so they should have their own versioning strategy and we should communicate about it.  
 
 As I tried to highlight it, sharing internal *events* (as a producer or a consumer) with other applications have some strong impacts on application execution, teams organization and communication, deployment constraints. This solution may be a good tradeoff in your context.  
-The other solution is to build and publish dedicated *messages* for public communication and to "translate" and validate *messages* before consuming them.
+The other solution is to build and publish dedicated *messages* for public communication and to "translate" and validate consumed *messages* before processing them.
 
 ---
 
