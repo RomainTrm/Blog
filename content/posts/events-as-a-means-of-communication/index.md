@@ -1,8 +1,8 @@
 ---
 title: "Events as a means of communication"
-date: 2026-01-22T09:00:00+01:00
+date: 2026-01-28T09:00:00+01:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 I've recently finished reading [Real-World Event Sourcing](https://pragprog.com/titles/khpes/real-world-event-sourcing/). It was a fun reading, but I found the book unclear on a very specific point and I want to express my thoughts on it in this blog post. I may have misinterpreted the author's explanations but this doesn't invalidate the following reflection.
