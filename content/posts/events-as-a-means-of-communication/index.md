@@ -90,7 +90,7 @@ However, I must confess, this solution can necessitate a lot of extra work and i
 
 ## Conclusion
 
-*Events* are a natural communication means, but we should distinguish between interal and external uses.  
+*Events* are a natural communication means, but we should distinguish between internal and external uses.  
 
 For internal uses, *events* are primarily persistence contracts, so we have full control of their structure and how they evolve.  
 For external uses, *events* act like any API contracts, so they should have their own versioning strategy and we should communicate about it.  
