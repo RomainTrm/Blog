@@ -18,7 +18,7 @@ git pull --rebase
 cd ../..
 
 # Build site
-hugo
+hugo --gc --minify
 
 # Commit new version and push
 cd public
