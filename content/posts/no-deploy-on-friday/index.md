@@ -27,28 +27,34 @@ Contrary to the regular software or website, some critical systems with a high t
 
 ## The release frequency
 
-The frequency on which we're releasing new versions also impacts risks and threats.
+The frequency on which we release new versions also impacts risks and threats.
 
 Deploying often means the batches we’re deploying are smaller with less code changes, so we decrease the risk of a defect. In case of the bug, as the number of changes is small, we'll probably isolate the issue and deploy a fix faster, so we also reduce the associated threats.
 
-This has also a cultural/organizational aspect: is deployment an event for our team/company? The release frequency isn't the same if we're working in waterfall, in two weeks sprints or in continuous deployment. The more often we deploy, the more we should automate our release process and rely less on individual validations (like a QA team). This means the cost of deploying a new version (or a fix) isn't the same, our organizational context has a direct impact on our deployment frequency.  
+This has also a cultural/organizational aspect: is deployment an event for our team/company? The release frequency isn't the same if we're working in waterfall, in two weeks sprints or in continuous deployment. The more often we deploy, the more we should automate our release process and less we should rely on individual validations (like a QA team). This means the cost of deploying a new version (or a fix) isn't the same, our organizational context has a direct impact on our deployment frequency.  
 
 Here again, the "no deploy on friday" is about how long our service will be down. If our deployment frequency limits us to one release per day, or if some mandatory validations are impossible because required people are away during the weekend, then yes, deploying on friday may not be the best idea.
 
 ## Technical practices
 
-Obviously, this ability to deploy often doesn't come for free, it requires some skills and extra work to be able to increase deployment frequency. I'm thinking of *zero downtime deployment* capability that allows teams to deploy at anytime without impacting users.  
+Obviously, this ability to deploy often doesn't come for free, it requires some technical skills and extra work to be able to increase deployment frequency. I'm thinking of *zero downtime deployment* capability that allows teams to deploy at anytime without impacting users.  
 
 To achieve such capability, we must meet several requirements. One of them is backward compatibility on our database schema and api contracts: this is used to ensure no downtime during rolling updates, but it can also be used for rollbacking our application to the previous version in case of a major issue. If we have this ability, then deploying on friday should not be frigtening as we can revert the release and take the time to fix it after the weekend.
 
-Another technical trick is *feature toggling* (also known as *feature flags*). This is basically a `if` statement in our code that enable or disable a specific feature. Depending on the use case, the *toggle* value can be global of specific to every users. Here again, if something goes wrong on a feature with a *toggle*, we have the possibility to disable it and take the time needed for the fix. This is also the core concept of the [circuit breaker pattern](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern), a *toggle* that can flip automatically if too many failures occur on a feature.
+Another technical trick is *feature toggling* (also known as *feature flags*). This is basically a `if` statement in our code that enable or disable a specific feature. Depending on the use case, the *toggle* value can be global or specific to every users. Here again, if something goes wrong on a feature with a *toggle*, we have the possibility to disable it and take the time needed for the fix. This is also the core concept of the [circuit breaker pattern](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern), a *toggle* that can flip automatically if too many failures occur on a feature.
 
 > Be carefull though of a potential trap using *feature toggles*. I argued that deploying often helps reducing risks and threats, but this is true as long as the code is executed in production.  
-> If we're working on a new feature that remains disabled in prodution, even though we deploy it daily, we're not sure that the code is working properly. If a bug appears the day we choose to flip the *toggle*, we will need to investigate whole feature's code and not assume that the bug is hidden in the latest release changes.
+> If we're working on a new feature that remains disabled in prodution, even though we deploy it daily, we're not sure that the code is working properly. If a bug appears the day we choose to flip the *toggle*, we will need to investigate the whole feature's code and not assume that the bug is hidden in the latest release changes.
+
+A last trick I want to highlight is asynchronous work. Not every business processes need to be executed right away. Most of them can be delayed and executed later, meaning we can isolate them, and even replay them in case of a failure. I have written a dedicated [post](../using-processes-for-better-resilience/) if you're looking for more details.
 
 ## Conclusion
 
+As I tried to highlight it, the "no deploy on friday" rule of thumb is a defensive practive aiming to preserve everyone's weekends. Though, the relevance of this rule depends a lot of the context: Does the business contraints (goals, financial, legal) justifies it? Is it the result of the team's organization and processes? Can it be mitigated by some technical capabilities?  
 
+I let you judge of the revelance of the rule on your own context. But now I believe that, depending on how you're using this joke, it says more about your work that you may initially thought.  
+
+I wonder if it can be used during a job interview...
 
 ---
 
