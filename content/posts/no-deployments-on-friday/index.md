@@ -2,7 +2,7 @@
 title: "No deployments on Friday"
 date: 2026-02-25T09:00:00+01:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 If you're working in IT, you've probably already encountered the "No deployments on Friday" mantra/dogma. It's so ubiquitous that they're many memes about it on the internet.
