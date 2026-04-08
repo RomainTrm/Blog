@@ -1,5 +1,5 @@
 ---
-title: "Using the Elm Achitecture - Part 1"
+title: "Using the Elm Architecture - Part 1"
 date: 2026-04-01T09:53:00+02:00
 tags: [post, en]
 draft: true
@@ -12,12 +12,17 @@ draft: true
 - first example: counter app (ignore effects)
 - second example: customer page (use effects)
 - third example: split customer page (use intents)
-- additional resources : https://zaid-ajaj.github.io/the-elmish-book/#/
+
+## Additional resources
+
+If you liked this content and you are looking for a more detailed resources to implement this pattern on your own, I recommand you reading the [Elmish book](https://zaid-ajaj.github.io/the-elmish-book/) wrote by [Zaid Ajaj](https://github.com/Zaid-Ajaj).
+
+https://sporto.github.io/elm-patterns/architecture/reusable-views.html
  -->
 
-In my previous post [Reaching a limit of Reactive Programming](../reaching-a-limit-of-reactive-programming/), I've mentioned the MVU (*Model-View-Update*) pattern could be a solution to the problems I was encountering with reactive programming. I'm now using MVU since a few months on other projects and I want to write my own article where I present it in more details.  
+A few months ago in my post [Reaching a limit of Reactive Programming](../reaching-a-limit-of-reactive-programming/), I've mentioned the MVU (*Model-View-Update*) pattern could be a solution to the problems I was encountering with reactive programming. I'm now using MVU since a few months on other projects and I want to write my own article where I present it in more details.  
 
-In this blog post, I'll assume we're working on a webpage, but this pattern can be use in other contexts like desktop applications.
+In this blog post series, we'll be working on a webpage, but this pattern can be used in other contexts like desktop applications.
 
 ## *Model-View-Update* pattern: core concepts
 
@@ -41,15 +46,15 @@ The whole pattern lies on a reduction using the *Update* function: `(Command, Mo
 
 ## Existing technologies
 
-One of the most known implementation of this pattern is [React Redux](https://react-redux.js.org/). Even if I've never used it, I've easily recognized the pattern simply by reading the tutorial in the official website.  
+One of the best known implementations of this pattern is [React Redux](https://react-redux.js.org/). Even if I've never used it, I've easily recognized the pattern simply by reading the tutorial on the official website.  
 
-The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm architecture](https://guide.elm-lang.org/architecture/). If you never played with it, I think you should give it a try, the Elm's compiler is realy didactic. This artchitecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpile F# code to a React application.  
+The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpile F# code to a React application.  
 
 For the rest of this post, I will reproduce this second implementation.  
 
-## Recoding the Elm architecture with Typescript and PReact
+## Recoding The Elm Architecture (*TEA*) with Typescript and PReact
 
-For this implementation, I use [PReact](https://preactjs.com/) to render my web application. As you will see, except for rendering and the main component, there is almost no dependency to the framework, meaning it should be easy to replace with something else.  
+For this implementation, I use [PReact](https://preactjs.com/) to render my web application. As you will see, except for the rendering and the main component, there is almost no dependency to the framework, meaning it should be easy to replace with something else.  
 
 > All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/blob/main/src/elmish.tsx). It is very similar to the [Elmish implementation](https://github.com/elmish/elmish/blob/v5.x/src/program.fs).
 
@@ -116,7 +121,7 @@ Nothing special here, we build our application, start it when the PReact compone
 
 ### Elmish core logic
 
-Now we can see in details the core logic of our Elm architecture:  
+Now we can see in detail the core logic of our Elm architecture:  
 
 ```typescript
 // elmish.tsx
@@ -152,6 +157,35 @@ function createProgram<TModel, TCommand, TEffect>(
 
     return { start, dispatch }
 }
+```
+
+Here's the flow to implement: each `Command` is processed with the last known `Model`. Once processed, the `View` and `Model` are updated, then we process the `Effect[]`. Each `Effect` has the possibility to enqueue new `Command` at the end of the `cmdsBuffer` queue.
+
+```mermaid
+sequenceDiagram
+    participant processCmds
+    participant update
+    participant model@{ "type" : "database" }
+    participant cmdsBuffer@{ "type" : "queue" }
+    participant executeEffects
+    participant executeEffect
+    participant view
+
+    loop while some commands available 
+        cmdsBuffer->>processCmds: read next Command
+        model->>processCmds: read last model
+
+        processCmds->>update: sends (Command, Model)
+        update->>processCmds: receives (Model, Effect[])
+        processCmds->>view: render view with new model
+        processCmds->>model: update model
+
+        processCmds->>executeEffects: Send Effect[]
+        loop while some effects to process
+            executeEffects->>executeEffect: process (Effect[], Dispatch<Command>)
+            executeEffect-->>cmdsBuffer: Enqueue last if Dispatch<Command> called
+        end
+    end
 ```
 
 The `dispatch` function does two things, it adds a new `Command` to the `cmdBuffer` and triggers `processCmds` if it's not already processing.  
@@ -213,7 +247,7 @@ const executeEffects = (
 }
 ```
 
-And finally, the `start` function runs our *MVU* engine. We send to the component our first `Model`, then we execute our `initialEffects` and run `Command` that may have been raised:  
+Finally, the `start` function "ignites" our *MVU* engine. We send to the component our first `Model`, then we execute our `initialEffects` and run `Command` that may have been raised:  
 
 ```typescript
 const start = () => {
@@ -228,11 +262,11 @@ const start = () => {
 }
 ```
 
+## Conclusion
+
 That's it! With roughly 110 lines of code, we're now able to write an entire application with the *MVU* pattern.
 
-## Additional resources
-
-If you liked this content and you are looking for a more detailed resources to implement this pattern on your own, I recommand you reading the [Elmish book](https://zaid-ajaj.github.io/the-elmish-book/) wrote by [Zaid Ajaj](https://github.com/Zaid-Ajaj).
+In the next [blog post](/posts/using-the-elm-architecture-part-2/), we will write our first application using this component.
 
 ---
 
