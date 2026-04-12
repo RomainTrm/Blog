@@ -83,7 +83,7 @@ Contrairement à un TU, il n’est pas toujours possible de spécifier le résul
 
 Un test de PBT défini un cadre métier dont on ne doit pas sortir&nbsp;:
 
-![Un nuage de points avec certains dans le cadre, d'autres à l'extérieur](1.png)
+![Un nuage de points avec certains dans le cadre, d'autres à l'extérieur]({{< relref "1.png" >}})
 
 L’idée est d’être moins spécifique sur le résultat, l’important est de s’assurer que les impératifs métiers sont validés. Cela présente l’avantage de laisser une plus grande liberté dans l’implémentation puisque son couplage avec le test est moins important.
 

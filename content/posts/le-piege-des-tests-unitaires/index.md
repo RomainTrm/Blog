@@ -65,7 +65,7 @@ Ainsi, un test se présente typiquement de la façon suivante&nbsp;:
 2. Je lance une action métier via une API publique (ex: endpoint REST)
 3. Je vérifie le nouvel état de mon système (ex: données en BDD) et les éventuelles interactions avec le monde extérieur (ex: publication d’un message sur un bus)
 
-![Schema explicatif](1.png)
+![Schema explicatif]({{< relref "1.png" >}})
 
 Pour écrire ces tests et les garder indépendants, j’utilise des implémentations “in memory” de mes dépendances externes (typiquement la base de données). Je m’assure également que ces implémentations ont des comportements identiques à celles que j’utilise réellement en production. Pour cela, j’écris quelques tests d’intégrations paramétrés qui testent uniquement les accès au monde extérieur.
 

@@ -28,7 +28,7 @@ Pour mon exemple, j’utilise VisualMutator qui s’intègre directement dans vi
 
 Ici, je teste de manière laxiste une simple méthode qui me dit si mon objet Sequence contient un seul élément. Voici une première solution&nbsp;:
 
-![Code sous tests](1.png)
+![Code sous tests]({{< relref "1.png" >}})
 
 ![Code de tests](2.png)
 

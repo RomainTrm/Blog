@@ -6,7 +6,7 @@ draft: false
 aliases: ["/posts/2024-11-26/"]
 ---
 
-![Crash test d'une voiture en laboratoire](1.png)
+![Crash test d'une voiture en laboratoire]({{< relref "1.png" >}})
 
 Nouvelle présentation, nouveau co-spreaker ! Cette fois-ci, c'est [Aurélien BOUDOUX](https://bsky.app/profile/boudoux.fr) qui m'accompagne pour vous proposer un retour d'expérience sur nos années de développement avec le pattern CQRS/ES.  
 

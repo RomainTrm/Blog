@@ -8,7 +8,7 @@ aliases: ["/posts/2016-12-20/"]
 
 Actuellement, j’entend de plus en plus parler de CQRS et CQRS/ES&nbsp;: par mes collègues autour de la machine à café, lors d’entretiens techniques, sur Twitter, les blogs, etc.
 
-![Tampon "Must have"](1.png)
+![Tampon "Must have"]({{< relref "1.png" >}})
 
 Le principe du *Command and Query Responsability Segregation* (CQRS) est de séparer modèles d’écriture et modèles de lecture. L’*Event Sourcing* (ES) quant à lui consiste à sauvegarder des événements au lieu d’entités, pour reconstruire une entité il faut agréger des événements. Exprimés de cette façon, ces concepts semblent plutôt simples à comprendre, mais les aspects techniques peuvent vite les rendre complexes à appréhender et implémenter.
 

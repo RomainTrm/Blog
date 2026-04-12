@@ -31,7 +31,7 @@ Dès lors, la moindre modification se fait à taton avec son lot de souffrance&n
 
 Une solution envisagée est de produire d’importantes quantités de documentation et de spécifications. C’est par exemple le parti pris des projets réalisés en cycle en V. L’idée est d’analyser le besoin et conceptualiser la solution à produire avant les développements.
 
-![Schema explicatif du cycle en V](1.png)
+![Schema explicatif du cycle en V]({{< relref "1.png" >}})
 
 Le premier problème est que plus une erreur est introduite tôt dans ce processus de documentation, plus les documents qui en découlent sont erronés.
 

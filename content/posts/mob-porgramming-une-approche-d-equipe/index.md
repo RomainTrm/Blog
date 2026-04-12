@@ -14,7 +14,7 @@ J’étais déjà convaincu par les bénéfices pour un projet d’appliquer le 
 
 “Mob” est le terme anglais pour désigner la foule. On peut présenter le mob programming comme une sorte de pair programming++ qui implique l’ensemble de l’équipe pour la réalisation d’une seule tâche.
 
-![Woody Zuill](1.png)
+![Woody Zuill]({{< relref "1.png" >}})
 
 Le Mob a été initiée par [Woody Zuill](https://twitter.com/woodyzuill). Elle découle d’un besoin récurent sur la plupart des projets&nbsp;: se réunir pour aborder des sujets complexes impliquant l’ensemble de l’équipe. Woody a alors décidé de réaliser ces réunions en y introduisant la notion de *Driver / Navigator* issue du pair programming. Cette pratique leur a immédiatement paru extrêmement pertinente et est entrée dans leurs habitudes.
 

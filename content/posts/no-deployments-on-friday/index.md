@@ -7,7 +7,7 @@ draft: false
 
 If you're working in IT, you've probably already encountered the "No deployments on Friday" mantra/dogma. It's so ubiquitous that they're many memes about it on the internet.
 
-![Several meme about "No deployments on Friday"](1.png)
+![Several meme about "No deployments on Friday"]({{< relref "1.png" >}})
 
 Recently, one of my LinkedIn relations commented a post that way saying something like "If you had to deploy today (Friday) and it went wrong, I'm sorry for you." In his comment, he argued that he had shipped more than 10 versions that day and it was no big deal for him, starting a discussion with the author of the post. As I was reading them, I realized they were both right, and above all, by their positioning about "no deployments on Friday" I could make a lot of guessing about their respective business and organizational contexts as well as their technical practices.
 
@@ -46,7 +46,7 @@ Another technical trick is *feature toggling* (also known as *feature flags*). T
 > Be careful though of a potential trap using *feature toggles*. I argued that deploying often helps reduce risks and threats, but this is true as long as the code is executed in production.  
 > If we're working on a new feature that remains disabled in production, even though we deploy it daily, we're not sure that the code is working properly. If a bug appears the day we choose to flip the *toggle*, we will need to investigate the whole feature's code and not assume that the bug is hidden in the latest changes.
 
-A last trick I want to highlight is asynchronous work. Not every business processes need to be executed right away. Most of them can be delayed and executed later, meaning we can isolate them, and even replay them in case of a failure. I have written a dedicated [post](../using-processes-for-better-resilience/) if you're looking for more details.
+A last trick I want to highlight is asynchronous work. Not every business processes need to be executed right away. Most of them can be delayed and executed later, meaning we can isolate them, and even replay them in case of a failure. I have written a dedicated [post](/posts/using-processes-for-better-resilience/) if you're looking for more details.
 
 ## Conclusion
 

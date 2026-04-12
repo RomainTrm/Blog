@@ -8,7 +8,7 @@ aliases: ["/posts/2016-05-04/"]
 
 Connaissez vous la bernache nonnette&nbsp;?
 
-![Une bernache nonnette et son petit](1.png)
+![Une bernache nonnette et son petit]({{< relref "1.png" >}})
 
 Il s’agit d’une espèce d’oie vivant principalement dans les îles arctiques. La bernache est exclusivement végétarienne, et ce dès sa naissance. Le problème, c’est qu’elle a pour habitude de nicher au sommet d’une falaise pour se protéger elle et ses œufs des prédateurs terrestres. Les oisillons ne sachant pas voler avant l’âge de 40-45 jours, il faut que ceux-ci puissent descendre de la falaise pour se nourrir.
 

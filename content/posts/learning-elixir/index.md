@@ -5,7 +5,7 @@ tags: [post, en]
 draft: false
 ---
 
-In a previous [post](../using-processes-for-better-resilience/), I've mentioned I've read the book [Programming Elixir 1.6](https://pragprog.com/titles/elixir16/programming-elixir-1-6/).  
+In a previous [post](/posts/using-processes-for-better-resilience/), I've mentioned I've read the book [Programming Elixir 1.6](https://pragprog.com/titles/elixir16/programming-elixir-1-6/).  
 
 As I was planning to read [Real-World Event Sourcing](https://pragprog.com/titles/khpes/real-world-event-sourcing/), I chose to conduct a second reading because my limited knowledge and skills with Elixir were eroded over time. I took time to take many notes which are available on a dedicated [repository](https://github.com/RomainTrm/Book-ElixirExercices).  
 

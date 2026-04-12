@@ -16,7 +16,7 @@ Seulement, comment définir et évaluer la complexité métier de son applicatio
 
 Cette définition met clairement en évidence une première notion, elle implique de fortes dépendances entre plusieurs éléments.
 
-![Chaines](1.png)
+![Chaines]({{< relref "1.png" >}})
 
 J’ai récemment pu assister au talk “[Out The Tar Pit Vulgarized](https://www.youtube.com/watch?v=RugUTW-BPuE)” de [Romeu Moura](https://twitter.com/malk_zameth) où il est justement question de complexité logiciel. Il commence par y définir les termes simple et complexe&nbsp;:
 

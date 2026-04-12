@@ -27,7 +27,7 @@ Bien entendu, ces rôles sont régulièrement échangés. La règle d’or lors 
 
 Une crainte récurrente chez toutes les personnes qui n’ont jamais travaillé en pair programming est la perte de productivité&nbsp;: *“Il y en a un qui écrit pendant que l’autre regarde.”*, sous entendu celui qui n’écrit pas est passif.
 
-![Homer Simpson affalé entrain de boire une bière](1.png)
+![Homer Simpson affalé entrain de boire une bière]({{< relref "1.png" >}})
 
 En vérité, si vous comparez la charge consommée par une personne et la charge consommée par un binôme, en effet vous consommerez plus. Il a ainsi été déterminé que des développeurs consomment environ [15% de charge supplémentaire](http://collaboration.csc.ncsu.edu/laurie/Papers/XPSardinia.PDF) lorsqu’ils pratiquent le pair programming, pourtant les bénéfices dépassent ce surcoût.
 
