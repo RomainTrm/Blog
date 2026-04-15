@@ -4,6 +4,7 @@ date: 2026-04-02T09:53:00+02:00
 tags: [post, en]
 draft: true
 ---
+
 <style>
   img {
     width: 25em
@@ -343,7 +344,7 @@ Now that the business logic is implemented, we've got a functional counter:
 In this post, we built our first working app using our own `ElmishView` component.  
 We saw how to init our app, how to use the `Model` to render the `View` and finally, how to test and implement the business behaviors.  
 
-In the next [post](/posts/using-the-elm-architecture-part-3), we will explore a new application to introduce the use of `Effect`.
+In the [next post](/posts/using-the-elm-architecture-part-3), we will explore a new application to introduce the use of `Effect`.
 
 ---
 
