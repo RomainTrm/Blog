@@ -46,7 +46,7 @@ export type Model = {
 }
 ```
 
-Then, the `Command` represents the actions the *view* can trigger, here increments or decrement the counter value:  
+Then, the `Command` represents the actions the *view* can trigger, here we can increment or decrement the counter's value:  
 
 ```typescript
 // counter/counter.app.ts
@@ -81,7 +81,7 @@ export function init() : { model: Model, effects: Effect[] } {
 }
 ```
 
-For now, let’s just provide default implementation for our `update` and `executeEffect` functions:  
+For now, let’s just provide a default implementation for our `update` and `executeEffect` functions:  
 
 ```typescript
 // counter/counter.app.ts
@@ -100,6 +100,8 @@ I usually declare the `View` in a dedicated file for two reasons:
 
 - It splits logic in smaller code chunks, making it easier to navigate.
 - It isolates the rendering in `.txs` files, while business logic remains in `.ts` files where no rendering can occur.
+
+Let's just put a placeholder for now:
 
 ```typescript
 // counter/counter.view.tsx
@@ -147,7 +149,7 @@ export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
 }
 ```
 
-We could also use the value to decide if we should enable or disable the buttons, but I prefer to avoid this solution as it places some logic inside the view. Instead we add two additional properties `canDecrement` and `canIncrement` to our `Model` (and update the `init` function accordingly).  
+We could use the value to decide if we should enable or disable the buttons, but I prefer to avoid this solution as it places some logic inside the view. Instead we add two additional properties `canDecrement` and `canIncrement` to our `Model` (and update the `init` function accordingly).  
 
 ```typescript
 // counter/counter.app.ts
@@ -184,7 +186,7 @@ export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
 }
 ```
 
-Also, when clicking on a button, we need to dispatch the correct `Command` to call the `update` function:
+Also, when clicking on a button, we need to dispatch the correct `Command`:
 
 ```typescript
 // counter/counter.view.tsx
@@ -211,7 +213,7 @@ Obviously, as we're still running the default implementation of the `update` fun
 
 ### Unit-testing our application
 
-One thing I really appreciate with this pattern is its functional aspect: most of the business logic is isolated in a pure function (side-effect free and deterministic), making it easy to test.
+One thing I really appreciate about this pattern is its functional aspect: most of the business logic is isolated in a pure function (side-effect free and deterministic), making it easy to test.
 
 ```typescript
 // counter/counter.test.ts
@@ -327,11 +329,11 @@ export function update(command: Command, model: Model) : { model: Model, effects
 }
 ```
 
-> #### Personal though about Typescript  
+> #### Personal though on Typescript  
 >
 > In my opinion, we're touching a limit of the typescript's type system with this pattern.  
 > Even if union types are supported by the use of flags (like `kind: 'Increment'`), the provided `switch..case` syntax is really inconvenient for manipulating them, particularly because of the shared scope between all cases.  
-> That's why I chose to use [ts-pattern](https://github.com/gvergnaud/ts-pattern) here, making manipulation of the `Command` more practical.
+> That's why I chose to use [ts-pattern](https://github.com/gvergnaud/ts-pattern) here, making the manipulation of the `Command` more practical.
 
 ### Running our application
 

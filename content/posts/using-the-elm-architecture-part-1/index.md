@@ -5,22 +5,7 @@ tags: [post, en]
 draft: true
 ---
 
-<!-- - update previous post
-- explain MVU architecture
-- core concept: a reduction
-- introduce elm and elmish and mention redux
-- first example: counter app (ignore effects)
-- second example: customer page (use effects)
-- third example: split customer page (use intents)
-
-## Additional resources
-
-If you liked this content and you are looking for a more detailed resources to implement this pattern on your own, I recommand you reading the [Elmish book](https://zaid-ajaj.github.io/the-elmish-book/) wrote by [Zaid Ajaj](https://github.com/Zaid-Ajaj).
-
-https://sporto.github.io/elm-patterns/architecture/reusable-views.html
- -->
-
-A few months ago in my post [Reaching a limit of Reactive Programming](../reaching-a-limit-of-reactive-programming/), I've mentioned the MVU (*Model-View-Update*) pattern could be a solution to the problems I was encountering with reactive programming. I'm now using MVU since a few months on other projects and I want to write my own article where I present it in more details.  
+A few months ago in my post [Reaching a limit of Reactive Programming](/posts/reaching-a-limit-of-reactive-programming/), I've mentioned the *MVU* (*Model-View-Update*) pattern could be a solution to the problems I was encountering with reactive programming. I'm now using *MVU* since a few months on other projects and I want to write my own article where I present it in more details.  
 
 In this blog post series, we'll be working on a webpage, but this pattern can be used in other contexts like desktop applications.
 
@@ -48,7 +33,7 @@ The whole pattern lies on a reduction using the *Update* function: `(Command, Mo
 
 One of the best known implementations of this pattern is [React Redux](https://react-redux.js.org/). Even if I've never used it, I've easily recognized the pattern simply by reading the tutorial on the official website.  
 
-The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpile F# code to a React application.  
+The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpiles F# code to a React application.  
 
 For the rest of this post, I will reproduce this second implementation.  
 
@@ -182,7 +167,7 @@ sequenceDiagram
 
         processCmds->>executeEffects: Send Effect[]
         loop while some effects to process
-            executeEffects->>executeEffect: process (Effect[], Dispatch<Command>)
+            executeEffects->>executeEffect: process (Effect, Dispatch<Command>)
             executeEffect-->>cmdsBuffer: Enqueue last if Dispatch<Command> called
         end
     end

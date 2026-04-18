@@ -7,6 +7,15 @@ draft: true
 
 AAA
 
+<!-- - update previous post
+
+## Additional resources
+
+If you liked this content and you are looking for a more detailed resources to implement this pattern on your own, I recommend you reading the [Elmish book](https://zaid-ajaj.github.io/the-elmish-book/) wrote by [Zaid Ajaj](https://github.com/Zaid-Ajaj).
+
+https://sporto.github.io/elm-patterns/architecture/reusable-views.html
+ -->
+
 ---
 
 ## Comments

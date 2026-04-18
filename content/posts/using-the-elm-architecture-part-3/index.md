@@ -23,7 +23,7 @@ Today, we will navigate into a new app and focus on the use of `Effect` to handl
 
 Our application is a simple page that displays and allows edition of customers' information. For simplicity, a customer is defined by an id, a name and a premium subscription status. Only the premium subscription status can be updated by the view.  
 
-This is how our final application should behave:  
+Here's how our final application should behave:  
 
 ![Webpage with our customer page displayed, an edit button allows edition, save button apply changes and cancel reverts them](1.gif)
 
@@ -46,7 +46,7 @@ export interface Api {
 }
 ```
 
-But for now, with everything we've learned so far, our type system doesn't handle any side effect:  
+However, with everything we've learned so far, our type system doesn't handle any side effect:  
 
 ```typescript
 // customer/customer.app.ts
@@ -82,7 +82,7 @@ You may have noticed this time our `init` function receives `CustomerId` as a pa
 
 ## Loading the customer
 
-The first thing we have to do is making an API call retrieve the customer. However, these are asynchronous and non-deterministic, so we should avoid making such calls in our `update` function that is synchronous and pure.  
+The first thing we have to do is making an API call retrieve the customer. Unfortunately, these are asynchronous and non-deterministic, so we should avoid making such calls in our `update` function that is synchronous and pure.  
 
 To query our customer, we'll use an `Effect` and then dispatch a `Command` with the result returned by the API.  
 
@@ -205,7 +205,7 @@ export function update(command: Command, model: Model) : { model: Model, effects
 
 ## Saving the customer
 
-Saving the customer follows the same flow, so there's no point for me to detail every step. We declare and handle a new `Effect` and two `Command`. In the existing logic, we just need to update the `SaveCustomer` to return our new `Effect`:  
+Saving the customer follows the same flow, so there's no point for me to detail every step. We declare and handle a new `Effect` and two `Command`. In the existing logic, we just need to update the `SaveCustomer` command handling to return our new `Effect`:  
 
 ```typescript
 export type Command = 
@@ -270,7 +270,7 @@ export function executeEffect(effect: Effect, dispatch: Dispatch<Command>, api: 
 
 ## Conclusion
 
-In this post, we learned how to perform non-deterministic and asynchronous operations within our Elm Architecture. This may seem like a cumbersome process to make a single API call, with a lot of indirection, but it isolates side effects, protecting the rest of the code base and keeping it easier to understand and maintain. In my opinion, this is a good tradeoff.  
+In this post, we learned how to perform non-deterministic and asynchronous operations within our Elm Architecture. This may seem like a cumbersome process with a lot of indirection to make a single API call, but it isolates side effects, protecting the rest of the code base and keeping it easier to understand and maintain. In my opinion, this is a good tradeoff.  
 
 In the [last post](/posts/using-the-elm-architecture-part-4) of this series, we will see how to handle larger applications by extracting and using subcomponents.
 
