@@ -60,7 +60,7 @@ export type Model = {
 export type Command = 
     | { kind: "EditCustomer" }
     | { kind: "UpdatePremiumSubscription", value: boolean }
-    | { kind: "SaveCustomer", customer: CustomerDto }
+    | { kind: "SaveCustomer" }
     | { kind: "CancelEdit" }
 
 export type Effect = never
@@ -210,7 +210,7 @@ Saving the customer follows the same flow, so there's no point for me to detail 
 ```typescript
 export type Command = 
     | // ...
-    | { kind: "SaveCustomer", customer: CustomerDto } // Already declared
+    | { kind: "SaveCustomer" } // Already declared
     | { kind: "NotifySaveSucceeded" }
     | { kind: "NotifySaveFailed", error: string }
 
@@ -223,12 +223,16 @@ export function update(command: Command, model: Model) : { model: Model, effects
     return match(command)
         .returnType<{ model: Model, effects: Effect[] }>()
         // ...
-        .with({ kind: "SaveCustomer" }, ({ customer }) => {
+        .with({ kind: "SaveCustomer" }, () => {
+            if (!model.customerEdition) return { model, effects: [] }
+
             const newModel: Model = {
                 ...model,
                 loading: true,
             }
-            const effects: Effect[] = [{ kind: "SaveCustomer", customer }]
+            const effects: Effect[] = [
+                { kind: "SaveCustomer", customer: model.customerEdition }
+            ]
             return { model: newModel, effects }
         })
         .with({ kind: "NotifySaveSucceeded" }, () => {
