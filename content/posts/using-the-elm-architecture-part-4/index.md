@@ -1,6 +1,6 @@
 ---
-title: "Using the Elm Architecture - Part 4"
-date: 2026-04-04T09:53:00+02:00
+title: "Using the Elm Architecture - Part 4: View composition"
+date: 2026-05-13T09:00:00+02:00
 tags: [post, en]
 draft: true
 ---

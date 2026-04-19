@@ -1,6 +1,6 @@
 ---
-title: "Using the Elm Architecture - Part 3"
-date: 2026-04-03T09:53:00+02:00
+title: "Using the Elm Architecture - Part 3: Managing side effects"
+date: 2026-05-06T09:00:00+02:00
 tags: [post, en]
 draft: true
 ---
@@ -29,7 +29,7 @@ Here's how our final application should behave:
 
 As we should be able to display different customers, we retrieve the customer's id from the URL, then we should be able to load and save its information with some API calls.  
 
-Our API contract looks something, like this:  
+Our API contract looks something like this:  
 
 ```typescript
 // customer/api.ts
@@ -78,7 +78,7 @@ export function init(customerId: CustomerId) : { model: Model, effects: Effect[]
 }
 ```
 
-You may have noticed this time our `init` function receives `CustomerId` as a parameter to initialize our application. For now, the `SaveCustomer` command does nothing.
+You may have noticed this time our `init` function receives a `CustomerId` as a parameter to initialize our application. For now, the `SaveCustomer` command does not save customer's information.
 
 ## Loading the customer
 
@@ -110,7 +110,7 @@ export type Effect =
     | { kind: "LoadCustomer", customerId: CustomerId }
 ```
 
-Then we update our `init` function to return the `LoadCustomer` effect. With this, an API call will be trigger every time we open the page:  
+Then we update our `init` function to return the `LoadCustomer` effect. With this, an API call will be trigger every time we navigate to this page:  
 
 ```typescript
 // customer/customer.app.ts
@@ -153,6 +153,8 @@ export function Customer({ customerId } : { customerId: string }) {
 }
 ```
 
+> For this example, I've implemented a `fakeApi` with a set of static data. The `Promise` always returns a result after a delay of one second, allowing me to see the loading display on my view.
+
 Implementing `executeEffect` is quite simple. We call our `Api` and return a success or an error depending on the `Promise`:  
 
 ```typescript
@@ -173,9 +175,7 @@ export function executeEffect(effect: Effect, dispatch: Dispatch<Command>, api: 
 }
 ```
 
-This can be tested as well but it gets more complicated than testing the `update` function, because we'll have to mock or fake our `Api` dependency.  
-
-What's why I would advise you put the minimum logic there, just return the result into the `Command` and let the `update` function do the job. In this use case, it's just leaving the loading state and setting either the customer data or an error:  
+This can be tested as well but it gets more complicated than testing the `update` function, because we'll have to mock or fake our `Api` dependency. What's why I would advise you put the minimum logic there, just return the result into the `Command` and let the `update` function do the job. In this use case, it's just removing the loading state and setting either the customer's data or an error:  
 
 ```typescript
 // customer/customer.app.ts

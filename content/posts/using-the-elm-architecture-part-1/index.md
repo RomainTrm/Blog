@@ -1,13 +1,13 @@
 ---
-title: "Using the Elm Architecture - Part 1"
-date: 2026-04-01T09:53:00+02:00
+title: "Using the Elm Architecture - Part 1: Pattern's core logic"
+date: 2026-04-22T09:00:00+02:00
 tags: [post, en]
 draft: true
 ---
 
-A few months ago in my post [Reaching a limit of Reactive Programming](/posts/reaching-a-limit-of-reactive-programming/), I've mentioned the *MVU* (*Model-View-Update*) pattern could be a solution to the problems I was encountering with reactive programming. I'm now using *MVU* since a few months on other projects and I want to write my own article where I present it in more details.  
+A few months ago in my post [Reaching a limit of Reactive Programming](/posts/reaching-a-limit-of-reactive-programming/), I've mentioned the *MVU* (*Model-View-Update*) pattern could be a solution to the problems I was encountering at that time. I'm now using *MVU* since a few months on other projects and I want to write my own article where I present this pattern in more details.  
 
-In this blog post series, we'll be working on a webpage, but this pattern can be used in other contexts like desktop applications.
+This post is the first of a four-post series. We'll be working on webpages, but this pattern can be used in other contexts like desktop applications.
 
 ## *Model-View-Update* pattern: core concepts
 
@@ -27,13 +27,13 @@ The simplest way to represent the *MVU* pattern is a loop between the three elem
             +--------+
 ```
 
-The whole pattern lies on a reduction using the *Update* function: `(Command, Model) -> Model`. If you are not familiar with the concept of reduction, just think about a loop that sequentially applies each command to the model then send the result to the *View* function. This is the glue between our two functions.  
+The whole pattern lies on a reduction using the *Update* function: `(Command, Model) -> Model`. If you are not familiar with the concept of reduction, just think about a loop that sequentially applies each command to the model then sends the result to the *View* function.  
 
 ## Existing technologies
 
 One of the best known implementations of this pattern is [React Redux](https://react-redux.js.org/). Even if I've never used it, I've easily recognized the pattern simply by reading the tutorial on the official website.  
 
-The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpiles F# code to a React application.  
+The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm Architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpiles F# code to a React application.  
 
 For the rest of this post, I will reproduce this second implementation.  
 
@@ -97,7 +97,7 @@ export class ElmishView<TModel, TCommand, TEffect>
     }
 
     override render() : VNode {
-        return this.props.view(this.state, this.dispatcher)
+        return this.props.view(this.state, this.dispatch)
     }
 }
 ```

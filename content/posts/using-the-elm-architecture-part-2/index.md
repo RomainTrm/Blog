@@ -1,6 +1,6 @@
 ---
-title: "Using the Elm Architecture - Part 2"
-date: 2026-04-02T09:53:00+02:00
+title: "Using the Elm Architecture - Part 2: Building our first app"
+date: 2026-04-29T09:00:00+02:00
 tags: [post, en]
 draft: true
 ---
@@ -37,7 +37,7 @@ type ElmishViewProps<TModel, TCommand, TEffect> = {
 
 So we have to define three types: `Model`, `Command` and `Effect`.  
 
-The `Model` represent the state of our application, so it should contain the value of the counter:  
+The `Model` represent the state of our application, so it should contain the counter's value:  
 
 ```typescript
 // counter/counter.app.ts
@@ -46,7 +46,7 @@ export type Model = {
 }
 ```
 
-Then, the `Command` represents the actions the *view* can trigger, here we can increment or decrement the counter's value:  
+Then, the `Command` represents the actions the *view* can trigger, here we can increment or decrement the counter:  
 
 ```typescript
 // counter/counter.app.ts
@@ -66,8 +66,8 @@ export type Effect = never
 
 Then we define our `init`, `update` and `executeEffect` functions.  
 
-First the `init` function: I chose to start our counter at 0.  
-With this example, we don't need to pass an external value to initialize our application, so our function takes `void`, but we are free to pass whatever we need.  
+First the `init` function. With this example, we don't need to pass an external value to initialize our application, so our function takes `void`, but we are free to pass whatever we need.  
+I chose to start our counter at 0:
 
 ```typescript
 // counter/counter.app.ts
@@ -110,6 +110,8 @@ export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
 }
 ```
 
+### Build and run our app
+
 Now we have everything we need to implement a new `ElmishView`:  
 
 ```typescript
@@ -149,7 +151,7 @@ export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
 }
 ```
 
-We could use the value to decide if we should enable or disable the buttons, but I prefer to avoid this solution as it places some logic inside the view. Instead we add two additional properties `canDecrement` and `canIncrement` to our `Model` (and update the `init` function accordingly).  
+We could also use the value to decide if we should enable or disable the buttons, but I prefer to avoid this solution as it places some logic inside the view. Instead we add two additional properties `canDecrement` and `canIncrement` to our `Model` and update the `init` function accordingly.  
 
 ```typescript
 // counter/counter.app.ts
