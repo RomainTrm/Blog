@@ -17,7 +17,7 @@ If you have been searching for resources about the Elm architecture on the inter
 
 Today, I will not derogate from this rule, although I want to make a slightly more complex variant: our first application is a simple counter with a bounded value (min 0 and max 5). Two buttons allow us to increment and decrement it.  
 
-> All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/counter)
+> All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/counter).
 
 ## Scaffold our application
 

@@ -17,7 +17,7 @@ In the [previous post](/posts/using-the-elm-architecture-part-2/), we've impleme
 
 Today, we will navigate into a new app and focus on the use of `Effect` to handle asynchronous and non-deterministic behaviors.
 
-> All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/customer-effects/src/customer)
+> All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/customer-effects/src/customer).
 
 ## The use case
 
@@ -53,6 +53,7 @@ However, with everything we've learned so far, our type system doesn't handle an
 export type Model = {
     customerId: CustomerId
     loading: boolean
+    error: string | null
     customer: CustomerDto | null
     customerEdition: CustomerDto | null
 }
@@ -70,6 +71,7 @@ export function init(customerId: CustomerId) : { model: Model, effects: Effect[]
         model: { 
             customerId: customerId,
             customer: null,
+            error: null,
             customerEdition: null,
             loading: true,
         },
