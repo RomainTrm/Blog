@@ -112,7 +112,7 @@ export type Effect =
 
 Then we update our `init` function to return the `LoadCustomer` effect. With this, an API call will be trigger every time we navigate to this page:  
 
-```typescript
+```typescript {hl_lines=[8]}
 // customer/customer.app.ts
 export function init(customerId: CustomerId) : { model: Model, effects: Effect[] } {
     return {
@@ -135,7 +135,7 @@ export function executeEffect(effect: Effect, dispatch: Dispatch<Command>, api: 
 
 Obviously, our `ElmishView` component is still expecting a function with two parameters, so we declare and pass an override with the API encapsulated:  
 
-```typescript
+```typescript {hl_lines=["3-5",10]}
 // customer/index.tsx
 export function Customer({ customerId } : { customerId: string }) {
     function executeEffectWithApi(effect: Effect, dispatch: Dispatch<Command>) {
@@ -207,7 +207,8 @@ export function update(command: Command, model: Model) : { model: Model, effects
 
 Saving the customer follows the same flow, so there's no point for me to detail every step. We declare and handle a new `Effect` and two `Command`. In the existing logic, we just need to update the `SaveCustomer` command handling to return our new `Effect`:  
 
-```typescript
+```typescript {hl_lines=["5-6",10,24,"28-44","52-60"]}
+// customer/customer.app.ts
 export type Command = 
     | // ...
     | { kind: "SaveCustomer" } // Already declared
@@ -218,7 +219,6 @@ export type Effect =
     | // ...
     | { kind: "SaveCustomer", customer: CustomerDto }
 
-// customer/customer.app.ts
 export function update(command: Command, model: Model) : { model: Model, effects: Effect[] } {
     return match(command)
         .returnType<{ model: Model, effects: Effect[] }>()

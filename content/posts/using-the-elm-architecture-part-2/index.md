@@ -153,7 +153,7 @@ export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
 
 We could also use the value to decide if we should enable or disable the buttons, but I prefer to avoid this solution as it places some logic inside the view. Instead we add two additional properties `canDecrement` and `canIncrement` to our `Model` and update the `init` function accordingly.  
 
-```typescript
+```typescript {hl_lines=["4-5","12-13"]}
 // counter/counter.app.ts
 export type Model = {
     value: number
@@ -173,7 +173,7 @@ export function init() : { model: Model, effects: Effect[] } {
 }
 ```
 
-```typescript
+```typescript {hl_lines=[7,9]}
 // counter/counter.view.tsx
 export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
     return <>
@@ -190,7 +190,7 @@ export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
 
 Also, when clicking on a button, we need to dispatch the correct `Command`:
 
-```typescript
+```typescript {hl_lines=[8,11]}
 // counter/counter.view.tsx
 export function View(props: { model: Model, dispatch: Dispatch<Command> }) {
     return <>

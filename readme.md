@@ -1,6 +1,6 @@
 # Personal blog
 
-This repository regroup all my blog post in the markdown format.  
+This repository regroups all my blog post in the markdown format.  
 
 ## How to comment
 
@@ -52,3 +52,7 @@ Builder server with drats for preview:
 ```bash
 hugo server -D -F
 ```
+
+## Usefull links
+
+- [Code block syntax highlighting](https://gohugo.io/content-management/syntax-highlighting/)
