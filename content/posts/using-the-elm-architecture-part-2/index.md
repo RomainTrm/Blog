@@ -13,7 +13,7 @@ draft: true
 
 In the [previous post](/posts/using-the-elm-architecture-part-1/), we've introduced the Elm architecture and then wrote a PReact component that is implementing this pattern. Today it's time to use it! If you haven’t, I recommend that you read the first post before continuing on this one.
 
-If you have been searching for resources about the Elm architecture on the internet, you must have encountered the counter example. This is literally the Elm architecture's "Hello world".  
+If you have been searching for resources about the Elm architecture on the internet, you must have encountered the "counter" example. This is literally the Elm architecture's "Hello world".  
 
 Today, I will not derogate from this rule, although I want to make a slightly more complex variant: our first application is a simple counter with a bounded value (min 0 and max 5). Two buttons allow us to increment and decrement it.  
 

@@ -2,7 +2,7 @@
 title: "Using the Elm Architecture - Part 1: Pattern's core logic"
 date: 2026-04-22T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 A few months ago in my post [Reaching a limit of Reactive Programming](/posts/reaching-a-limit-of-reactive-programming/), I've mentioned the *MVU* (*Model-View-Update*) pattern could be a solution to the problems I was encountering at that time. I'm now using *MVU* since a few months on other projects and I want to write my own article where I present this pattern in more details.  
@@ -15,7 +15,7 @@ The simplest way to represent the *MVU* pattern is a loop between the three elem
 
 - A *Model* that represent the state of the webpage.
 - A *View* function that takes the *Model* as an input to render the page.
-- A *Update* function that applies a command to the current *Model* and returns an updated version of it.
+- An *Update* function that applies a command to the current *Model* and returns an updated version of it.
 
 ```goat
 +-------+                 +-------+                               
@@ -31,9 +31,9 @@ The whole pattern lies on a reduction using the *Update* function: `(Command, Mo
 
 ## Existing technologies
 
-One of the best known implementations of this pattern is [React Redux](https://react-redux.js.org/). Even if I've never used it, I've easily recognized the pattern simply by reading the tutorial on the official website.  
+One of the best known implementations of *MVU* is [React Redux](https://react-redux.js.org/). Even if I've never used it, I've easily recognized the pattern simply by reading the tutorial on the official website.  
 
-The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and his famous [Elm Architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpiles F# code to a React application.  
+The other main implementation of *MVU* is [Elm](https://elm-lang.org/) and its famous [Elm Architecture](https://guide.elm-lang.org/architecture/) (*TEA*). If you never played with it, I think you should give it a try, the Elm's compiler is really didactic. This architecture has also been recoded with the [Elmish](https://github.com/elmish/elmish) project that transpiles F# code to a React application.  
 
 For the rest of this post, I will reproduce this second implementation.  
 
@@ -144,7 +144,7 @@ function createProgram<TModel, TCommand, TEffect>(
 }
 ```
 
-Here's the flow to implement: each `Command` is processed with the last known `Model`. Once processed, the `View` and `Model` are updated, then we process the `Effect[]`. Each `Effect` has the possibility to enqueue new `Command` at the end of the `cmdsBuffer` queue.
+Here's the flow to implement: each `Command` is executed with the last known `Model`. Once processed, the `View` and `Model` are updated, then we run the `Effect[]`. Each `Effect` has the possibility to enqueue new `Command` at the end of the `cmdsBuffer` queue.
 
 ```mermaid
 sequenceDiagram
