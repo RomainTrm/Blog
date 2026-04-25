@@ -11,7 +11,7 @@ So far we've learned how to [build an application](/posts/using-the-elm-architec
 
 I will use the example from the previous post, our goal is to extract the edit form into a dedicated component.
 
-> The following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer).
+> The following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v2).
 
 ## Existing codebase
 
@@ -266,7 +266,7 @@ export function update(command: Command, model: Model) : { model: Model, effects
 As we no longer have access to the `Effect` type, `SaveCustomer` and `CancelEdit` do nothing here, but we will need to notify the parent to trigger the save.
 
 > I made the choice to let the save logic inside the parent. In terms of responsibility, this can be challenged but it's a refactoring that is easier to detail in a blog post. Another possibility would have been to also move the save logic with the `Effect` into our new component, and only notify the parent of the result. Though, this implies more communication between the two components.  
-> If you want to have a look, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/edit-with-effects/src/customer).  
+> If you want to have a look, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3).  
 
 As we've now isolated the logic of the edit form commands, we must also isolate it in the parent. To do so, we update once again the `Command` type to wrap the command of the edit form:  
 

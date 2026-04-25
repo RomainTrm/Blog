@@ -17,7 +17,7 @@ In the [previous post](/posts/using-the-elm-architecture-part-2/), we've impleme
 
 Today, we will navigate into a new app and focus on the use of `Effect` to handle asynchronous and non-deterministic behaviors.
 
-> All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/customer-effects/src/customer).
+> All the following code is available in my [github repository](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v1).
 
 ## The use case
 
