@@ -12,6 +12,7 @@ paginate = 10
     unsafe= true
 
 [params]
+  isRelease = false
   favicon = "favicon.ico"
   about = """
 Software developer, *DD and F# enthusiast
