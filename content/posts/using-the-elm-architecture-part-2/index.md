@@ -2,7 +2,7 @@
 title: "Using the Elm Architecture - Part 2: Building our first app"
 date: 2026-04-29T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 <style>
@@ -11,9 +11,9 @@ draft: true
   }
 </style>
 
-In the [previous post](/posts/using-the-elm-architecture-part-1/), we've introduced the Elm architecture and then wrote a PReact component that is implementing this pattern. Today it's time to use it! If you haven’t, I recommend that you read the first post before continuing on this one.
+In the [previous post](/posts/using-the-elm-architecture-part-1/), we've introduced the Elm Architecture (*TEA*) and then wrote a PReact component to implement this pattern. Today it's time to use it! If you haven’t, I recommend that you read the first post before continuing on this one.
 
-If you have been searching for resources about the Elm architecture on the internet, you must have encountered the "counter" example. This is literally the Elm architecture's "Hello world".  
+If you have been searching for resources about the Elm Architecture on the internet, you must have encountered the "counter" example. This is literally the Elm Architecture's "Hello world".  
 
 Today, I will not derogate from this rule, although I want to make a slightly more complex variant: our first application is a simple counter with a bounded value (min 0 and max 5). Two buttons allow us to increment and decrement it.  
 
@@ -35,9 +35,9 @@ type ElmishViewProps<TModel, TCommand, TEffect> = {
 
 ### Scaffold our type system
 
-So we have to define three types: `Model`, `Command` and `Effect`.  
+So, we have to define three types: `Model`, `Command` and `Effect`.  
 
-The `Model` represent the state of our application, so it should contain the counter's value:  
+The `Model` represent the state of our application. At least, it should contain the counter's value:  
 
 ```typescript
 // counter/counter.app.ts
@@ -66,7 +66,7 @@ export type Effect = never
 
 Then we define our `init`, `update` and `executeEffect` functions.  
 
-First the `init` function. With this example, we don't need to pass an external value to initialize our application, so our function takes `void`, but we are free to pass whatever we need.  
+First the `init` function. With this example, we don't need to pass any external value to initialize our application, so our function takes `void`, but we are free to pass whatever we need.  
 I chose to start our counter at 0:
 
 ```typescript
@@ -136,7 +136,7 @@ And if we execute our application, it renders correctly:
 
 ## Implementing the view
 
-I start with the view. We use the `model` to display the counter's value.  
+We use the `model` to display the counter's value.  
 
 ```typescript
 // counter/counter.view.tsx
@@ -172,6 +172,8 @@ export function init() : { model: Model, effects: Effect[] } {
     }
 }
 ```
+
+And we use our new properties:
 
 ```typescript {hl_lines=[7,9]}
 // counter/counter.view.tsx
@@ -215,7 +217,7 @@ Obviously, as we're still running the default implementation of the `update` fun
 
 ### Unit-testing our application
 
-One thing I really appreciate about this pattern is its functional aspect: most of the business logic is isolated in a pure function (side-effect free and deterministic), making it easy to test.
+One thing I really appreciate about this pattern is its functional aspect: most of the business logic is isolated in a pure, side-effect free and deterministic function, making it easy to test.
 
 ```typescript
 // counter/counter.test.ts
