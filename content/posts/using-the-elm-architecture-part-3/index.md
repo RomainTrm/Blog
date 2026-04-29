@@ -27,7 +27,7 @@ Here's how our final application should behave:
 
 ![Webpage with our customer page displayed, an edit button allows edition, save button apply changes and cancel reverts them](1.gif)
 
-As we should be able to display different customers, we retrieve the customer's id from the URL, then we should be able to load and save its information with some API calls.  
+As we should be able to display different customers, we retrieve the customer's id from the URL, then we load and save its information with some API calls.  
 
 Our API contract looks something like this:  
 
@@ -80,11 +80,11 @@ export function init(customerId: CustomerId) : { model: Model, effects: Effect[]
 }
 ```
 
-You may have noticed this time our `init` function receives a `CustomerId` as a parameter to initialize our application. For now, the `SaveCustomer` command does not save customer's information.
+You may have noticed this time our `init` function receives a `CustomerId` as a parameter to initialize our application. For now, the `SaveCustomer` command does nothing more than switching the `loading` flag.
 
 ## Loading the customer
 
-The first thing we have to do is making an API call retrieve the customer. Unfortunately, these are asynchronous and non-deterministic, so we should avoid making such calls in our `update` function that is synchronous and pure.  
+The first thing we have to do is to launch an API call to retrieve the customer. Unfortunately, these are asynchronous and non-deterministic, so we should avoid making such calls in our `update` function that is synchronous and pure.  
 
 To query our customer, we'll use an `Effect` and then dispatch a `Command` with the result returned by the API.  
 
@@ -112,7 +112,7 @@ export type Effect =
     | { kind: "LoadCustomer", customerId: CustomerId }
 ```
 
-Then we update our `init` function to return the `LoadCustomer` effect. With this, an API call will be trigger every time we navigate to this page:  
+Then we update our `init` function to return the `LoadCustomer` effect. With this, an API call will be triggered every time we navigate to this page:  
 
 ```typescript {hl_lines=[8]}
 // customer/customer.app.ts
@@ -155,7 +155,7 @@ export function Customer({ customerId } : { customerId: string }) {
 }
 ```
 
-> For this example, I've implemented a `fakeApi` with a set of static data. The `Promise` always returns a result after a delay of one second, allowing me to see the loading display on my view.
+> For this example, I've implemented a `fakeApi` with a set of static data. The `Promise` returns a result after a delay of one second, allowing me to see the loading display on my view.
 
 Implementing `executeEffect` is quite simple. We call our `Api` and return a success or an error depending on the `Promise`:  
 
@@ -177,7 +177,7 @@ export function executeEffect(effect: Effect, dispatch: Dispatch<Command>, api: 
 }
 ```
 
-This can be tested as well but it gets more complicated than testing the `update` function, because we'll have to mock or fake our `Api` dependency. What's why I would advise you put the minimum logic there, just return the result into the `Command` and let the `update` function do the job. In this use case, it's just removing the loading state and setting either the customer's data or an error:  
+This can be unit-tested as well but it gets more complicated than testing the `update` function, because we'll have to mock or fake our `Api` dependency. What's why I would advise you to put the minimum logic there, just return the result into the `Command` and let the `update` function do the job. In this use case, it's just removing the loading state and setting either the customer's data or the error:  
 
 ```typescript
 // customer/customer.app.ts

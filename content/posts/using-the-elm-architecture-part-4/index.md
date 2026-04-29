@@ -1,5 +1,5 @@
 ---
-title: "Using the Elm Architecture - Part 4: View composition"
+title: "Using the Elm Architecture - Part 4: Application (de)composition"
 date: 2026-05-13T09:00:00+02:00
 tags: [post, en]
 draft: true
@@ -7,7 +7,7 @@ draft: true
 
 *This blog post is the last of a series where we're using The Elm Architecture (TEA). If you haven't, I strongly recommend reading the previous articles first.*
 
-So far we've learned how to [build an application](/posts/using-the-elm-architecture-part-2) and [run side-effects](/posts/using-the-elm-architecture-part-3). But as our programs grow, we may feel the need to break things down. Today we'll see how to split our page in different modules. This can be for isolating some logic and reduce cognitive load, favor views composition or allow reusability.  
+So far we've learned how to [build an application](/posts/using-the-elm-architecture-part-2) and [run side effects](/posts/using-the-elm-architecture-part-3). But as our programs grow, we may feel the need to break things down. Today we'll see how to split our page in different modules. This can be for isolating some logic and reduce cognitive load, favor views composition or allow reusability.  
 
 I will use the example from the previous post, our goal is to extract the edit form into a dedicated component.
 
@@ -28,14 +28,11 @@ export type Model = {
 }
 
 export type Command = 
-    | { kind: "NotifyCustomerLoaded", customer: CustomerDto }
-    | { kind: "NotifyLoadingError", error: string }
     | { kind: "EditCustomer" }
     | { kind: "UpdatePremiumSubscription", value: boolean }
     | { kind: "SaveCustomer" }
     | { kind: "CancelEdit" }
-    | { kind: "NotifySaveSucceeded" }
-    | { kind: "NotifySaveFailed", error: string }
+    | // ...
 
 export type Effect = 
     | { kind: "LoadCustomer", customerId: CustomerId }
@@ -59,12 +56,6 @@ export function init(customerId: CustomerId) : { model: Model, effects: Effect[]
 export function update(command: Command, model: Model) : { model: Model, effects: Effect[] } {
     return match(command)
         .returnType<{ model: Model, effects: Effect[] }>()
-        .with({ kind: "NotifyCustomerLoaded" }, ({ customer }) => {
-            // Irrelevant
-        })
-        .with({ kind: "NotifyLoadingError" }, ({ error }) => {
-            // Irrelevant
-        })
         .with({ kind: "EditCustomer" }, () => {
             if (model.customer === null) return { model, effects:[] }
 
@@ -105,12 +96,7 @@ export function update(command: Command, model: Model) : { model: Model, effects
             ]
             return { model: newModel, effects }
         })
-        .with({ kind: "NotifySaveSucceeded" }, () => {
-            // Irrelevant
-        })
-        .with({ kind: "NotifySaveFailed" }, ({ error }) => {
-            // Irrelevant
-        })
+        // Other commands are irrelevant for this post
         .exhaustive()
 }
 
@@ -263,10 +249,10 @@ export function update(command: Command, model: Model) : { model: Model, effects
 }
 ```
 
-As we no longer have access to the `Effect` type, `SaveCustomer` and `CancelEdit` do nothing here, but we will need to notify the parent to trigger the save.
+As we no longer have access to the `Effect` type, `SaveCustomer` and `CancelEdit` can't do anything here (yet). We will need to notify the parent to trigger the save.
 
-> I made the choice to let the save logic inside the parent. In terms of responsibility, this can be challenged but it's a refactoring that is easier to detail in a blog post. Another possibility would have been to also move the save logic with the `Effect` into our new component, and only notify the parent of the result. Though, this implies more communication between the two components.  
-> If you want to have a look, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3).  
+> I made the choice to let the save logic inside the parent. In terms of responsibility, this can be challenged but it's a refactoring that is easier to detail in a blog post.  
+> The other possibility would have been to also move the save logic with the `Effect` into our new component, and only notify the parent of the result. Though, this implies more communication between the two components. If you want to take a look later, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3).  
 
 As we've now isolated the logic of the edit form commands, we must also isolate it in the parent. To do so, we update once again the `Command` type to wrap the command of the edit form:  
 
@@ -303,7 +289,7 @@ export function update(command: Command, model: Model) : { model: Model, effects
 }
 ```
 
-We also need to update our `View` as commands received from our `EditCustomerView` must now be wrapped into our new `EditCommand` command:  
+We also need to update the parent `View` as commands received from our `EditCustomerView` must now be wrapped into our new `EditCommand` command:  
 
 ```typescript {hl_lines=[14]}
 // customer/customer.view.tsx
@@ -328,7 +314,7 @@ export function View({ model, dispatch }: { model: Model, dispatch: Dispatch<Com
 
 ## How to send signals to the parent component?
 
-Now we have to send to our parent a signal when the edit form process a `SaveCustomer` or a `CancelEdit` command.  
+Now we have to send a signal to the parent when the edit form process a `SaveCustomer` or a `CancelEdit` command.  
 
 One solution could be to look at the `subCommand` when handling the `EditCommand` and intercept the signal for `SaveCustomer` or `CancelEdit`. Something like:  
 
@@ -374,12 +360,12 @@ export function update(command: Command, model: Model) : { model: Model, effects
 }
 ```
 
-This could work but I've got two issues with this solution:  
+This could work but I've got two major issues with this solution:  
 
 - Intercepted commands are never forwarded to the edit form's `update` function, which breaks the contract established by this architecture.
 - The parent is coupled to the child's `Command` type whereas this is an implementation detail of the child.
 
-The other solution is to define a dedicated contract to send signals to the parent.
+Another solution is to define a dedicated contract to send signals to the parent.
 
 ## The `Intent` pattern
 
@@ -476,11 +462,12 @@ function applyIntent(
 }
 ```
 
-> This pattern is one solution to solve this *child to parent* message issue. So far, this is the only one I've been using, but know they are [others](https://rchavesferna.medium.com/child-parent-communication-in-elm-outmsg-vs-translator-vs-nomap-patterns-f51b2a25ecb1) (`Intent` is referred as `OutMsg`) like the [translator pattern](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98).
+> This pattern is one way to solve this *child to parent* message issue. So far, this is the only one I've used on production code, but know that they are [others](https://rchavesferna.medium.com/child-parent-communication-in-elm-outmsg-vs-translator-vs-nomap-patterns-f51b2a25ecb1) (`Intent` is referred as `OutMsg`).  
+> By curiosity, I've also made a [variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v4) of this app using the [translator pattern](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98). It allows the child to choose if it wants to dispatch a command for itself or for its parent.
 
 ## Conclusion
 
-In this post, we've seen how to extract a subcomponent and how to compose a view. We didn't have to handle effects for our child component but the idea remains the same: wrap the effects and the commands dispatched by them. The [alternative version](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3) mentioned earlier does exactly that.  
+In this post, we've seen how to extract a subcomponent and how to compose a view. We didn't have to handle effects for our child component but the idea remains the same: wrap the effects and the potential commands dispatched by them. The [alternative version](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3) mentioned earlier does exactly that.  
 
 ## Additional resources
 
