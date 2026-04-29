@@ -266,7 +266,7 @@ export function update(command: Command, model: Model) : { model: Model, effects
 As we no longer have access to the `Effect` type, `SaveCustomer` and `CancelEdit` do nothing here, but we will need to notify the parent to trigger the save.
 
 > I made the choice to let the save logic inside the parent. In terms of responsibility, this can be challenged but it's a refactoring that is easier to detail in a blog post. Another possibility would have been to also move the save logic with the `Effect` into our new component, and only notify the parent of the result. Though, this implies more communication between the two components.  
-> If you want to have a look, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3).  
+> If you want to take a look later, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3).  
 
 As we've now isolated the logic of the edit form commands, we must also isolate it in the parent. To do so, we update once again the `Command` type to wrap the command of the edit form:  
 
@@ -379,7 +379,7 @@ This could work but I've got two issues with this solution:
 - Intercepted commands are never forwarded to the edit form's `update` function, which breaks the contract established by this architecture.
 - The parent is coupled to the child's `Command` type whereas this is an implementation detail of the child.
 
-The other solution is to define a dedicated contract to send signals to the parent.
+Another solution is to define a dedicated contract to send signals to the parent.
 
 ## The `Intent` pattern
 
@@ -476,11 +476,12 @@ function applyIntent(
 }
 ```
 
-> This pattern is one solution to solve this *child to parent* message issue. So far, this is the only one I've been using, but know they are [others](https://rchavesferna.medium.com/child-parent-communication-in-elm-outmsg-vs-translator-vs-nomap-patterns-f51b2a25ecb1) (`Intent` is referred as `OutMsg`) like the [translator pattern](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98).
+> This pattern is one way to solve this *child to parent* message issue. So far, this is the only one I've been using on production code, but know they are [others](https://rchavesferna.medium.com/child-parent-communication-in-elm-outmsg-vs-translator-vs-nomap-patterns-f51b2a25ecb1) (`Intent` is referred as `OutMsg`).  
+> By curiosity, I've also made a [variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v4) of this app using the [translator pattern](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98). It allows the child to choose if it wants to dispatch a command for itself or for its parent.
 
 ## Conclusion
 
-In this post, we've seen how to extract a subcomponent and how to compose a view. We didn't have to handle effects for our child component but the idea remains the same: wrap the effects and the commands dispatched by them. The [alternative version](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3) mentioned earlier does exactly that.  
+In this post, we've seen how to extract a subcomponent and how to compose a view. We didn't have to handle effects for our child component but the idea remains the same: wrap the effects and the potential commands dispatched by them. The [alternative version](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3) mentioned earlier does exactly that.  
 
 ## Additional resources
 
