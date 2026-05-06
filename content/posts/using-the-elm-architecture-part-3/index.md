@@ -2,7 +2,7 @@
 title: "Using the Elm Architecture - Part 3: Managing side effects"
 date: 2026-05-06T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: flase
 ---
 
 <style>
@@ -278,7 +278,7 @@ export function executeEffect(effect: Effect, dispatch: Dispatch<Command>, api: 
 
 In this post, we learned how to perform non-deterministic and asynchronous operations within our Elm Architecture. This may seem like a cumbersome process with a lot of indirection to make a single API call, but it isolates side effects, protecting the rest of the code base and keeping it easier to understand and maintain. In my opinion, this is a good tradeoff.  
 
-In the [last post](/posts/using-the-elm-architecture-part-4) of this series, we will see how to handle larger applications by extracting and using subcomponents.
+[Next post](/posts/using-the-elm-architecture-part-4) will be the last in this series, we will see how to handle larger applications by extracting and using subcomponents.
 
 ---
 
