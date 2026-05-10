@@ -274,6 +274,8 @@ export function executeEffect(effect: Effect, dispatch: Dispatch<Command>, api: 
 }
 ```
 
+This piece of code highlights one nice aspect of this architecture: there is no hidden cascade of effects in our system. To know if a `Command` will trigger additional operations, we only have to look at the `Effect[]` returned by the `update` function. Here, the `SaveCustomer` command explicitly returns a `SaveCustomer` effect.
+
 ## Conclusion
 
 In this post, we learned how to perform non-deterministic and asynchronous operations within our Elm Architecture. This may seem like a cumbersome process with a lot of indirection to make a single API call, but it isolates side effects, protecting the rest of the code base and keeping it easier to understand and maintain. In my opinion, this is a good tradeoff.  
