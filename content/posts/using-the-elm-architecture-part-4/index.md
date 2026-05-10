@@ -154,7 +154,7 @@ export function View({ model, dispatch }: { model: Model, dispatch: Dispatch<Com
 
 Some positive stuff here, our `View` and `Model` are already quite decoupled. In the `View`, the edition is already isolated in a dedicated component `EditCustomerView`. The `Model` uses a dedicated `customerEdition: CustomerDto | null` property, this allows us to know when to display the edit form and do whatever we need for an edition without erasing the customer's initial state (stored in the property `customer`). This way, if the user chooses to give up his changes, we simply need to set `customerEdition` to `null`.  
 
-However, the `Command` type is a bit messier as it mixes loading, saving, mode switching and edition commands. In my opinion, three of them belong to our future new component: `UpdatePremiumSubscription`, `SaveCustomer` and `CancelEdit`.
+However, the `Command` type is a bit messier as it mixes loading, saving, mode switching and edition commands. Three of them belong to our future new component: `UpdatePremiumSubscription`, `SaveCustomer` and `CancelEdit`.
 
 ## Start extracting code
 
@@ -251,10 +251,10 @@ export function update(command: Command, model: Model) : { model: Model, effects
 
 As we no longer have access to the `Effect` type, `SaveCustomer` and `CancelEdit` can't do anything here (yet). We will need to notify the parent to trigger the save.
 
-> I made the choice to let the save logic inside the parent. In terms of responsibility, this can be challenged but it's a refactoring that is easier to detail in a blog post.  
+> I made the choice to leave the save logic inside the parent (this could be challenged) because this refactoring is easier to detail in a blog post.  
 > The other possibility would have been to also move the save logic with the `Effect` into our new component, and only notify the parent of the result. Though, this implies more communication between the two components. If you want to take a look later, I've also coded [this variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v3).  
 
-As we've now isolated the logic of the edit form commands, we must also isolate it in the parent. To do so, we update once again the `Command` type to wrap the command of the edit form:  
+As we've now isolated the logic of the edit form commands, we must also isolate it in the parent. To do so, we update once again the `Command` type to wrap the command of the edit form and we replace the old logic:  
 
 ```typescript {hl_lines=[3,9,"17-27"]}
 // customer/customer.app.ts
@@ -360,7 +360,7 @@ export function update(command: Command, model: Model) : { model: Model, effects
 }
 ```
 
-This could work but I've got two major issues with this solution:  
+This might work, but we should not use this solution because of two major issues:  
 
 - Intercepted commands are never forwarded to the edit form's `update` function, which breaks the contract established by this architecture.
 - The parent is coupled to the child's `Command` type whereas this is an implementation detail of the child.
@@ -463,7 +463,7 @@ function applyIntent(
 ```
 
 > This pattern is one way to solve this *child to parent* message issue. So far, this is the only one I've used on production code, but know that they are [others](https://rchavesferna.medium.com/child-parent-communication-in-elm-outmsg-vs-translator-vs-nomap-patterns-f51b2a25ecb1) (`Intent` is referred as `OutMsg`).  
-> By curiosity, I've also made a [variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v4) of this app using the [translator pattern](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98). It allows the child to choose if it wants to dispatch a command for itself or for its parent.
+> By curiosity, I've also made a [variant](https://github.com/RomainTrm/Sandbox-Elmish-PReact/tree/main/src/customer-v4) of this app using the [translator pattern](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98). It allows the child to dispatch a command directly to its parent.
 
 ## Conclusion
 
