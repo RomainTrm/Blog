@@ -2,7 +2,7 @@
 title: "Using the Elm Architecture - Part 4: Application (de)composition"
 date: 2026-05-13T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 *This blog post is the last of a series where we're using The Elm Architecture (TEA). If you haven't, I strongly recommend reading the previous articles first.*
