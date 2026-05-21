@@ -7,9 +7,9 @@ draft: true
 
 *To my English readers: this post talks about electronic voting and how it impacts democracies. Even if this thinking can be applied to other countries, I wanted to remain focus on the French context. That’s why I exceptionally decided to write in French.*
 
-La Tech' est politique ! Vous avez sans doute déjà lu cela quelque part, souvent pour dénoncer des inégalités créées ou amplifiées par celle-ci. Je suis d'accord avec cette affirmation. La Tech influence nos vies, elle change nos façons de communiquer, consommer, de s'informer, de travailler... Mais au-delà même des impacts sur les individus ou des groupes d'individus, la Tech peut avoir de l'influence sur le fonctionnement même de nos sociétés.  
+La Tech' est politique ! Vous avez sans doute déjà lu cela quelque part, souvent pour dénoncer des inégalités créées ou amplifiées par celle-ci. Je suis d'accord avec cette affirmation, la Tech influence nos vies, elle change nos façons de communiquer, consommer, de s'informer, de travailler... Mais au-delà même des impacts sur les individus ou des groupes d'individus, la Tech peut avoir de l'influence sur le fonctionnement même de nos sociétés.  
 
-Aujourd'hui, j'ai envie de vous parler d'un cas d'usage concret et des impacts qu'il aurait, selon moi, sur le fonctionnement même de notre démocratie. Bien entendu, j'ai une orientation politique, mais il n'est pas question ici de vous louer les mérites d'une partie de l'offre politique actuelle tout en descendant ouvertement ses opposants.
+Aujourd'hui, j'ai envie de vous parler d'un cas d'usage concret et des impacts qu'il aurait, selon moi, sur le fonctionnement même de notre démocratie. Bien entendu, j'ai une orientation politique, mais il n'est pas question ici de vous louer les mérites d'une partie de l'offre politique actuelle en particulier.
 
 Cela fait maintenant plusieurs mois que je réfléchis à l'usage du vote électronique pour nos différents scrutins nationaux (élections présidentielles, législatives, européennes). Si cette réflexion est restée longtemps à l'état d'idées, une récente [tribune](https://www.lemonde.fr/idees/article/2026/05/06/l-extension-du-vote-electronique-aux-scrutins-nationaux-doit-etre-envisagee_6686102_3232.html) sur le journal [Le Monde](https://www.lemonde.fr/) m'a décidé à les structurer pour en faire cet article de blog.  
 
@@ -37,7 +37,7 @@ Cependant, il faut reconnaitre au vote papier certaines qualités.
 
 Tout d'abord, son fonctionnement est simple et peut être compris par tous. Parce que les citoyens peuvent le comprendre, ils sont en mesure d'observer, de participer au bon déroulé d'un scrutin (les assesseurs sont des volontaires, vous pouvez tenir ce rôle), d'identifier et dénoncer les irrégularités si elles se présentent.  
 
-Par définition, le résultat d'un bureau de vote est donc difficile à manipuler. Il y a toujours plusieurs assesseurs présents en même temps pour surveiller l'urne et le respect de la procédure. En cas de contestation, vous pouvez faire recompter les voix et vérifier que les chiffres apparaissant sur le site du ministère de l'Intérieur correspondent bien au nombre de voix décomptées dans le bureau. Multipliez cela par le nombre de bureaux de vote en France, environ [65000](https://observatoire-des-votes.geoclip.fr/), et il est impossible d'avoir une quelconque manipulation significative à l'échelle nationale.  
+Par définition, le résultat d'un bureau de vote est donc difficile à manipuler. Il y a toujours plusieurs assesseurs présents en même temps pour surveiller l'urne et le respect de la procédure. En cas de contestation, vous pouvez faire recompter les voix et vérifier que les chiffres apparaissant sur le site du ministère de l'Intérieur correspondent bien au nombre de voix décomptées dans le bureau. Sur ce dernier point, ce qui est souvent présenté comme un défaut du vote papier est en réalité l'une des forces de ce système. Multipliez cela par le nombre de bureaux de vote en France, environ [65000](https://observatoire-des-votes.geoclip.fr/), et il est impossible d'avoir une quelconque manipulation significative à l'échelle nationale.  
 
 Aussi imparfait qu'il puisse être, le vote papier est donc un système **compréhensible** et **robuste**.
 
@@ -117,6 +117,11 @@ Aussi imparfait qu'il puisse être, le vote papier est donc un système **compr�
 
 - hypothèse du mixe des modes de scrutin :
   - soupson installé et d'autant plus fort que la proportion de votes électroniques serait elevée. - on perd les avantages des bureaux de vote physiques
+
+
+vote papier : contestation comme désagrément / contestation comme arme de défense
+vérification d'identité : le vote reste-t-il anonyme ?
+sécurité : il y a l'algo mais aussi tout ce qu'il y a autour (OS, réseau, hardware)
 
 ---
 
