@@ -1,5 +1,5 @@
 ---
-title: "Vote électronique"
+title: "Que penser du vote électronique ?"
 date: 2026-05-18T09:00:00+02:00
 tags: [post, fr]
 draft: true
@@ -21,11 +21,11 @@ Cela fait maintenant plusieurs mois que je réfléchis à l'usage du vote élect
 
 ## La tribune
 
-La tribune en question fait le constat d'un taux d'abstention en constante augmentation lors des derniers scrutins, et suggère que le vote électronique permettrait de ramener une partie des électeurs aux urnes, exemple à l'appui avec le cas de l'Estonie qui a vu le taux de participation augmenter de 5 points en l'espace de 20 ans. Elle semble donc expliquer que le désengagement citoyen est, en partie, lié à un simple problème de commodité.
+La tribune en question fait le constat d'un taux d'abstention en constante augmentation lors des derniers scrutins, et suggère que le vote électronique permettrait de ramener une partie des électeurs aux urnes, exemple à l'appui avec le cas de l'Estonie qui a vu le taux de participation augmenter de 5 points en l'espace de 20 ans.
 
 Elle argumente également que le vote électronique, grâce à des solutions techniques robustes, serait plus sûr que le vote papier et rappel que la France dispose déjà des moyens techniques nécessaires puisque les expatriés votent déjà de cette façon.  
 
-Je vais être très franc, j'ai de nombreuses critiques à émettre à l'égard de cette tribune. Une augmentation de 5 points sur une période de 20 ans peut s'expliquer de nombreuses manières et est sans doute multifactorielle. Selon moi, le seul cas de l'Estonie n'est donc pas une preuve valable. Aussi, j'ai identifié de nombreux angles morts dans cette réflexion que je vais m'efforcer d'éclaircir. Sans doute vous en trouverez également dans la mienne que j'espère tout de même un peu plus aboutie. Enfin, il faut préciser que l'auteur de cette tribune est le président d'un groupe de travail sur le vote électronique, et le fondateur d'une société spécialisée dans... la conception de dispositifs de vote électronique...
+Je vais être très franc, j'ai de nombreuses critiques à émettre à l'égard de cette tribune. Tout d'abord, elle semble expliquer que le désengagement citoyen est, au moins en partie, lié à un simple problème de commodité. Ensuite, une augmentation de 5 points sur une période de 20 ans peut s'expliquer de nombreuses manières et est sans doute multifactorielle. Selon moi, le seul cas de l'Estonie n'est donc pas une preuve valable. Aussi, j'ai identifié de nombreux angles morts dans cette réflexion que je vais m'efforcer d'éclaircir. Sans doute vous en trouverez également dans la mienne que j'espère tout de même un peu plus aboutie. Enfin, il faut préciser que l'auteur de cette tribune est le président d'un groupe de travail sur le vote électronique, et le fondateur d'une société spécialisée dans... la conception de dispositifs de vote électronique...
 
 Clairement, cette tribune est plus une forme de lobbying, voire de publicité déguisée, qu'une réelle réflexion sur le fonctionnement de notre vie démocratique.
 
@@ -37,13 +37,13 @@ Tout commence avec une inscription sur les listes électorales. Un citoyen se vo
 
 Ce système est bien sûr imparfait. Il nécessite, soit de pouvoir se déplacer jusqu'au bureau de vote le jour de l'élection, soit d'avoir une personne de confiance votant dans le même bureau et de faire les démarches en amont pour lui donner procuration. Malheureusement, cela exclut des scrutins certaines personnes isolées et/ou dépendantes pour leurs déplacements.
 
-Une autre critique légitime régulièrement formulée, notamment par la tribune, est liée au décompte même des voix. Ce processus étant réalisé par des humains, il est par définition faillible et peut mener à des contestations ou des erreurs de saisies.
+Une autre critique régulièrement formulée, notamment par la tribune, est liée au décompte même des voix. Ce processus étant réalisé par des humains, il est par définition faillible et peut mener à des contestations ou des erreurs de saisies.
 
 Cependant, il faut reconnaitre au vote papier certaines qualités.  
 
 Tout d'abord, son fonctionnement est simple et peut être compris par tous. Parce que les citoyens peuvent le comprendre, ils sont en mesure d'observer, de participer au bon déroulé d'un scrutin (les assesseurs sont des volontaires, vous pouvez tenir ce rôle), d'identifier et dénoncer les irrégularités si elles se présentent.  
 
-Par définition, le résultat d'un bureau de vote est donc difficile à manipuler. Il y a toujours plusieurs assesseurs présents en même temps pour surveiller l'urne et le respect de la procédure. En cas de contestation, vous pouvez faire recompter les voix et vérifier que les chiffres apparaissant sur le site du ministère de l'Intérieur correspondent bien au nombre de voix décomptées dans le bureau. Sur ce dernier point, la contestation qui nous est souvent présentée comme un défaut du vote papier est en réalité l'une des forces de ce système. Multipliez cela par le nombre de bureaux de vote en France, environ [65000](https://observatoire-des-votes.geoclip.fr/), et il est impossible d'avoir une quelconque manipulation significative à l'échelle nationale.  
+Par essence, le résultat d'un bureau de vote est donc difficile à manipuler. Il y a toujours plusieurs assesseurs présents en même temps pour surveiller l'urne et le respect de la procédure. En cas de contestation, vous pouvez faire recompter les voix et vérifier que les chiffres apparaissant sur le site du ministère de l'Intérieur correspondent bien au nombre de voix décomptées dans le bureau. Sur ce dernier point, la contestation qui nous est souvent présentée comme un défaut du vote papier est en réalité l'une des forces de ce système. Multipliez cela par le nombre de bureaux de vote en France, environ [65000](https://observatoire-des-votes.geoclip.fr/), et il est impossible d'avoir une quelconque manipulation significative à l'échelle nationale.  
 
 Aussi imparfait qu'il puisse être, le vote papier est donc un système **simple**, **compréhensible** et **robuste**.
 
@@ -57,7 +57,7 @@ La toute première critique que l'on peut formuler à son égard est la même qu
 
 Pour mitiger ce problème d'exclusion, l'hypothèse d'un mix des modes de scrutins où chaque citoyen choisirait de quelle façon celui-ci veut voter me parait improbable. En effet, cela impliquerait trop de problèmes d'organisation : il faut garantir que chaque citoyen n'a accès qu'à un seul mode de scrutin et ne peut donc pas voter deux fois. À cela s'ajoute une complexification du décompte des voix ainsi que des coûts plus élevés pour ouvrir des bureaux de vote à la fois physiques et virtuels.
 
-Enfin, il n'est pas possible de totalement exclure l'apparition de bugs informatiques lors de l'exécution du programme. Nos amis belges en ont fait les frais le 18 mai 2003, un rayon cosmique ayant modifié le résultat d'une élection. Heureusement, leur système de secours a permis un recomptage rapide des voix. Si le sujet vous intéresse, je vous recommande vivement cette [vidéo](https://www.youtube.com/watch?v=AaZ_RSt0KP8) de la chaine YouTube Veritasium.
+Enfin, il n'est pas possible de totalement exclure l'apparition de bugs informatiques lors de l'exécution du programme. Nos amis belges en ont fait les frais le 18 mai 2003, un rayon cosmique ayant modifié le résultat d'une élection. Heureusement, leur système de secours a permis un recomptage rapide des voix. Si le sujet vous intéresse, je vous recommande vivement cette [vidéo](https://www.youtube.com/watch?v=AaZ_RSt0KP8) de l'excellente chaine YouTube [Veritasium](https://www.youtube.com/@veritasium).
 
 ## Des risques de sécurité
 
@@ -73,13 +73,13 @@ Si l'on envisage le vote électronique, il nous faut sérieusement nous poser la
 
 Lorsque l'on parle de sécurité face à des acteurs mal intentionnés, alors aucun système n'est infaillible. Il faut plutôt raisonner sur un rapport coût/bénéfice : quels bénéfices peut espérer l'attaquant et pour quels moyens déployé ? Si les coûts surpassent de loin les bénéfices espérés, alors cela va décourager quiconque de mener une attaque.  
 
-Par exemple, un message chiffré n'est pas inviolable puisqu'il existe une clé pour le déchiffrer. Sa sécurité réside aujourd'hui dans des algorithmes qui rendent tellement difficile la prédiction de cette clé que la solution la plus simple reste de toutes les essayer, cela au prix d'une durée tellement démesurée que vous risquez de ne pas lire ledit message de votre vivant. Cependant, même ceci ne peut pas être garanti, il existe peut-être des vulnérabilités *[zero-day](https://fr.wikipedia.org/wiki/Vuln%C3%A9rabilit%C3%A9_zero-day)* dans l'algorithme utilisé qui n'ont pas encore été découvertes, ou pire, qui sont déjà connues et exploitées par des personnes mal intentionnées.  
+Par exemple, un message chiffré n'est pas inviolable puisqu'il existe une clé pour le déchiffrer. Sa sécurité réside aujourd'hui dans des algorithmes qui rendent tellement difficile la prédiction de cette clé que la solution la plus simple reste de toutes les essayer, cela au prix d'une durée tellement démesurée que vous risquez de ne pas lire ledit message de votre vivant. Cependant, même ceci ne peut pas être garanti, il existe peut-être des vulnérabilités *[zero-day](https://fr.wikipedia.org/wiki/Vuln%C3%A9rabilit%C3%A9_zero-day)* dans l'algorithme qui n'ont pas encore été découvertes, ou pire, qui sont déjà connues et exploitées par des personnes mal intentionnées.  
 
 > J'ai utilisé ici l'exemple des algorithmes de chiffrement, car il est simple à comprendre. Cependant, ceux-ci sont tellement scrutés qu'y rechercher une nouvelle vulnérabilité représente déjà un coût prohibitif pour de potentiels attaquants. Ils font donc partie de ces systèmes dans lesquels nous pouvons avoir un niveau de confiance élevé.
 
 Pour autant, il ne faudrait pas faire l'erreur de résumer la sécurité du vote électronique à la sécurité d'un seul logiciel. Il faut envisager l'ensemble de l'écosystème dans lequel celui-ci s'exécute : les machines, les systèmes d'exploitation, les réseaux, les configurations employées... Tous ces éléments sont autant de surfaces d'attaque potentielles.
 
-Mon doute quant à la sécurité d'un système de vote électronique est d'autant plus grand qu'il implique une typologie de menace très particulière : on parle ici de manipuler l'orientation politique d'un État et de ses institutions. Les attaquants pouvant désirer de tels effets seront très probablement des entités étatiques avec des moyens plus que conséquents.  
+Mon doute quant à la sécurité de tels systèmes est d'autant plus grand qu'il implique une typologie de menace très particulière : on parle ici de manipuler l'orientation politique d'un État et de ses institutions. Les attaquants pouvant désirer de tels effets seront très probablement des entités étatiques avec des moyens plus que conséquents.  
 
 ## Un problème d'échelle
 
@@ -87,7 +87,7 @@ Comme nous l'avons déjà mentionné, la France compte aujourd'hui environ 65000
 
 Bien entendu, ce système resterait supporté par de multiples instances, à minima pour faire face aux contraintes de charge associées par de tels afflux de connexions dans un laps de temps si court. Cela permettrait également de mitiger les risques de manipulation. Mais du point de vue d'un potentiel attaquant, plus ce système sera centralisé, plus les bénéfices espérés augmenteront et les coûts associés diminueront.  
 
-Dans l'hypothèse du succès d'une manipulation, alors la proportion de voix manipulées devient immédiatement plus importante. Et si la faille exploitée pour mener cette attaque est présente sur d'autres, voir toutes les instances de notre système de vote électronique, alors nous risquons rapidement une manipulation à très grande échelle.
+Dans l'hypothèse du succès d'une attaque, alors la proportion de voix manipulées devient immédiatement plus importante. Et si la faille exploitée est présente sur d'autres, voir toutes les instances de notre système de vote électronique, alors nous risquons rapidement une manipulation à très grande échelle.
 
 Si le but de l'attaque n'est pas de manipuler de façon subtile, mais juste de la perturber le déroulé d'une élection, alors un système plus centralisé serait également plus sensible à des attaques de type [DDoS](https://fr.wikipedia.org/wiki/Attaque_par_d%C3%A9ni_de_service) qui sont relativement peu coûteuses à réaliser.
 
@@ -113,26 +113,23 @@ Je ne remets donc pas en cause l'usage du **vote électronique pour les expatri�
 
 Laissons maintenant de côté les menaces techniques pour nous pencher sur un autre problème du vote électronique : la perte de contrôle pour les citoyens.  
 
-Comme nous l'avons déjà évoqué, le vote papier a l'avantage d'être simple à comprendre et à surveiller, ce qui permet à chaque citoyen de s'assurer qu'il n'y a aucune irrégularité commise. Le vote électronique, tout comme d'autres systèmes tels que le vote sur ordinateur ou par correspondance, n'apporte pas cette garantie. Il agit au contraire comme une boite noire dans laquelle tout ce qui se passe est invisible pour les votants. Ceux-ci sont alors dans l'incapacité de pouvoir identifier et dénoncer une quelconque irrégularité.  
+Comme nous l'avons déjà évoqué, le vote papier a l'avantage d'être simple à comprendre et à surveiller, ce qui permet à chaque citoyen de s'assurer qu'il n'y a aucune irrégularité commise. Le vote électronique, tout comme n'importe quel autre système informatisé ou le vote par correspondance, n'apporte pas cette garantie. Il agit au contraire comme une boite noire dans laquelle tout ce qui se passe est invisible pour les votants. Ceux-ci sont alors dans l'incapacité de pouvoir identifier et dénoncer une quelconque irrégularité.  
 
 Seules des personnes avec les compétences techniques nécessaires peuvent étudier le fonctionnement du système et garantir son bon fonctionnement. Les autres n'ont pas d'autre choix que de faire confiance sans aucune forme de contrôle à leur disposition. Là encore, en tant que développeur, et donc en tant que personne pouvant potentiellement regarder à l'intérieur de cette boite noire, je trouve cette idée extrêmement problématique. Aussi bonnes que puissent être mes intentions, je ne souhaite pas m'arroger un tel pouvoir sur mes concitoyens, car cela irait **à rebours d'un système démocratique**.
 
 ## Une menace pour la démocratie
 
-C'est ici 
+Si l'on combine les risques de manipulation avec cette boite noire qu'est le vote électronique, alors peut émerger une suspicion vis-à-vis de résultats électoraux : les résultats annoncés représentent-ils bien la volonté du peuple ? Jusqu'à maintenant en France, il n'existe pas de rhétorique s'attaquant aux résultats mêmes des différents suffrages. Les critiques portent plutôt sur des alliances de circonstances entre diverses formations politiques comme cela a été fait par le RN au sujet du barrage républicain durant les législatives anticipées de 2024. Avec le vote électronique, ce discours aurait sans doute été tout autre, et je pense que l'on peut regarder outre-Atlantique pour s'en convaincre.  
 
----
+En 2020, Donald Trump a violemment contesté sa défaite à l'élection présidentielle américaine. Pour se faire, lui et ses proches ont préparé l'opinion américaine en dénonçant sans cesse une fraude électorale généralisée ainsi qu'en relayant des théories complotistes. Cette rhétorique a débuté avant l'élection et a perduré jusqu'à l'assaut du Capitole le 6 janvier 2021, un événement pouvant être qualifié de tentative de coup d'État et ayant provoqué la mort de cinq personnes.
 
-- etat de soupson permanent
-  - si il y a une crainte de manipulation : les citoyens ne peuvent pas aller surveiller par eux-même le déroulé du scrutin
-  - exemple de Trump en 2021 :
-    - mixe des méthodes de scrutin selon les états : correspondance, informatisé, papier -> même effet de boite noire décrit plus tôt
-    - a préparé l'opinion à une manipulation avant l'élection
-    - a déclenché l'assault du capitole avec une base de soutiens convaincus d'une élection volée
-    -> pas seul facteur (sphères complotistes, RS, grands électeurs), mais terreau fertile
+Bien entendu, le contexte américain est différent du contexte français par de nombreux aspects et doit donc être comparé avec prudence. Mais l'une des différences majeures est le mode de vote, qui varie selon les états, et qui implique des systèmes "boites noires" (vote informatisé, par correspondance, etc.). Cette spécificité a, tout du moins en partie, permis à Donald Trump de mettre en place son narratif d'une élection volée.
 
-- hypothèse du mixe des modes de scrutin :
-  - soupson installé et d'autant plus fort que la proportion de votes électroniques serait elevée. - on perd les avantages des bureaux de vote physiques
+## Conclusion
+
+Vous l'aurez compris, le vote électronique pose selon moi de nombreux problèmes et peut même mettre en difficulté notre fonctionnement démocratique. Si le désengagement citoyen observé par un taux de participation toujours plus faible est une réalité, cette problématique ne doit pas être traitée avec un prisme technosolutioniste, le remède serait pire que le mal.
+
+Je pense en revanche qu'il serait temps de s'interroger sur les raisons profondes pour lesquelles les citoyens se rendent de moins en moins aux urnes. Cela passera sans doute par une remise en question des différents acteurs politiques, de leurs pratiques de communication et de leurs façons d'exercer le pouvoir.
 
 ---
 
