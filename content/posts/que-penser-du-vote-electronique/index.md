@@ -1,8 +1,8 @@
 ---
 title: "Que penser du vote électronique ?"
-date: 2026-05-18T09:00:00+02:00
+date: 2026-06-10T09:00:00+02:00
 tags: [post, fr]
-draft: true
+draft: false
 ---
 
 <style>
