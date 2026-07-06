@@ -6,6 +6,12 @@ draft: false
 aliases: ["/posts/2022-04-20/"]
 ---
 
+<style>
+  img {
+    width: 10em
+  }
+</style>
+
 ![Chat dessiné]({{< relref "1.jpg" >}})
 
 Tout part d'un [talk](https://youtu.be/83e3TWdecqQ) donné par [Emilien PECOUL](https://bsky.app/profile/ouarzy.bsky.social) (aka Ouarzy). Durant ce talk, celui-ci a tenté de démontrer à son audience qu'elle connaissait déjà la plupart des concepts formulés dans la théorie des catégories. À mon sens, il y est parvenu même si ce sujet est bien trop vaste pour être abordé en seulement 45 minutes.  
@@ -22,7 +28,8 @@ La Theorie des Categories est très intimidante. Beaucoup de gens intelligents u
 
 ## Code et slides
 
-Vous pouvez retrouver le code et les slides de cette université sur ce [repo GitHub](https://github.com/RomainTrm/Talk-CategoryTheoryYouAlreadyKnowIt).
+Vous pouvez retrouver les slides de cette universitée au format pdf : [slides](CategoryTheoryUniveristy_Devoxx_FR_2022.pdf).  
+Ces slides ainsi que le code de cette université sont également accessibles sur ce [repo GitHub](https://github.com/RomainTrm/Talk-CategoryTheoryYouAlreadyKnowIt).
 
 ---
 
