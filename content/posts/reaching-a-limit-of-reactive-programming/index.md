@@ -113,6 +113,11 @@ This is a function `(model, command) => model` that returns a new `model` by app
 
 *Reactive* is a good way to organize the code, but as every solution, it comes with some tradeoffs and limitations. In this post, we saw that the computation flow must be either unidirectional or must not suffer from loss of data over transformations. If we don't respect at least one of these conditions, then *Reactive* is probably not the best choice for our feature. In such cases, turning to a strategy where every intent is handled by a dedicated piece of code seems to be a better tradeoff.
 
+> ### Edit: 2026/07/25  
+>
+> Since I wrote this post, I had the opportunity to work on a similar use case, this time using a *MVU* pattern, and my experience confirms my intuition.  
+> If you're looking for more details about *MVU*, I've written a [post series](/posts/using-the-elm-architecture-part-1) about the Elm Architecture.
+
 ---
 
 ## Comments

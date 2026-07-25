@@ -115,12 +115,14 @@ Attention également aux dogmes&nbsp;! Si je me montre critique envers les tests
 
 Si cet article vous a plu, je vous recommande de regarder la conférence [DevTernity 2017: Ian Cooper – TDD, Where Did It All Go Wrong](https://www.youtube.com/watch?v=EZ05e7EMOLM).
 
-Edit 1&nbsp;: Je vous partage également cet article que l’on m’a montré en réaction à ce post et qui explique sans doute mieux que moi le point que je souhaitais traiter ici.
+> ### Edit 1
+>
+> Je vous partage également cet article que l’on m’a montré en réaction à ce post et qui explique sans doute mieux que moi le point que je souhaitais traiter ici.  
 
-Edit 2&nbsp;: Deux autres remarques m’ont été faites&nbsp;:
-
-- Certains tests sont déjà naturellement isolés (domaine, hexagone) et ne dépendent pas de détails d’implémentations. Ceux-ci sont aussi viables que la stratégie que je propose dans cet article.
-- Si les tests « petite maille » ne sont pas idéals sur le long terme, ils peuvent être très utiles comme « échaffaudage » pour implémenter progressivement un scénario plus vaste. À condition de les supprimer une fois les conditions d’un test « grosse maille » remplies.
+> ### Edit 2&nbsp;: Deux autres remarques m’ont été faites
+>
+> - Certains tests sont déjà naturellement isolés (domaine, hexagone) et ne dépendent pas de détails d’implémentations. Ceux-ci sont aussi viables que la stratégie que je propose dans cet article.
+> - Si les tests « petite maille » ne sont pas idéals sur le long terme, ils peuvent être très utiles comme « échaffaudage » pour implémenter progressivement un scénario plus vaste. À condition de les supprimer une fois les conditions d’un test « grosse maille » remplies.
 
 ---
 
