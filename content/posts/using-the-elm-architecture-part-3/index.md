@@ -2,6 +2,7 @@
 title: "Using the Elm Architecture - Part 3: Managing side effects"
 date: 2026-05-06T09:00:00+02:00
 tags: [post, en]
+description: "In the previous post, we've implemented our first application using our `ElmishView` and we saw how to render and update our `Model`. However, our application's logic didn't have to produce any kind of side effect (like API calls), making this example unrepresentative of most of the actual use cases. "
 draft: flase
 ---
 

@@ -2,6 +2,7 @@
 title: "Using the Elm Architecture - Part 4: Application (de)composition"
 date: 2026-05-13T09:00:00+02:00
 tags: [post, en]
+description: "So far we've learned how to build an application and run side effects. But as our programs grow, we may feel the need to break things down. Today we'll see how to split our page in different modules. This can be for isolating some logic and reduce cognitive load, favor views composition or allow reusability."
 draft: false
 ---
 

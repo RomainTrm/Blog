@@ -2,6 +2,7 @@
 title: "Que penser du vote électronique ?"
 date: 2026-06-10T09:00:00+02:00
 tags: [post, fr]
+description: "La Tech' est politique ! Vous avez sans doute déjà lu cela quelque part, souvent pour dénoncer des inégalités créées ou amplifiées par celle-ci. Je suis d'accord avec cette affirmation, la Tech influence nos vies, elle change nos façons de communiquer, de consommer, de s'informer, de travailler... Mais au-delà même des impacts sur les individus ou des groupes d'individus, la Tech peut avoir de l'influence sur le fonctionnement même de nos sociétés."
 draft: false
 ---
 

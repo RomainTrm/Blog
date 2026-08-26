@@ -3,7 +3,6 @@ languageCode = 'en-us'
 title = 'Romain Berthon'
 theme = 'rocinante'
 
-summaryLength = 30
 paginate = 10
 
 [markup]
