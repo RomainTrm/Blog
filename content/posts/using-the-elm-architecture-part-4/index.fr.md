@@ -5,6 +5,8 @@ tags: [post, en]
 draft: false
 ---
 
+FR
+
 *This blog post is the last of a series where we're using The Elm Architecture (TEA). If you haven't, I strongly recommend reading the previous articles first.*
 
 So far we've learned how to [build an application](/posts/using-the-elm-architecture-part-2) and [run side effects](/posts/using-the-elm-architecture-part-3). But as our programs grow, we may feel the need to break things down. Today we'll see how to split our page in different modules. This can be for isolating some logic and reduce cognitive load, favor views composition or allow reusability.  

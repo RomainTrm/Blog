@@ -56,3 +56,12 @@ hugo server -D -F
 ## Usefull links
 
 - [Code block syntax highlighting](https://gohugo.io/content-management/syntax-highlighting/)
+
+## I18n
+
+Create two versions of a post:  
+
+- post.en.md
+- post.fr.md
+
+By default, the post is in english, use `localhost/fr/<path>` to display the french variant.

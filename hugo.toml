@@ -1,5 +1,4 @@
 baseURL = 'https://berthon.dev/'
-languageCode = 'en-us'
 title = 'Romain Berthon'
 theme = 'rocinante'
 
@@ -11,6 +10,15 @@ paginate = 10
     style = "monokailight"
   [markup.goldmark.renderer]
     unsafe= true
+
+[languages]
+  [languages.en]
+    label = 'English'
+    weight = 1
+    
+  [languages.fr]
+    label = 'Français'
+    weight = 2
 
 [params]
   isRelease = false
