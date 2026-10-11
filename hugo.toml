@@ -11,6 +11,9 @@ paginate = 10
   [markup.goldmark.renderer]
     unsafe= true
 
+[outputs]
+  section = ["html"]
+
 [params]
   isRelease = false
   favicon = "favicon.ico"
