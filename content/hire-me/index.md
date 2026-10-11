@@ -17,6 +17,12 @@ With my experience, I've identified at least three roles in which I believe I ca
 - Backend expertise: in contexts where robustness, performance, and maintainability are major concerns.
 - Craft coaching: to help teams improve application stability, deliverable quality, and deployment cycles.
 
+## What environments am I looking for?
+
+I want to work in environments with a strong operational culture, where developers are close to users and are responsible for what they deploy: "you built it, you run it." Based on my experience, this mostly corresponds to small structures such as SMEs whose core business isn't necessarily tied to IT. Larger structures can also offer me a suitable environment if the internal culture is the right one.
+
+I don't have a fixed opinion on the type of contract; I can accept either a permanent position or a freelance role.
+
 ## Resume
 
 You can download my resume in PDF format ([english version](./romain-berthon-en.pdf) | [version française](./romain-berthon-fr.pdf)). You can also check my [LinkedIn account](https://fr.linkedin.com/in/romain-berthon).  
