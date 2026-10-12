@@ -7,7 +7,7 @@ draft: true
 
 With years of experience, I've learned what activities I like and the ones I dislike about my job. Among the second category seats in a high place estimates. By chance, I worked on different teams with different relations to estimates, and I think I now have a clear idea of how I can work with it.
 
-Truth is, they don't bring much value to the developers. Often, it is a difficult process of guessing with a poor overall result. I may even be tempted to think we only produce accurate estimate by accident. However, legitimately, management requests it because they need it for decision-making and budget tracking.
+Truth is, they don't bring much value to the developers. Often, it is a difficult process of guessing with a poor overall result. I may even be tempted to think we only produce accurate estimate by accident. However, legitimately, stakeholders request it because they need it for decision-making and budget tracking.
 
 Today, I see two ways to cope with estimates, one I will try to avoid, and one that makes sense to me.
 
@@ -37,9 +37,7 @@ Finally, there is usually an error made when estimating the "effort" that a team
 
 I'm fully aware that some frameworks and methodologies exist for producing "goods" estimate. I can mention [PERT](https://en.wikipedia.org/wiki/Program_evaluation_and_review_technique) that includes some mathematical theory for estimating the time required for a given task. Truth is, I've never used such framework, and I don't think anyone wants to do it for a conventional IT project.
 
-At this point, I think it's also worth mentioning the [Hofstadter's law](https://en.wikipedia.org/wiki/Hofstadter%27s_law): a task will always take more time than anticipated, even when Hofstadter's law is taken into account. We could understand it as *we always underestimate* but I think it also highlights another side effect: the more time is available, the more we take to accomplish something. It doesn't mean we procrastinate, it is rather a matter of adding extra work/steps to achieve the desired result.
-
-Note that the overall quality of the result will also depend on the time allocated to the task, which means there's a minimum amount of time needed to achieve the expected quality.
+At this point, I think it's also worth mentioning the [Hofstadter's law](https://en.wikipedia.org/wiki/Hofstadter%27s_law): *a task will always take more time than anticipated, even when Hofstadter's law is taken into account*. We could understand it as *we always underestimate* but I think it also highlights another side effect: the more time is available, the more we take to accomplish something. It doesn't mean we procrastinate, it is rather a matter of adding extra work/steps to achieve the desired result.
 
 <figure>
 
@@ -49,19 +47,21 @@ Note that the overall quality of the result will also depend on the time allocat
   </figcaption>
 </figure>
 
+The overall quality will depend on the time allocated to the task, which means there's a minimum amount of time needed to achieve the expected quality. But we can also choose to limit the time spent, which can be useful when we have to explore certain hypotheses while keeping the cost contained.
+
 ## A path I'm willing to follow
 
 The following strategy is similar to what I have experienced in recent years. First, let's assume we have a decent understanding of the upcoming features to develop (thanks to example mapping sessions, UI mockups, etc.).
 
 Now, the stakeholders are asking us for estimates. We can give them a coarse estimate; an order of magnitude. How much time for this feature? Is it a few hours? A day? Maybe a couple? A week? We should not seek precision here, this estimate exercise should be as fast as possible. If we can't even estimate the order of magnitude, then the task may be too big or requires some exploration first.
 
-Then, it's up to the stakeholders to decide how much time it wants to invest in a feature given the estimated time, the quality expected and the business priority. This investment can cover the entire scope or only a sub-part of a feature.
+Then, it's up to the stakeholders to decide how much time they want to invest in a feature given the estimated time, the quality expected and the business priority. This investment can cover the entire scope or only a sub-part of a feature.
 
 If we finish within the planned budget, it’s a success. If instead the expected output is not there yet, then we do a quick estimate of what's left. Maybe we'll get extra credits to continue the task right away. Maybe the stakeholders will be satisfied with what they got, and the remaining work will be postponed because it doesn't bring enough value to be done now.
 
 Sometimes we realize that we've used the wrong order of magnitude. In this case, it is important to understand why and maybe start another round of exploration before investing again in the feature.
 
-There's a subtle but important difference with the commitments here:
+You may think that's not really different from what we're used to, yet there is a subtle but important difference with the commitments here:
 
 - Commitments are result-driven, they define the result we expect after a given period. If at the end of the period, we don't have what we were hoping for, then we failed to achieve our objective.
 - The solution I suggest is cost-driven. The work is done at a constant and sustainable pace and we define after the fact if the time we've allocated was sufficient to achieve our goal.
