@@ -2,7 +2,7 @@
 title: "Estimates: commitments and budgets"
 date: 2026-10-14T09:00:00+02:00
 tags: [post, en]
-draft: true
+draft: false
 ---
 
 With years of experience, I've learned what activities I like and the ones I dislike about my job. Among the second category seats in a high place estimates. By chance, I worked on different teams with different relations to estimates, and I think I now have a clear idea of how I can work with it.
