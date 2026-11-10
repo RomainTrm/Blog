@@ -7,9 +7,9 @@ draft: true
 
 Have you ever experienced the sensation to understand something enough that you could explain it? But when you get the opportunity, you realize that your explanation is at best messy, or doesn't make sense at all?
 
-In my case, the reason is often the same: it implies several ideas that seem cohesive as a whole, but as I can't express them simultaneously, my explanation lacks a proper structure and my arguments don't support each other well. Some elements need predicates to be accepted, so they need to be expressed first as a logical path, a kind of chain of thoughts.
+In my case, the reason is often the same: it implies several ideas that seem cohesive as a whole, but as I can't express them simultaneously, my explanation lacks a proper structure and my arguments don't support each other well. Some elements need predicates to be accepted, so these predicates need to be expressed first as a logical path, a kind of chain of thoughts.
 
-Maybe you're used to write things down, 
+Maybe you're used to write things down. It could be on a piece of paper, on a blog or LinkedIn post, or any other form like code. Writing goes through this same process of organizing ideas in a way they can support each others.  
 
 
 
